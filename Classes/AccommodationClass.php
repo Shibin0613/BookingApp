@@ -12,11 +12,6 @@ class Accommodation {
     public int $category;
     public array $images;
 
-    public function createAccommodationObject()
-    {
-
-    }
-
     public function addAccommodation()
     {
 
@@ -34,6 +29,6 @@ class Accommodation {
 
     public function updateAccommodation()
     {
-        
+
     }
 }
