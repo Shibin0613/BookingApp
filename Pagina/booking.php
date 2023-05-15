@@ -13,15 +13,15 @@
 <form>
   <div class="form-group">
     <label for="naam">Naam</label>
-    <input type="text" class="form-control" id="naam" name="naam" required>
+    <input type="text" class="form-control" id="naam" name="naam" >
   </div>
   <div class="form-group">
     <label for="achternaam">Achternaam</label>
-    <input type="text" class="form-control" id="achternaam" name="achternaam" required>
+    <input type="text" class="form-control" id="achternaam" name="achternaam" >
   </div>
   <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" name="email" required>
+    <input type="email" class="form-control" id="email" name="email" >
   </div>
   <div class="form-group">
     <label for="postcode">Postcode</label>
@@ -79,16 +79,7 @@ if (isset($data['response']['numFound']) && $data['response']['numFound'] > 0) {
     $city = $address['woonplaatsnaam'];
 
     // Output the address
-    echo "
-    <div class='form-group'>
-    <label for='adres'>Adres</label>
-    <input type='text' class='form-control' id='adres' name='adres' value='$street'>
-  </div>
-  <div class='form-group'>
-    <label for='woonplaats'>Woonplaats</label>
-    <input type='text' class='form-control' id='woonplaats' name='woonplaats'>
-  </div>
-  ";
+    
 } else {
     echo 'Error: Unable to retrieve address for the provided postal code.';
 }

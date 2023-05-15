@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2023 at 01:58 PM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.9
+-- Gegenereerd op: 15 mei 2023 om 14:24
+-- Serverversie: 10.4.22-MariaDB
+-- PHP-versie: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,178 +24,204 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accommodatie`
+-- Tabelstructuur voor tabel `accommodation`
 --
 
-CREATE TABLE `accommodatie` (
+CREATE TABLE `accommodation` (
   `id` int(11) NOT NULL,
-  `categorie` int(11) NOT NULL,
-  `naam` varchar(50) NOT NULL,
-  `minimumpersonen` int(2) NOT NULL,
-  `maximumpersonen` int(2) NOT NULL,
+  `category` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `minimpeople` int(2) NOT NULL,
+  `maximpeople` int(2) NOT NULL,
   `gas` int(1) NOT NULL,
-  `stroom` int(1) NOT NULL,
+  `electricity` int(1) NOT NULL,
   `water` int(1) NOT NULL,
-  `prijs` int(11) NOT NULL,
-  `beschrijving` text NOT NULL
+  `price` int(11) NOT NULL,
+  `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accommodatiecategorie`
+-- Tabelstructuur voor tabel `admin`
 --
 
-CREATE TABLE `accommodatiecategorie` (
+CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
-  `categorie` varchar(100) NOT NULL,
-  `minimumpersonen` int(2) NOT NULL,
-  `maximumpersonen` int(2) NOT NULL,
-  `gas` int(1) NOT NULL,
-  `stroom` int(1) NOT NULL,
-  `water` int(1) NOT NULL,
-  `prijs` int(11) NOT NULL,
-  `beschrijving` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `fotos`
---
-
-CREATE TABLE `fotos` (
-  `id` int(11) NOT NULL,
-  `foto` int(11) NOT NULL,
-  `accomodatieid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `reserveren`
---
-
-CREATE TABLE `reserveren` (
-  `id` int(11) NOT NULL,
-  `accommodatie` int(11) NOT NULL,
-  `naam` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `huisnummer` int(3) NOT NULL,
-  `postcode` varchar(7) NOT NULL,
+  `password` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `booking`
+--
+
+CREATE TABLE `booking` (
+  `id` int(11) NOT NULL,
+  `accommodationid` int(11) NOT NULL,
+  `guestid` int(2) NOT NULL,
   `datum` date NOT NULL,
-  `dagen` int(2) NOT NULL,
-  `personen` int(2) NOT NULL,
-  `bedrag` int(11) NOT NULL,
-  `betaald` int(1) NOT NULL
+  `days` int(2) NOT NULL,
+  `people` int(2) NOT NULL,
+  `price` int(11) NOT NULL,
+  `paid` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabelstructuur voor tabel `category`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `wachtwoord` varchar(200) NOT NULL
+  `category` varchar(100) NOT NULL,
+  `minimpeople` int(2) NOT NULL,
+  `maximpeople` int(2) NOT NULL,
+  `gas` int(1) NOT NULL,
+  `electricity` int(1) NOT NULL,
+  `water` int(1) NOT NULL,
+  `price` int(11) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `guests`
+--
+
+CREATE TABLE `guests` (
+  `id` int(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `housenumber` int(100) NOT NULL,
+  `postalcode` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `photo`
+--
+
+CREATE TABLE `photo` (
+  `id` int(11) NOT NULL,
+  `photo` varchar(11) NOT NULL,
+  `accommodationid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Indexes for dumped tables
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `accommodatie`
+-- Indexen voor tabel `accommodation`
 --
-ALTER TABLE `accommodatie`
+ALTER TABLE `accommodation`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `categorie` (`categorie`);
+  ADD KEY `categorie` (`category`);
 
 --
--- Indexes for table `accommodatiecategorie`
+-- Indexen voor tabel `admin`
 --
-ALTER TABLE `accommodatiecategorie`
+ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `fotos`
+-- Indexen voor tabel `booking`
 --
-ALTER TABLE `fotos`
+ALTER TABLE `booking`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `accomodatieid` (`accomodatieid`);
+  ADD KEY `accomodatie` (`accommodationid`),
+  ADD KEY `guest` (`guestid`);
 
 --
--- Indexes for table `reserveren`
+-- Indexen voor tabel `category`
 --
-ALTER TABLE `reserveren`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `accomodatie` (`accommodatie`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
+ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexen voor tabel `guests`
+--
+ALTER TABLE `guests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `photo`
+--
+ALTER TABLE `photo`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `accomodatieid` (`accommodationid`);
+
+--
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `accommodatie`
+-- AUTO_INCREMENT voor een tabel `accommodation`
 --
-ALTER TABLE `accommodatie`
+ALTER TABLE `accommodation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `accommodatiecategorie`
+-- AUTO_INCREMENT voor een tabel `admin`
 --
-ALTER TABLE `accommodatiecategorie`
+ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `fotos`
+-- AUTO_INCREMENT voor een tabel `booking`
 --
-ALTER TABLE `fotos`
+ALTER TABLE `booking`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `reserveren`
+-- AUTO_INCREMENT voor een tabel `category`
 --
-ALTER TABLE `reserveren`
+ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT voor een tabel `guests`
 --
-ALTER TABLE `users`
+ALTER TABLE `guests`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `photo`
+--
+ALTER TABLE `photo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Beperkingen voor geëxporteerde tabellen
 --
 
 --
--- Constraints for table `accommodatie`
+-- Beperkingen voor tabel `accommodation`
 --
-ALTER TABLE `accommodatie`
-  ADD CONSTRAINT `categorie` FOREIGN KEY (`categorie`) REFERENCES `accommodatiecategorie` (`id`);
+ALTER TABLE `accommodation`
+  ADD CONSTRAINT `categorie` FOREIGN KEY (`category`) REFERENCES `category` (`id`);
 
 --
--- Constraints for table `fotos`
+-- Beperkingen voor tabel `booking`
 --
-ALTER TABLE `fotos`
-  ADD CONSTRAINT `accomodatieid` FOREIGN KEY (`accomodatieid`) REFERENCES `accommodatie` (`id`);
+ALTER TABLE `booking`
+  ADD CONSTRAINT `accomodation` FOREIGN KEY (`accommodationid`) REFERENCES `accommodation` (`id`),
+  ADD CONSTRAINT `guest` FOREIGN KEY (`guestid`) REFERENCES `guests` (`id`);
 
 --
--- Constraints for table `reserveren`
+-- Beperkingen voor tabel `photo`
 --
-ALTER TABLE `reserveren`
-  ADD CONSTRAINT `accomodatie` FOREIGN KEY (`accommodatie`) REFERENCES `accommodatie` (`id`);
+ALTER TABLE `photo`
+  ADD CONSTRAINT `accomodatieid` FOREIGN KEY (`accommodationid`) REFERENCES `accommodation` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
