@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 15 mei 2023 om 14:24
--- Serverversie: 10.4.22-MariaDB
--- PHP-versie: 8.1.2
+-- Gegenereerd op: 15 mei 2023 om 15:32
+-- Serverversie: 10.4.27-MariaDB
+-- PHP-versie: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,7 +38,14 @@ CREATE TABLE `accommodation` (
   `water` int(1) NOT NULL,
   `price` int(11) NOT NULL,
   `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `accommodation`
+--
+
+INSERT INTO `accommodation` (`id`, `category`, `name`, `minimpeople`, `maximpeople`, `gas`, `electricity`, `water`, `price`, `description`) VALUES
+(1, 1, 'mega grote tent beta', 2, 4, 1, 1, 1, 25, 'dit is een mega grote tent!');
 
 -- --------------------------------------------------------
 
@@ -50,7 +57,14 @@ CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `admin`
+--
+
+INSERT INTO `admin` (`id`, `email`, `password`) VALUES
+(1, 'test@gmail.com', '123456');
 
 -- --------------------------------------------------------
 
@@ -67,7 +81,14 @@ CREATE TABLE `booking` (
   `people` int(2) NOT NULL,
   `price` int(11) NOT NULL,
   `paid` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `booking`
+--
+
+INSERT INTO `booking` (`id`, `accommodationid`, `guestid`, `datum`, `days`, `people`, `price`, `paid`) VALUES
+(1, 1, 1, '2023-05-15', 4, 2, 25, 1);
 
 -- --------------------------------------------------------
 
@@ -85,7 +106,14 @@ CREATE TABLE `category` (
   `water` int(1) NOT NULL,
   `price` int(11) NOT NULL,
   `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `category`
+--
+
+INSERT INTO `category` (`id`, `category`, `minimpeople`, `maximpeople`, `gas`, `electricity`, `water`, `price`, `description`) VALUES
+(1, 'tent', 2, 4, 1, 1, 1, 25, 'deze tent is mega cool!');
 
 -- --------------------------------------------------------
 
@@ -99,7 +127,14 @@ CREATE TABLE `guests` (
   `email` varchar(100) NOT NULL,
   `housenumber` int(100) NOT NULL,
   `postalcode` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `guests`
+--
+
+INSERT INTO `guests` (`id`, `name`, `email`, `housenumber`, `postalcode`) VALUES
+(1, 'tim', 'tim@gmail.com', 9, '8711GG');
 
 -- --------------------------------------------------------
 
@@ -111,7 +146,14 @@ CREATE TABLE `photo` (
   `id` int(11) NOT NULL,
   `photo` varchar(11) NOT NULL,
   `accommodationid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `photo`
+--
+
+INSERT INTO `photo` (`id`, `photo`, `accommodationid`) VALUES
+(1, 'photo.jpg', 1);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -165,37 +207,37 @@ ALTER TABLE `photo`
 -- AUTO_INCREMENT voor een tabel `accommodation`
 --
 ALTER TABLE `accommodation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT voor een tabel `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT voor een tabel `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT voor een tabel `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT voor een tabel `guests`
 --
 ALTER TABLE `guests`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT voor een tabel `photo`
 --
 ALTER TABLE `photo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
@@ -224,4 +266,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
