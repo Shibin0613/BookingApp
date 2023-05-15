@@ -64,7 +64,7 @@ $where = '';
 
 
         // Return the selected rows as an array of associative arrays.
-        return $stmt->fetchAll(PDO::FETCH_ASSOC); // object
+        return $stmt->fetchAll(PDO::FETCH_OBJ); // object
     }
         public static function join($mainTable, $col, $joinTables, array $joinCols, $id)
     {
@@ -89,7 +89,7 @@ $where = '';
 // echo $query;
         $stmt = self::$pdo->prepare($query);
         $stmt->execute(['id' => $id[1]]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
 
 
         // return self::select($table, ['id' => $id[1]], $query);
