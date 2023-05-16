@@ -14,11 +14,11 @@ class Guests extends Users
 
         $guesttable = "guests";
         $guestdata = [
-            'postalcode' -> $postalCode,
-            'housenumber' -> $houseNumber,
+            'postalcode' => $postalCode,
+            'housenumber' => $houseNumber,
         ];
 
-        $createguest = DB::insert($guesttable, $guestdata,'Guests');
+        $createguest = DB::insert($guesttable, $guestdata,);
         return $createguest;
     }
 

@@ -2,7 +2,7 @@
 class Accommodation {
     public int $id;
     public string $description;
-    public int $price;
+    public float $price;
     public int $minimunPeople;
     public int $maximunPeople;
     public int $gas;

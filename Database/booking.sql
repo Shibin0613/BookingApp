@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 15 mei 2023 om 15:32
--- Serverversie: 10.4.27-MariaDB
--- PHP-versie: 8.1.12
+-- Gegenereerd op: 16 mei 2023 om 15:25
+-- Serverversie: 10.4.22-MariaDB
+-- PHP-versie: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,16 +36,19 @@ CREATE TABLE `accommodation` (
   `gas` int(1) NOT NULL,
   `electricity` int(1) NOT NULL,
   `water` int(1) NOT NULL,
-  `price` int(11) NOT NULL,
-  `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `priceadults` int(11) NOT NULL,
+  `pricekids` int(11) NOT NULL,
+  `pricebaby` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `createdate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Gegevens worden geëxporteerd voor tabel `accommodation`
+-- Gegevens worden ge毛xporteerd voor tabel `accommodation`
 --
 
-INSERT INTO `accommodation` (`id`, `category`, `name`, `minimpeople`, `maximpeople`, `gas`, `electricity`, `water`, `price`, `description`) VALUES
-(1, 1, 'mega grote tent beta', 2, 4, 1, 1, 1, 25, 'dit is een mega grote tent!');
+INSERT INTO `accommodation` (`id`, `category`, `name`, `minimpeople`, `maximpeople`, `gas`, `electricity`, `water`, `priceadults`, `pricekids`, `pricebaby`, `description`, `createdate`) VALUES
+(1, 1, 'mega grote tent beta', 2, 4, 1, 1, 1, 25, 15, 5, 'dit is een mega grote tent!', '2023-05-15');
 
 -- --------------------------------------------------------
 
@@ -57,10 +60,10 @@ CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Gegevens worden geëxporteerd voor tabel `admin`
+-- Gegevens worden ge毛xporteerd voor tabel `admin`
 --
 
 INSERT INTO `admin` (`id`, `email`, `password`) VALUES
@@ -76,19 +79,20 @@ CREATE TABLE `booking` (
   `id` int(11) NOT NULL,
   `accommodationid` int(11) NOT NULL,
   `guestid` int(2) NOT NULL,
-  `datum` date NOT NULL,
-  `days` int(2) NOT NULL,
+  `createdate` date NOT NULL,
+  `checkindate` date NOT NULL,
+  `checkoutdate` date NOT NULL,
   `people` int(2) NOT NULL,
   `price` int(11) NOT NULL,
   `paid` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Gegevens worden geëxporteerd voor tabel `booking`
+-- Gegevens worden ge毛xporteerd voor tabel `booking`
 --
 
-INSERT INTO `booking` (`id`, `accommodationid`, `guestid`, `datum`, `days`, `people`, `price`, `paid`) VALUES
-(1, 1, 1, '2023-05-15', 4, 2, 25, 1);
+INSERT INTO `booking` (`id`, `accommodationid`, `guestid`, `createdate`, `checkindate`, `checkoutdate`, `people`, `price`, `paid`) VALUES
+(1, 1, 1, '2023-05-15', '2023-05-15', '2023-05-22', 2, 25, 1);
 
 -- --------------------------------------------------------
 
@@ -106,10 +110,10 @@ CREATE TABLE `category` (
   `water` int(1) NOT NULL,
   `price` int(11) NOT NULL,
   `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Gegevens worden geëxporteerd voor tabel `category`
+-- Gegevens worden ge毛xporteerd voor tabel `category`
 --
 
 INSERT INTO `category` (`id`, `category`, `minimpeople`, `maximpeople`, `gas`, `electricity`, `water`, `price`, `description`) VALUES
@@ -126,15 +130,17 @@ CREATE TABLE `guests` (
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `housenumber` int(100) NOT NULL,
-  `postalcode` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `postalcode` varchar(100) NOT NULL,
+  `woonplaats` varchar(100) NOT NULL,
+  `createdate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Gegevens worden geëxporteerd voor tabel `guests`
+-- Gegevens worden ge毛xporteerd voor tabel `guests`
 --
 
-INSERT INTO `guests` (`id`, `name`, `email`, `housenumber`, `postalcode`) VALUES
-(1, 'tim', 'tim@gmail.com', 9, '8711GG');
+INSERT INTO `guests` (`id`, `name`, `email`, `housenumber`, `postalcode`, `woonplaats`, `createdate`) VALUES
+(1, 'tim', 'tim@gmail.com', 9, '8711GG', 'Workum', '2023-05-15');
 
 -- --------------------------------------------------------
 
@@ -146,17 +152,17 @@ CREATE TABLE `photo` (
   `id` int(11) NOT NULL,
   `photo` varchar(11) NOT NULL,
   `accommodationid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Gegevens worden geëxporteerd voor tabel `photo`
+-- Gegevens worden ge毛xporteerd voor tabel `photo`
 --
 
 INSERT INTO `photo` (`id`, `photo`, `accommodationid`) VALUES
 (1, 'photo.jpg', 1);
 
 --
--- Indexen voor geëxporteerde tabellen
+-- Indexen voor ge毛xporteerde tabellen
 --
 
 --
@@ -200,7 +206,7 @@ ALTER TABLE `photo`
   ADD KEY `accomodatieid` (`accommodationid`);
 
 --
--- AUTO_INCREMENT voor geëxporteerde tabellen
+-- AUTO_INCREMENT voor ge毛xporteerde tabellen
 --
 
 --
@@ -240,7 +246,7 @@ ALTER TABLE `photo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Beperkingen voor geëxporteerde tabellen
+-- Beperkingen voor ge毛xporteerde tabellen
 --
 
 --

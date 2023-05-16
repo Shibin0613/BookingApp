@@ -65,7 +65,6 @@ if (isset($data['response']['numFound']) && $data['response']['numFound'] > 0) {
     $address = $data['response']['docs'][0];
 
     // Extract relevant address components
-    $postcode = $address['postcode'];
     $straat = $address['straatnaam'];
     $woonplaats = $address['woonplaatsnaam'];
 
@@ -102,8 +101,6 @@ if (isset($data['response']['numFound']) && $data['response']['numFound'] > 0) {
     <input type="email" class="form-control" id="email" name="email" required>
   </div>
   <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-</form>
-<form method="POST" action="">
   <div class="form-group">
     <label for="0-4">0-4 jaar</label>
     <input type="number" class="form-control" id="0-4" name="0-4" min="0" max="100">
