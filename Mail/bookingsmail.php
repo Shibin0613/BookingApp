@@ -4,12 +4,8 @@ if (isset($_POST['submit'])) {
 $data = [
   'naam' => $_POST['name'],
   'email' => $_POST['email'],
-  'role' => 1,
-  'active' => 0,
-  'activationcode' => uniqid(),
 ];
 $table = "users";
-$guid=$data['activationcode'];
 
 $naam = $_POST['name'];
 $email = $_POST['email'];
@@ -44,6 +40,7 @@ $headers  = 'MIME-Version: 1.0' . "\r\n";
     echo "<script>alert('Het is niet gelukt om een account aan te maken, probeer later opnieuw!')</script>";
   ?>
   <META HTTP-EQUIV="Refresh" CONTENT="0; URL=DocentToevoegen.php">
+  
   <?php
   }
 
