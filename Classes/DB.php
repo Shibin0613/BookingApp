@@ -14,7 +14,7 @@ class DB
         $host = "localhost";
         $username = "root";
         $password = "";
-        $database = "stagetijd";
+        $database = "booking";
 
         try {
             self::$pdo = new PDO("mysql:host=$host;dbname=$database", $username, $password);

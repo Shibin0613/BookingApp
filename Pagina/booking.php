@@ -13,16 +13,18 @@
 <form>
   <div class="form-group">
     <label for="naam">Naam</label>
-    <input type="text" class="form-control" id="naam" name="naam" >
+    <input type="text" class="form-control" id="naam" name="naam" required>
   </div>
   <div class="form-group">
     <label for="achternaam">Achternaam</label>
-    <input type="text" class="form-control" id="achternaam" name="achternaam" >
+    <input type="text" class="form-control" id="achternaam" name="achternaam" required>
   </div>
   <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" name="email" >
+    <input type="email" class="form-control" id="email" name="email" required>
   </div>
+</form>
+<form method="POST">
   <div class="form-group">
     <label for="postcode">Postcode</label>
     <input type="text" class="form-control" id="postcode" name="postcode" required>
@@ -31,11 +33,11 @@
     <label for="huisnummer">Huisnummer</label>
     <input type="text" class="form-control" id="huisnummer" name="huisnummer" required>
   </div>
-  <button name ="check">Check adres</button>
-</form>
+  <button name ="checkadres">Check adres</button>
   <?php
-if(isset($_POST['check'])){
+if(isset($_POST['checkadres'])){
 $postalCode = $_POST['postcode']; // Replace with the postal code you want to search
+$huisnummer = $_POST['huisnummer'];
 
 // Set up your Kadaster API credentials
 $clientId = 'YOUR_CLIENT_ID'; // Replace with your actual client ID
@@ -56,15 +58,6 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, array(
 // Send the request
 $response = curl_exec($curl);
 
-// Check for any cURL errors
-if (curl_errno($curl)) {
-    echo 'Error: ' . curl_error($curl);
-    exit;
-}
-
-// Close the cURL request
-curl_close($curl);
-
 // Parse the JSON response
 $data = json_decode($response, true);
 
@@ -74,18 +67,27 @@ if (isset($data['response']['numFound']) && $data['response']['numFound'] > 0) {
     $address = $data['response']['docs'][0];
 
     // Extract relevant address components
-    $street = $address['straatnaam'];
-    $houseNumber = $address['huisnummer'];
-    $city = $address['woonplaatsnaam'];
+    $straat = $address['straatnaam'];
+    $woonplaats = $address['woonplaatsnaam'];
 
     // Output the address
-    
-} else {
-    echo 'Error: Unable to retrieve address for the provided postal code.';
+    echo"
+    <div class='form-group'>
+    <label for='adres'>Adres</label>
+    <input type='text' class='form-control' id='adres' name='adres' value='".$straat." ".$huisnummer."' readonly>
+    </div>
+    <div class='form-group'>
+    <label for='woonplaats'>Woonplaats</label>
+    <input type='text' class='form-control' id='woonplaats' name='woonplaats' value='".$woonplaats."' readonly>
+    </div>
+    ";
+}else{
+    echo "<script>alert('De postcode bestaat niet')</script>";
 }
 }
 ?>
-<form action="" method="">
+</form>
+<form>
   <div class="form-group">
     <label for="0-4">0-4 jaar</label>
     <input type="number" class="form-control" id="0-4" name="0-4" min="0" max="100">
