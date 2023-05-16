@@ -1,3 +1,15 @@
+<?php
+include_once("../Classes/BookingClass.php");
+include_once("../Classes/GuestClass.php");
+include_once("../Classes/UserClass.php");
+
+
+use Controllers\DB;
+
+$guestService = new Guests();
+$userService = new Users();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,21 +22,7 @@
 </head>
 
 <body>
-<form>
-  <div class="form-group">
-    <label for="naam">Naam</label>
-    <input type="text" class="form-control" id="naam" name="naam" required>
-  </div>
-  <div class="form-group">
-    <label for="achternaam">Achternaam</label>
-    <input type="text" class="form-control" id="achternaam" name="achternaam" required>
-  </div>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" name="email" required>
-  </div>
-</form>
-<form method="POST">
+<form method="POST" action="">
   <div class="form-group">
     <label for="postcode">Postcode</label>
     <input type="text" class="form-control" id="postcode" name="postcode" required>
@@ -67,6 +65,7 @@ if (isset($data['response']['numFound']) && $data['response']['numFound'] > 0) {
     $address = $data['response']['docs'][0];
 
     // Extract relevant address components
+    $postcode = $address['postcode'];
     $straat = $address['straatnaam'];
     $woonplaats = $address['woonplaatsnaam'];
 
@@ -87,7 +86,24 @@ if (isset($data['response']['numFound']) && $data['response']['numFound'] > 0) {
 }
 ?>
 </form>
-<form>
+<form method="POST" action="">
+  <div class="form-group">
+    <label for="naam">Naam</label>
+    <input type="text" class="form-control" id="naam" name="naam" required>
+  </div>
+  <input hidden name='postcode' value='<?php echo $postcode;?>'>
+  <input hidden name='huisnummer' value='<?php echo $huisnummer;?>'>
+  <div class="form-group">
+    <label for="achternaam">Achternaam</label>
+    <input type="text" class="form-control" id="achternaam" name="achternaam" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" name="email" required>
+  </div>
+  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+</form>
+<form method="POST" action="">
   <div class="form-group">
     <label for="0-4">0-4 jaar</label>
     <input type="number" class="form-control" id="0-4" name="0-4" min="0" max="100">
@@ -102,15 +118,30 @@ if (isset($data['response']['numFound']) && $data['response']['numFound'] > 0) {
   </div>
   <div class="form-group">
     <label for="date">Datum</label>
-    <input type="date" class="form-control" id="date" name="date" required>
+    <input type="date" class="form-control" id="date" name="date">
   </div>
   <div class="form-group">
     <label for="aantal">Aantal nachten</label>
-    <input type="number" class="form-control" id="aantal" name="aantal" required>
+    <input type="number" class="form-control" id="aantal" name="aantal">
   </div>
-  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
 </form>
 
 </body>
-
 </html>
+
+<?php
+if(isset($_POST['submit'])){
+  $createdGuest = $guestService->createGuest();
+  $insertedUser = $userService->insertUser();
+
+  if($insertedUser) :
+    echo "<script>alert('Boeking is aangemaakt')</script>"; ?>
+    <META HTTP-EQUIV="Refresh" CONTENT="0; URL=booking.php">
+  <?php else :
+    echo "<script>alert('Het is niet gelukt om een boeking aan te maken, probeer later opnieuw!')</script>"; ?>
+    <META HTTP-EQUIV="Refresh" CONTENT="0; URL=booking.php">
+<?php endif;
+}
+
+
+?>
