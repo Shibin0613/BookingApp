@@ -24,7 +24,7 @@ class Booking {
 
     }
 
-    public function deleteBooking()
+    public function deleteBooking() 
     {
 
     }

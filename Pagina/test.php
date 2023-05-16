@@ -18,6 +18,9 @@
 include("header.php");
 
 use Controllers\DB;
+
+
+
 $class = "Class";
 $table = "users"; //Welke table je insert
 $data = [
@@ -28,9 +31,13 @@ $data = [
 $result1 = DB::select($table, $data, $class);
 var_dump($result1);
 
+
+
 $userid = 2;
 $active = 1;
 $result2 = DB::update("UPDATE `users` SET `active` = :active WHERE id = :userid", ['active' => $active, 'userid' => $userid]);
+
+
 
 $data1 = [ //Multiple rows die je toevoegt
     [ //Elke array is een row
@@ -53,10 +60,12 @@ $data2 = [ //Een single row die je toevoegt
     'role' => 1, //de key is de column en de value is de value van die column
     'active' => 1, //de key is de column en de value is de value van die column
 ];
-$class = "Class";
 $table = "users"; //Welke table je insert
 $result3 = DB::insert($table, $data);
 
+
+
+$class = "Class";
 $mainTables = [
     [
         "taken", //Eerste table waar je een andere tabel aan toevoegt met een inner join
@@ -84,4 +93,4 @@ $whereClauseMainTable = [
     ] //de value van de eerste column waar je op filtert
 ];
 
-$result4 = DB::join($mainTables[0], $mainTables[1], $koppelTables[0], $koppelTables[1], $whereClauseMainTable[0], $class);
+$result4 = DB::join($mainTables[0], $mainTables[1], $koppelTables[0], $koppelTables[1], $whereClauseMainTable[0]);

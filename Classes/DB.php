@@ -66,7 +66,7 @@ $where = '';
         // Return the selected rows as an array of associative arrays.
         return $stmt->fetchAll(PDO::FETCH_CLASS, $class); // object
     }
-        public static function join($mainTable, $col, $joinTables, array $joinCols, $id, string $class)
+        public static function join($mainTable, $col, $joinTables, array $joinCols, $id)
     {
         $table = $mainTable;
         $select = '*';
@@ -89,7 +89,7 @@ $where = '';
 // echo $query;
         $stmt = self::$pdo->prepare($query);
         $stmt->execute(['id' => $id[1]]);
-        return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
 
 
         // return self::select($table, ['id' => $id[1]], $query);
