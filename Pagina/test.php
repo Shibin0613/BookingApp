@@ -18,13 +18,14 @@
 include("header.php");
 
 use Controllers\DB;
+$class = "Class";
 $table = "users"; //Welke table je insert
 $data = [
     'naam' => "Timhamer", //de key is de column en de value is de value van die column
     'email' => "tfhammersma@gmail.com", //de key is de column en de value is de value van die column
     'role' => 1, //de key is de column en de value is de value van die column
 ];
-$result1 = DB::select($table, $data);
+$result1 = DB::select($table, $data, $class);
 var_dump($result1);
 
 $userid = 2;
@@ -52,6 +53,7 @@ $data2 = [ //Een single row die je toevoegt
     'role' => 1, //de key is de column en de value is de value van die column
     'active' => 1, //de key is de column en de value is de value van die column
 ];
+$class = "Class";
 $table = "users"; //Welke table je insert
 $result3 = DB::insert($table, $data);
 
@@ -82,4 +84,4 @@ $whereClauseMainTable = [
     ] //de value van de eerste column waar je op filtert
 ];
 
-$result4 = DB::join($mainTables[0], $mainTables[1], $koppelTables[0], $koppelTables[1], $whereClauseMainTable[0]);
+$result4 = DB::join($mainTables[0], $mainTables[1], $koppelTables[0], $koppelTables[1], $whereClauseMainTable[0], $class);

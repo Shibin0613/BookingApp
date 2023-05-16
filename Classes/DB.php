@@ -25,7 +25,7 @@ class DB
     }
 
     // Selects data from a MySQL database table.
-    public static function select(string $table, array $data = []): array
+    public static function select(string $table, array $data = [], string $class): array
     {
         // Get the number of elements in the array.
         $count = count($data);
@@ -64,9 +64,9 @@ $where = '';
 
 
         // Return the selected rows as an array of associative arrays.
-        return $stmt->fetchAll(PDO::FETCH_OBJ); // object
+        return $stmt->fetchAll(PDO::FETCH_CLASS, $class); // object
     }
-        public static function join($mainTable, $col, $joinTables, array $joinCols, $id)
+        public static function join($mainTable, $col, $joinTables, array $joinCols, $id, string $class)
     {
         $table = $mainTable;
         $select = '*';
@@ -89,7 +89,7 @@ $where = '';
 // echo $query;
         $stmt = self::$pdo->prepare($query);
         $stmt->execute(['id' => $id[1]]);
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
 
 
         // return self::select($table, ['id' => $id[1]], $query);
