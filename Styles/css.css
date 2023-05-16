@@ -70,3 +70,30 @@
     background-color: #0069d9;
   }
   
+  #agenda-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  #agenda {
+    margin-top: 20px;
+  }
+  
+  .day {
+    margin-bottom: 20px;
+  }
+  
+  .day-header {
+    font-weight: bold;
+  }
+  
+  .event {
+    margin-top: 10px;
+    padding-left: 10px;
+  }
+  
