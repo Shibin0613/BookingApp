@@ -6,6 +6,8 @@ class Guests extends Users
 {
     public string $postalCode;
     public string $houseNumber;
+    public string $residence;
+    public DateTime $created;
 
     public function createGuest() 
     {
@@ -18,7 +20,7 @@ class Guests extends Users
             'housenumber' => $houseNumber,
         ];
 
-        $createguest = DB::insert($guesttable, $guestdata,);
+        $createguest = DB::insert($guesttable, $guestdata);
         return $createguest;
     }
 
