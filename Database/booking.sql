@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 17 mei 2023 om 13:36
+-- Gegenereerd op: 17 mei 2023 om 13:59
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -53,15 +53,16 @@ INSERT INTO `accommodation` (`id`, `category`, `name`, `minimumpeople`, `maximum
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(200) NOT NULL
+  `password` varchar(200) NOT NULL,
+  `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `admin`
 --
 
-INSERT INTO `admin` (`id`, `email`, `password`) VALUES
-(1, 'test@gmail.com', '123456');
+INSERT INTO `admin` (`id`, `email`, `password`, `name`) VALUES
+(1, 'test@gmail.com', '123456', '');
 
 -- --------------------------------------------------------
 
@@ -262,3 +263,4 @@ ALTER TABLE `booking`
 ALTER TABLE `photo`
   ADD CONSTRAINT `accomodatieid` FOREIGN KEY (`accommodationid`) REFERENCES `accommodation` (`id`);
 COMMIT;
+ 

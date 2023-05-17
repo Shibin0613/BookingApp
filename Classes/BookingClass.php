@@ -1,13 +1,15 @@
 <?php
 class Booking {
     public int $id;
-    public DateTime $date;
-    public int $days;
     public int $accommodation;
     public int $guestId;
+    public int $days;
+    public DateTime $createdDate;
+    public DateTime $checkInDate;
+    public DateTime $checkOutDate;
     public int $peopleAmount;
-    public int $price;
-    public int $payed;
+    public float $price;
+    public bool $paid;
 
     public function createBooking()
     {

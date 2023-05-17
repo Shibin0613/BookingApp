@@ -1,15 +1,20 @@
 <?php
+include 'PhotoClass.php';
+
 class Accommodation {
     public int $id;
-    public string $description;
-    public float $price;
+    public int $category;
+    public string $name;
     public int $minimunPeople;
     public int $maximunPeople;
-    public int $gas;
-    public int $water;
-    public int $electricity;
-    public string $name;
-    public int $category;
+    public bool $gas;
+    public bool $electricity;
+    public bool $water;
+    public int $priceAdults;
+    public int $priceKids;
+    public int $priceBaby;
+    public string $description;
+    public DateTime $created;
     public array $images;
 
     public function addAccommodation()
