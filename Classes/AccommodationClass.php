@@ -1,6 +1,6 @@
 <?php
 include 'PhotoClass.php';
-
+use Controllers\DB;
 class Accommodation {
     public int $id;
     public int $category;
@@ -29,11 +29,19 @@ class Accommodation {
 
     public function readAccommodation()
     {
-
+        
     }
 
     public function updateAccommodation()
     {
 
+    }
+
+    public function readAccommodationAgenda()
+    {
+        $class = "Accommodation";
+        $table = "accommodation";
+        $data = [];
+        $result1 = DB::select($table, $data, $class);
     }
 }

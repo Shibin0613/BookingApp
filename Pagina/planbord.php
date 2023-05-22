@@ -1,50 +1,76 @@
-<?php
-include "header.php";
-use Controllers\DB;
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Planbord</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<meta charset='utf-8' />
+<script src='../Javascript/fullcalendar-scheduler-6.1.7/dist/index.global.js'></script>
+<?php
+  // include "header.php";
+  // use Controllers\DB;
+  //   $table = "users"; //Welke table je insert
+  //   $data = [];
+  //   $result1 = DB::select($table, $data);
+  //   $sql = "SELECT naam, startdatum, einddatum FROM boekingen";
+  //   $stmt = $conn->query($sql);
+?>
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+       themeSystem: 'bootstrap5',
+       initialView: 'resourceTimelineWeek',
+       slotDuration: '24:00',
+       timeZone: 'GMT+2',
+       locale: 'nl',
+       slotLabelFormat:{
+        weekday: 'long',
+        meridiem: false,
+       },
+       resourceAreaColumns: [
+        {
+          headerContent: 'Categorie',
+          field: 'building'
+        },
+        {
+          headerContent: 'Accommodaties',
+          field: 'title'
+        },
+    ],
+    resources: [
+      
+      
+
+
+    ],   
+
+
+
+    });
+    calendar.render();
+});
+</script>
+  
+    
+<style>
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 1100px;
+    margin: 50px auto;
+  }
+
+</style>
 </head>
 <body>
-    <div class="container">
-        <h2>Boekingen</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Naam</th>
-                    <th>Startdatum</th>
-                    <th>Einddatum</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                // Boekingen uit de database ophalen
-    $table = "users"; //Welke table je insert
-    $data = [];
-    $result1 = DB::select($table, $data);
-    $sql = "SELECT naam, startdatum, einddatum FROM boekingen";
-    $stmt = $conn->query($sql);
-    
-    if ($stmt->rowCount() > 0) {
-        // Boekingen weergeven
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            echo "<tr>";
-            echo "<td>" . $row["naam"] . "</td>";
-            echo "<td>" . $row["startdatum"] . "</td>";
-            echo "<td>" . $row["einddatum"] . "</td>";
-            echo "</tr>";
-        }
-    } else {
-        echo "<tr><td colspan='3'>Geen boekingen gevonden</td></tr>";
-    }
-                ?>
-            </tbody>
-        </table>
-    </div>
+
+  <div id='calendar'></div>
+
 </body>
 </html>

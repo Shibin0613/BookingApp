@@ -3,7 +3,7 @@
         'name' => 'tfham/stagetijd',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'fb8cc78b73c5c1da75abca7957b357c9e8c9c71b',
+        'reference' => '9d4a32c2ab5c75b61158d25abae36eb9028a3bba',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'tfham/stagetijd' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'fb8cc78b73c5c1da75abca7957b357c9e8c9c71b',
+            'reference' => '9d4a32c2ab5c75b61158d25abae36eb9028a3bba',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
