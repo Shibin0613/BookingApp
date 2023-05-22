@@ -1,12 +1,13 @@
 <?php
 require_once "../vendor/autoload.php";
-include 'PhotoClass.php'; 
+include 'PhotoClass.php';
 
 use Controllers\DB;
 
 DB::connect();
 
-class Accommodation {
+class Accommodation
+{
     public int $id;
     public int $category;
     public string $name;
@@ -24,29 +25,26 @@ class Accommodation {
 
     public function addAccommodation()
     {
-
     }
 
     public function deleteAccommodation()
     {
-
     }
 
     public function readAccommodation()
     {
-$accommodationSelect = [];
-$accommodations = DB::select('accommodation', $accommodationSelect, 'Accommodation');
+        $accommodationSelect = [];
+        $accommodations = DB::select('accommodation', $accommodationSelect, 'Accommodation');
+        $accommodationsLength = count($accommodations);
 
-for ($i=0; $i < count($accommodations); $i++) { 
-    $accommodations[$i]->images = DB::select('photo', ['accommodationId' => $accommodations[$i]->id], 'Photo');
-    echo "<pre>",print_r($accommodations),"</pre>";
-}   
-// echo "<pre>",print_r($accommodations),"</pre>";
+        for ($i = 0; $i < $accommodationsLength; $i++) {
+            $accommodations[$i]->images = DB::select('photo', ['accommodationId' => $accommodations[$i]->id], 'Photo');
+        }
+        return $accommodations;
     }
 
     public function updateAccommodation()
     {
-
     }
 
     public function readAccommodationAgenda()
