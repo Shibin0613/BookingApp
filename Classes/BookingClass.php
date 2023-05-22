@@ -18,7 +18,7 @@ class Booking {
 
     public function readBooking()
     {
-
+        
     }
 
     public function updateBooking()

@@ -48,4 +48,12 @@ for ($i=0; $i < count($accommodations); $i++) {
     {
 
     }
+
+    public function readAccommodationAgenda()
+    {
+        $class = "Accommodation";
+        $table = "accommodation";
+        $data = [];
+        $result1 = DB::select($table, $data, $class);
+    }
 }

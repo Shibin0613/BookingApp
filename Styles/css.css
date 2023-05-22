@@ -125,13 +125,53 @@
 
 
 .container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.filter-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.accommodations {
+  flex: 2;
+}
+
+h3 {
+  margin-top: 0;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 .accommodation {
-  display: flex;
+  border: 1px solid #ccc;
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
 }
 
 .image {
