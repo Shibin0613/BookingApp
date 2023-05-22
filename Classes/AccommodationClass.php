@@ -31,7 +31,7 @@ class Accommodation
     {
     }
 
-    public function readAccommodation()
+    public function readAccommodation($name, $price, $category, $gas, $water, $electricity, $minPeople, $maxPeople)
     {
         $accommodationSelect = [];
         $accommodations = DB::select('accommodation', $accommodationSelect, 'Accommodation');
