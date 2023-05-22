@@ -29,9 +29,11 @@ $AccommodationClass = new Accommodation();
                     <label for="price">water:</label>
                     <input type="text" name="water" id="water">
                     <label for="price">elektriciteit:</label>
-                    <input type="text" name="elek" id="elek">
-                    <label for="price">personen:</label>
-                    <input type="number" name="personen" id="personen">
+                    <input type="text" name="elektriciteit" id="elektriciteit">
+                    <label for="price">min personen:</label>
+                    <input type="number" name="minpersonen" id="minpersonen">
+                    <label for="price">max personen:</label>
+                    <input type="number" name="maxpersonen" id="maxpersonen">
                     <input type="submit" value="Filteren">
                 </form>
             </div>
