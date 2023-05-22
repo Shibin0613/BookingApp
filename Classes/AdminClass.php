@@ -1,6 +1,6 @@
 <?php
 include 'UserClass.php';
-class Admins extends Users
+class Admin extends Users
 {
     public string $password;
 

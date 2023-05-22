@@ -101,7 +101,7 @@ use Controllers\DB;
 DB::connect();
 if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST['email'] !== null && $_POST['wachtwoord'] !== null) {
 
-    $user = DB::select('users', ['email' => $_POST['email'], 'wachtwoord' => $_POST['wachtwoord']]);
+    $user = DB::select('users', ['email' => $_POST['email'], 'wachtwoord' => $_POST['wachtwoord']],'Admin');
 
     if ($user && $user[0]["active"] == 1) {
         session_start();
