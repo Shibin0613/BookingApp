@@ -7,7 +7,7 @@ class Guests extends Users
     public string $postalCode;
     public string $houseNumber;
     public string $residence;
-    public DateTime $created;
+    public DateTime $createDate;
 
     public function createGuest() 
     {

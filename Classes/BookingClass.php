@@ -7,13 +7,13 @@ class Booking {
     public DateTime $createdDate;
     public DateTime $checkInDate;
     public DateTime $checkOutDate;
-    public int $peopleAmount;
+    public int $people;
     public float $price;
     public bool $paid;
 
     public function createBooking()
     {
-
+        
     }
 
     public function readBooking()

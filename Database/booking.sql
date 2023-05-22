@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 17 mei 2023 om 13:59
+-- Gegenereerd op: 22 mei 2023 om 14:48
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -25,23 +25,23 @@ CREATE TABLE `accommodation` (
   `id` int(11) NOT NULL,
   `category` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `minimumpeople` int(2) NOT NULL,
-  `maximumpeople` int(2) NOT NULL,
+  `minimumPeople` int(2) NOT NULL,
+  `maximumPeople` int(2) NOT NULL,
   `gas` tinyint(1) NOT NULL,
   `electricity` tinyint(1) NOT NULL,
   `water` tinyint(1) NOT NULL,
-  `priceadults` decimal(11,2) NOT NULL,
-  `pricekids` decimal(11,2) NOT NULL,
-  `pricebaby` decimal(11,2) NOT NULL,
+  `priceAdults` decimal(11,2) NOT NULL,
+  `priceKids` decimal(11,2) NOT NULL,
+  `priceBaby` decimal(11,2) NOT NULL,
   `description` text NOT NULL,
-  `createdate` date NOT NULL
+  `createDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `accommodation`
 --
 
-INSERT INTO `accommodation` (`id`, `category`, `name`, `minimumpeople`, `maximumpeople`, `gas`, `electricity`, `water`, `priceadults`, `pricekids`, `pricebaby`, `description`, `createdate`) VALUES
+INSERT INTO `accommodation` (`id`, `category`, `name`, `minimumPeople`, `maximumPeople`, `gas`, `electricity`, `water`, `priceAdults`, `priceKids`, `priceBaby`, `description`, `createDate`) VALUES
 (1, 1, 'mega grote tent beta', 2, 4, 1, 1, 1, 25.00, 15.00, 5.00, 'dit is een mega grote tent!', '2023-05-15');
 
 -- --------------------------------------------------------
@@ -72,11 +72,11 @@ INSERT INTO `admin` (`id`, `email`, `password`, `name`) VALUES
 
 CREATE TABLE `booking` (
   `id` int(11) NOT NULL,
-  `accommodationid` int(11) NOT NULL,
-  `guestid` int(2) NOT NULL,
-  `createdate` date NOT NULL,
-  `checkindate` date NOT NULL,
-  `checkoutdate` date NOT NULL,
+  `accommodationId` int(11) NOT NULL,
+  `guestId` int(2) NOT NULL,
+  `createDate` date NOT NULL,
+  `checkInDate` date NOT NULL,
+  `checkOutDate` date NOT NULL,
   `people` int(2) NOT NULL,
   `price` decimal(11,2) NOT NULL,
   `paid` tinyint(1) NOT NULL
@@ -86,7 +86,7 @@ CREATE TABLE `booking` (
 -- Gegevens worden geëxporteerd voor tabel `booking`
 --
 
-INSERT INTO `booking` (`id`, `accommodationid`, `guestid`, `createdate`, `checkindate`, `checkoutdate`, `people`, `price`, `paid`) VALUES
+INSERT INTO `booking` (`id`, `accommodationId`, `guestId`, `createDate`, `checkInDate`, `checkOutDate`, `people`, `price`, `paid`) VALUES
 (1, 1, 1, '2023-05-15', '2023-05-15', '2023-05-22', 2, 25.00, 1);
 
 -- --------------------------------------------------------
@@ -98,8 +98,8 @@ INSERT INTO `booking` (`id`, `accommodationid`, `guestid`, `createdate`, `checki
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `category` varchar(100) NOT NULL,
-  `minimumpeople` int(2) NOT NULL,
-  `maximumpeople` int(2) NOT NULL,
+  `minimumPeople` int(2) NOT NULL,
+  `maximumPeople` int(2) NOT NULL,
   `gas` tinyint(1) NOT NULL,
   `electricity` tinyint(1) NOT NULL,
   `water` tinyint(1) NOT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE `category` (
 -- Gegevens worden geëxporteerd voor tabel `category`
 --
 
-INSERT INTO `category` (`id`, `category`, `minimumpeople`, `maximumpeople`, `gas`, `electricity`, `water`, `price`, `description`) VALUES
+INSERT INTO `category` (`id`, `category`, `minimumPeople`, `maximumPeople`, `gas`, `electricity`, `water`, `price`, `description`) VALUES
 (1, 'tent', 2, 4, 1, 1, 1, 25.00, 'deze tent is mega cool!');
 
 -- --------------------------------------------------------
@@ -124,17 +124,17 @@ CREATE TABLE `guests` (
   `id` int(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `housenumber` int(100) NOT NULL,
-  `postalcode` varchar(100) NOT NULL,
+  `houseNumber` int(100) NOT NULL,
+  `postalCode` varchar(100) NOT NULL,
   `residence` varchar(100) NOT NULL,
-  `createdate` date NOT NULL
+  `createDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `guests`
 --
 
-INSERT INTO `guests` (`id`, `name`, `email`, `housenumber`, `postalcode`, `residence`, `createdate`) VALUES
+INSERT INTO `guests` (`id`, `name`, `email`, `houseNumber`, `postalCode`, `residence`, `createDate`) VALUES
 (1, 'tim', 'tim@gmail.com', 9, '8711GG', 'Workum', '2023-05-15');
 
 -- --------------------------------------------------------
@@ -146,14 +146,14 @@ INSERT INTO `guests` (`id`, `name`, `email`, `housenumber`, `postalcode`, `resid
 CREATE TABLE `photo` (
   `id` int(11) NOT NULL,
   `photo` varchar(11) NOT NULL,
-  `accommodationid` int(11) NOT NULL
+  `accommodationId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `photo`
 --
 
-INSERT INTO `photo` (`id`, `photo`, `accommodationid`) VALUES
+INSERT INTO `photo` (`id`, `photo`, `accommodationId`) VALUES
 (1, 'photo.jpg', 1);
 
 --
@@ -178,8 +178,8 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `accomodatie` (`accommodationid`),
-  ADD KEY `guest` (`guestid`);
+  ADD KEY `accomodatie` (`accommodationId`),
+  ADD KEY `guest` (`guestId`);
 
 --
 -- Indexen voor tabel `category`
@@ -198,7 +198,7 @@ ALTER TABLE `guests`
 --
 ALTER TABLE `photo`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `accomodatieid` (`accommodationid`);
+  ADD KEY `accomodatieid` (`accommodationId`);
 
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
@@ -263,4 +263,3 @@ ALTER TABLE `booking`
 ALTER TABLE `photo`
   ADD CONSTRAINT `accomodatieid` FOREIGN KEY (`accommodationid`) REFERENCES `accommodation` (`id`);
 COMMIT;
- 

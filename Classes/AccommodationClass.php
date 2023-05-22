@@ -1,5 +1,10 @@
 <?php
-include 'PhotoClass.php';
+require_once "../vendor/autoload.php";
+include 'PhotoClass.php'; 
+
+use Controllers\DB;
+
+DB::connect();
 
 class Accommodation {
     public int $id;
@@ -14,7 +19,7 @@ class Accommodation {
     public int $priceKids;
     public int $priceBaby;
     public string $description;
-    public DateTime $created;
+    public string $createDate;
     public array $images;
 
     public function addAccommodation()
@@ -29,7 +34,14 @@ class Accommodation {
 
     public function readAccommodation()
     {
-        
+$accommodationSelect = [];
+$accommodations = DB::select('accommodation', $accommodationSelect, 'Accommodation');
+
+for ($i=0; $i < count($accommodations); $i++) { 
+    $accommodations[$i]->images = DB::select('photo', ['accommodationId' => $accommodations[$i]->id], 'Photo');
+    echo "<pre>",print_r($accommodations),"</pre>";
+}   
+// echo "<pre>",print_r($accommodations),"</pre>";
     }
 
     public function updateAccommodation()
