@@ -29,7 +29,7 @@ class Accommodation {
 
     public function readAccommodation()
     {
-
+        
     }
 
     public function updateAccommodation()
