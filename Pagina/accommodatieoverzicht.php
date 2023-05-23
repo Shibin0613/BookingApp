@@ -61,7 +61,7 @@ $AccommodationClass = new Accommodation();
                 $query .= " WHERE categorie LIKE '%$categorie%'";
             }
 
-            $accommodations = $AccommodationClass->readAccommodation($_GET['naam'], $_GET['prijs'], $_GET['categorie'], $_GET['gas'], $_GET['water'], $_GET['elektriciteit'], $_GET['minpersonen'], $_GET['maxpersonen']);
+            $accommodations = $AccommodationClass->readAccommodation();
             $accommodationsLength = count($accommodations);
             for ($i = 0; $i < $accommodationsLength; $i++) :
 
