@@ -1,3 +1,8 @@
+<?php include "../Classes/BookingClass.php"; 
+
+$BookingClass = new Booking();
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,19 +43,20 @@
         },
     ],
     resources: [
-      
-      
-
-
+      { id: 'a', title: 'Auditorium A' },
+        { id: 'b', title: 'Auditorium B', eventColor: 'green' },
+        { id: 'c', title: 'Auditorium C', eventColor: 'orange' },
     ],   
+    events: [<?=$BookingClass->readBooking();?>],
 
+  });
 
-
-    });
     calendar.render();
 });
+
+
+let array = []
 </script>
-  
     
 <style>
 

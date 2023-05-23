@@ -1,6 +1,6 @@
 <?php
-require_once "../vendor/autoload.php";
 include 'PhotoClass.php';
+require_once "../vendor/autoload.php";
 
 use Controllers\DB;
 
@@ -47,11 +47,5 @@ class Accommodation
     {
     }
 
-    public function readAccommodationAgenda()
-    {
-        $class = "Accommodation";
-        $table = "accommodation";
-        $data = [];
-        $result1 = DB::select($table, $data, $class);
-    }
+    
 }
