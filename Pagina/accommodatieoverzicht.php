@@ -1,4 +1,5 @@
 <?php include "../Classes/AccommodationClass.php";
+include "header.php";
 
 $AccommodationClass = new Accommodation();
 $accommodationTest = $AccommodationClass->readAccommodation();

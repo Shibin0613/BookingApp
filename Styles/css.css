@@ -193,3 +193,8 @@ h2 {
 p {
   margin-bottom: 10px;
 }
+
+.nav-list {
+  align-items: right;
+  text-decoration: none;
+}

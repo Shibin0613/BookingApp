@@ -1,8 +1,9 @@
 <?php 
-
 require_once "../vendor/autoload.php";
+
 use Controllers\DB;
 
+session_start();
 DB::connect();
 ?>
 <!DOCTYPE html>
@@ -15,4 +16,17 @@ DB::connect();
     <link rel="stylesheet" href="../Styles/css.css">
 </head>
 <body>
-    
+    <?php 
+    if ($_SESSION['userId']) : ?>
+    <header class="header">
+  <div class="header-container">
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="accommodatietoevoegen.php">Accommodatie toevoegen</a></li>
+        <li class="nav-item"><a href="accommodatieoverzicht.php">Accommodaties</a></li>
+        <li class="nav-item"><a href="booking.php">Boeken</a></li>
+        <li class="nav-item"><a href="planbord.php">Planbord</a></li>
+        <li class="nav-item"><form action="" method="POST"><button name="uitlog">Uitloggen</button></form></li>
+      </ul>
+</header>
+    <?php endif; ?>

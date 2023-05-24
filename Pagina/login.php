@@ -93,7 +93,7 @@
 
 
 <?php
-
+include "../Classes/AdminClass.php";
 require_once "../vendor/autoload.php";
 
 use Controllers\DB;
@@ -101,13 +101,12 @@ use Controllers\DB;
 DB::connect();
 if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST['email'] !== null && $_POST['wachtwoord'] !== null) {
 
-    $user = DB::select('users', ['email' => $_POST['email'], 'wachtwoord' => $_POST['wachtwoord']],'Admin');
+    $user = DB::select('admin', ['email' => $_POST['email'], 'password' => $_POST['wachtwoord']], 'Admin');
 
-    if ($user && $user[0]["active"] == 1) {
+    if ($user) {
         session_start();
-        $_SESSION['userId'] = $user[0]["id"];
-        $_SESSION['role'] = $user[0]["role"];
-        header("location:home.php");
+        $_SESSION['userId'] = $user[0]->id;
+        header("location:planbord.php");
     } else {
         echo '<script>alert("uw inlog gegevens kloppen niet.")</script>';
     }

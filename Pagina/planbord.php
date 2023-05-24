@@ -1,4 +1,5 @@
 <?php include "../Classes/BookingClass.php"; 
+include "header.php";
 
 $BookingClass = new Booking();
 

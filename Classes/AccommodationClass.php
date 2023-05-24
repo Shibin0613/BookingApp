@@ -32,12 +32,13 @@ class Accommodation
 
     public function deleteAccommodation()
     {
+        
     }
 
     public function readAccommodation()
     {
         $accommodationSelect = [
-            
+
         ];
         $accommodations = DB::select('accommodation', $accommodationSelect, 'Accommodation');
         $accommodationsLength = count($accommodations);
