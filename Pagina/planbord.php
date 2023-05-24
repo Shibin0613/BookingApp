@@ -42,12 +42,13 @@ $BookingClass = new Booking();
           field: 'title'
         },
     ],
-    resources: [
-      { id: 'a', title: 'Auditorium A' },
-        { id: 'b', title: 'Auditorium B', eventColor: 'green' },
-        { id: 'c', title: 'Auditorium C', eventColor: 'orange' },
+    resources: [ <?=$AccommodationClass->readAccommodationPlanning();?>
+
+      // { id: 'a', title: 'Auditorium A' },
+      //   { id: 'b', title: 'Auditorium B', eventColor: 'green' },
+      //   { id: 'c', title: 'Auditorium C', eventColor: 'orange' },
     ],   
-    events: [<?=$BookingClass->readBooking();?>],
+    events: [<?=$BookingClass->readBookingPlanning();?>],
 
   });
 

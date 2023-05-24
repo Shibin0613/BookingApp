@@ -22,7 +22,7 @@ class Booking
     {
     }
 
-    public function readBooking()
+    public function readBookingPlanning()
     {
         $class = "Booking";
         $table = "booking";
@@ -30,15 +30,16 @@ class Booking
         $bookings = DB::select($table, $data, $class);
 
         $resultLength = count($bookings);
+
         for ($i = 0; $i < $resultLength; $i++) {
             $accommodation = DB::select('accommodation', ['id' => $bookings[$i]->accommodationId], 'Booking');
             $start = new DateTime($bookings[$i]->checkInDate);
             $end = new DateTime($bookings[$i]->checkOutDate);
-            return "
+            echo "
         {
             id: " . $bookings[$i]->id . ",
             title: '" . $accommodation[0]->name . "',
-            resourceId: 'b',
+            resourceId: " . $accommodation[$i]->id . ",
             start: '" . $start->format('Y-m-d\TH:i:s') . "',
             end: '" . $end->format('Y-m-d\TH:i:s') . "',
             editable: true,

@@ -47,5 +47,26 @@ class Accommodation
     {
     }
 
-    
+    public function readAccommodationPlanning()
+    {
+        $class = "Accommodation";
+        $table = "accommodation";
+        $data = [];
+        $accommodation = DB::select($table, $data, $class);
+
+        $resultLength = count($accommodation);
+
+        for ($i = 0; $i < $resultLength; $i++) {
+            $category = DB::select('accommodation', ['id' => $accommodation[$i]->category], 'Accomodation');
+
+            echo "
+        {
+            id: " . $accommodation[$i]->id . ",
+            title: '" . $accommodation[0]->name . "',
+            building: " . $category[0]->category . "'
+          
+        }, ";
+        }
+    }
+
 }
