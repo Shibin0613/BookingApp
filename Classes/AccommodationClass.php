@@ -32,15 +32,13 @@ class Accommodation
 
     public function deleteAccommodation()
     {
-        
+
     }
 
-    public function readAccommodation()
+    public function readAccommodation($filterArray)
     {
-        $accommodationSelect = [
-
-        ];
-        $accommodations = DB::select('accommodation', $accommodationSelect, 'Accommodation');
+        
+        $accommodations = DB::select('accommodation', $filterArray, 'Accommodation');
         $accommodationsLength = count($accommodations);
 
         for ($i = 0; $i < $accommodationsLength; $i++) {
@@ -52,6 +50,7 @@ class Accommodation
     public function updateAccommodation()
     {
     }
+    
 
     
 }
