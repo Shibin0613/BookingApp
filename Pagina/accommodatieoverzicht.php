@@ -1,7 +1,9 @@
 <?php include "../Classes/AccommodationClass.php";
+include "header.php";
 
 $AccommodationClass = new Accommodation();
-
+$accommodationTest = $AccommodationClass->readAccommodation();
+print_r($accommodationTest);
 ?>
 
 <!DOCTYPE html>
@@ -41,27 +43,8 @@ $AccommodationClass = new Accommodation();
         <div class="accommodations">
             <?php
 
-            // Filter toepassen als er zoekparameters zijn
-            if (isset($_GET['name']) && !empty($_GET['name'])) {
-                $name = $_GET['name'];
-                $query .= " WHERE name LIKE '%$name%'";
-            }
-
-            if (isset($_GET['price']) && !empty($_GET['price'])) {
-                $price = $_GET['price'];
-                if (strpos($query, 'WHERE') !== false) {
-                    $query .= " AND price <= $price";
-                } else {
-                    $query .= " WHERE price <= $price";
-                }
-            }
-
-            if (isset($_GET['categorie']) && !empty($_GET['categorie'])) {
-                $name = $_GET['categorie'];
-                $query .= " WHERE categorie LIKE '%$categorie%'";
-            }
-
-            $accommodations = $AccommodationClass->readAccommodation($_GET['naam'], $_GET['prijs'], $_GET['categorie'], $_GET['gas'], $_GET['water'], $_GET['elektriciteit'], $_GET['minpersonen'], $_GET['maxpersonen']);
+                    
+            $accommodations = $AccommodationClass->readAccommodation();
             $accommodationsLength = count($accommodations);
             for ($i = 0; $i < $accommodationsLength; $i++) :
 

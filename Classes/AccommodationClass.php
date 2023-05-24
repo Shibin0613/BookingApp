@@ -25,15 +25,21 @@ class Accommodation
 
     public function addAccommodation()
     {
+        $accommodation = [
+
+        ];
     }
 
     public function deleteAccommodation()
     {
+        
     }
 
-    public function readAccommodation($name, $price, $category, $gas, $water, $electricity, $minPeople, $maxPeople)
+    public function readAccommodation()
     {
-        $accommodationSelect = [];
+        $accommodationSelect = [
+
+        ];
         $accommodations = DB::select('accommodation', $accommodationSelect, 'Accommodation');
         $accommodationsLength = count($accommodations);
 

@@ -1,9 +1,17 @@
-<?php
+<form method="POST" action="">
+  <div class="form-group">
+    <label for="postcode">Woonplaats</label>
+    <input type="text" class="form-control" id="woonplaats" name="woonplaats" required>
+  </div>
+  <button name ="checkweer">Check adres</button><br>
+  <?php
+  if(isset($_POST['checkweer'])){
+    $woonplaats = $_POST['woonplaats'];
 $clientId = 'YOUR_CLIENT_ID'; // Replace with your actual client ID
 $clientSecret = 'YOUR_CLIENT_SECRET'; // Replace with your actual client secret
 
 // Create a request URL
-$requestUrl = 'https://data.meteoserver.nl/api/dagverwachting.php?locatie=Sneek&key=5763837a25';
+$requestUrl = "https://data.meteoserver.nl/api/dagverwachting.php?locatie=".$woonplaats."&key=5763837a25";
 
 // Set up the cURL request
 $curl = curl_init();
@@ -22,6 +30,9 @@ $data = json_decode($response, true);
 
 // Check if the response contains any addresses
 if (!empty($data['data'])) {
+    
+    array_pop($data['data']);
+
     foreach($data['data'] as $result)
     {
         echo $result['dag']."<br>";
@@ -31,4 +42,8 @@ if (!empty($data['data'])) {
         echo "<br>";
 
     }
+    
 }
+  }
+?>
+</form>
