@@ -21,24 +21,69 @@ class Accommodation
     public int $priceBaby;
     public string $description;
     public string $createDate;
-    public array $images;
 
     public function addAccommodation()
     {
-        $accommodation = [
+        if(isset($_POST['gas'])){
+        $gas = 1;
+        }else{
+        $gas = 0;
+        };
+        if(isset($_POST['elek'])){
+        $elek = 1;
+        }else{
+        $elek = 0;
+        };
+        if(isset($_POST['water'])){
+        $water = 1;
+        }else{
+        $water = 0;
+        };
 
+        $accommodation = [
+            'category' => $_POST['categorie'],
+            'name' => $_POST['naam'],
+            'minimumPeople' => $_POST['min'],
+            'maximumPeople' =>$_POST['max'],
+            'gas' =>$gas,
+            'electricity' => $elek,
+            'water' => $water,
+            'priceAdults' =>$_POST['18+'],
+            'priceKids' =>$_POST['4-18'],
+            'priceBaby' =>$_POST['0-4'],
+            'description' =>$_POST['beschrijving'],
+            'createDate' => date('Y-m-d'),
+            
         ];
+
+        $addAccommodation = DB::insert('accommodation',$accommodation);
+
+        $image = $_FILES['image']['name'];
+        $target = "../Foto/".basename($image);
+        move_uploaded_file($_FILES['image']['tmp_name'], $target);
+
+        $accommodation = [];
+        $selectAccommodation= DB::select('accommodation',$accommodation,'Accommodation');
+        $lastAccommodationid = end($selectAccommodation)['id'];
+
+        $phototable = "photo";
+        $photodata = [
+            'photo' => $image,
+            'accommodationId' => $lastAccommodationid,
+        ];
+        $result = DB::insert($phototable,$photodata,'Accommodation');
+        return $addAccommodation;
+        
     }
 
     public function deleteAccommodation()
     {
-        
     }
 
     public function readAccommodation()
     {
         $accommodationSelect = [
-
+            
         ];
         $accommodations = DB::select('accommodation', $accommodationSelect, 'Accommodation');
         $accommodationsLength = count($accommodations);
@@ -51,6 +96,13 @@ class Accommodation
 
     public function updateAccommodation()
     {
+    }
+    public function readCategory()
+    {
+        $categorySelect = [];
+        $categories = DB::select('category', $categorySelect, 'Accommodation');
+        
+        return $categories; 
     }
 
     public function readAccommodationPlanning()
