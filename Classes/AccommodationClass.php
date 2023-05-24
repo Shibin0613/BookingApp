@@ -9,7 +9,7 @@ DB::connect();
 class Accommodation
 {
     public int $id;
-    public int $category;
+    public $category;
     public string $name;
     public int $minimunPeople;
     public int $maximunPeople;
@@ -55,24 +55,40 @@ class Accommodation
 
     public function readAccommodationPlanning()
     {
-        $class = "Accommodation";
+$class = "Accommodation";
         $table = "accommodation";
         $data = [];
-        $accommodation = DB::select($table, $data, $class);
+        $accommodations = DB::select($table, $data, $class);
 
-        $resultLength = count($accommodation);
+        $resultLength = count($accommodations);
 
-        for ($i = 0; $i < $resultLength; $i++) {
-            $category = DB::select('accommodation', ['id' => $accommodation[$i]->category], 'Accomodation');
-
+         for ($i = 0; $i < $resultLength; $i++) {
+            // $category = DB::select('category', ['id' => $accommodations[$i]], 'Accommodation');
             echo "
         {
-            id: " . $accommodation[$i]->id . ",
-            title: '" . $accommodation[0]->name . "',
-            building: " . $category[0]->category . "'
-          
+            id: " . $accommodations[$i]->id . ",
+            title: '" . $accommodations[$i]->name . "',
         }, ";
-        }
+         }
+
+        // $class = "Accommodation";
+        // $table = "accommodation";
+        // $data = [];
+        // $accommodation = DB::select($table, $data, $class);
+
+        // $resultLength = count($accommodation);
+
+        // for ($i = 0; $i < $resultLength; $i++) {
+        //     $category = DB::select('accommodation', ['id' => $accommodation[$i]->category], 'Accomodation');
+
+        //     echo "
+        // {
+        //     id: " . $accommodation[$i]->id . ",
+        //     title: '" . $accommodation[0]->name . "',
+        //     building: " . $category[0]->category . "'
+          
+        // }, ";
+        //}
     }
 
 }

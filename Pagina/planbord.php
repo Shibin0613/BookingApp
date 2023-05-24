@@ -1,7 +1,9 @@
 <?php include "../Classes/BookingClass.php"; 
+include "../Classes/AccommodationClass.php";
 include "header.php";
 
 $BookingClass = new Booking();
+$AccommodationClass = new Accommodation();
 
 ?>
 <!DOCTYPE html>
