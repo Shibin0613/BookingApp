@@ -1,9 +1,7 @@
-<?php include "header.php"; ?>
-<?php 
-require_once "../vendor/autoload.php";
-use Controllers\DB;
+<?php include "header.php"; 
 
-DB::connect();
+include "../Classes/AccommodationClass.php";
+$Accommodations = new Accommodation();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,53 +18,69 @@ DB::connect();
 <form method="POST" action="../Handlers/accommodationHandler.php">
   <div class="form-group">
     <label for="naam">Naam</label>
-    <input type="text" class="form-control" id="naam" name="naam" required>
+    <input type="text" class="form-control" id="naam" name="naam" >
   </div>
   <div class="form-group">
     <label for="beschrijving">Beschrijving</label>
-    <input type="text" class="form-control" id="beschrijving" name="beschrijving" required>
+    <input type="text" class="form-control" id="beschrijving" name="beschrijving" >
+  </div>
+  <div class="form-group">  
+    <label for="18+">*18+ jaar</label>
+    €<input type="number" style="width:40%;" class="form-control" id="18+" name="18+" min="20" value="20" max="100">
   </div>
   <div class="form-group">
-    <label for="prijs">Prijs</label>
-    <input type="text" class="form-control" id="prijs" name="prijs" required>
+    <label for="4-18">*4-18 jaar</label>
+    €<input type="number" style="width:40%;" class="form-control" id="4-18" name="4-18" value="20" min="20" max="100">
+  </div>
+  <div class="form-group">
+    <label for="0-4">*0-4 jaar</label>
+    €<input type="number" style="width:40%;" class="form-control" id="0-4" name="0-4" value="20" min="20" max="100">
   </div>
   <div class="form-group">
     <label for="categorie">Categorie</label>
+    <select name="categorie">
     <?php 
-    $class = "Class";
-    $categorytable = "category";
-    $categorydata = [];
-    $category = DB::select($categorytable,$categorydata,$class);
-    var_dump($category);
+    $category = $Accommodations->readCategory();
+    foreach ($category as $result){
+      $categorieid = $result->id;
+      $categorienaam = $result->category;
+      echo "
+    <option value='".$categorieid."'>".$categorienaam."</option>
+    ";
+    }
     ?>
+    </select>
   </div>
   <div class="form-group">
-    <label for="foto">Foto</label>
-    <input type="email" class="form-control" id="email" name="email" required>
+    <label for="file">
+    <i class="far fa-file-image"></i> &nbsp;
+    Voeg foto toe
+    </label><input class="form-control" type="file" id="file" name="image" accept="image/*">
   </div>
   <div class="form-group">
-    <label for="18+">water</label>
-    <input type="checkbox" class="form-control" id="18+" name="18+" value="1" min="1" max="10">
+    <label for="water">water</label>
+    <input type="checkbox" class="form-control" id="water" name="water">
   </div>
   <div class="form-group">
-    <label for="4-18">elektriciteit</label>
-    <input type="checkbox" class="form-control" id="4-18" name="4-18" value="0" min="0" max="10">
+    <label for="elec">elektriciteit</label>
+    <input type="checkbox" class="form-control" id="elek" name="elek">
   </div>
   <div class="form-group">
-    <label for="0-4">gas</label>
-    <input type="checkbox" class="form-control" id="0-4" name="0-4" value="0" min="0" max="10">
+    <label for="gas">gas</label>
+    <input type="checkbox" class="form-control" id="gas" name="gas">
   </div>
   <div class="form-group">
-    <label for="date">Min</label>
-    <input type="number" class="form-control" id="date" name="date" value="1" min="1" max="14">
+    <label for="min">Min</label>
+    <input type="number" style="width:40%;" class="form-control" id="min" name="min" value="2" min="1" max="6">
   </div>
   <div class="form-group">
-    <label for="aantal">Max</label>
-    <input type="number" class="form-control" id="aantal" name="aantal" value="4" min="4" max="14">
+    <label for="max">Max</label>
+    <input type="number" style="width:40%;" class="form-control" id="max" name="max" value="4" min="4" max="14">
   </div>
   <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+  <div style="float:right">
+  *: Per nacht per persoon
+  <div>
 </form>
-
 </body>
 </html>
-

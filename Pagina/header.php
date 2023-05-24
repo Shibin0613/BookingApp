@@ -17,7 +17,7 @@ DB::connect();
 </head>
 <body>
     <?php 
-    if ($_SESSION['userId']) : ?>
+    if (isset($_SESSION['userId'])) : ?>
     <header class="header">
   <div class="header-container">
     <nav class="nav">
