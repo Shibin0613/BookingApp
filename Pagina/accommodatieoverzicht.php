@@ -53,17 +53,17 @@ $AccommodationClass = new Accommodation();
             $filterArray = [];
             $betweenArray = [];
 
-            if (isset($_GET['minimumprice']) == !empty($_GET['minimumprice'])) {
+            if (isset($_GET['minimumprice']) && trim($_POST['minimumprice']) !== "") {
                 $betweenArray['priceAdults'] = $_GET['minimumprice'];
             } else {
                 $betweenArray['priceAdults'] = 0;
             }
-            if (isset($_GET['maximumprice']) == !empty($_GET['maximumprice'])) {
+            if (isset($_GET['maximumprice']) && trim($_POST['maximumprice']) !== "") {
                 $betweenArray['priceAdultMaximum'] = $_GET['maximumprice'];
             } else {
                 $betweenArray['priceAdultMaximum'] = 10000;
             }
-            if (isset($_GET['category']) == !empty($_GET['category'])) {
+            if (isset($_GET['category']) && trim($_POST['category']) !== "") {
                 $filterArray['category'] = $_GET['category'];
             }
             if (isset($_GET['gas'])) {

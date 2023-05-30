@@ -109,7 +109,7 @@ class Accommodation
             $priceKids = $_POST['4_18'];
             $priceBaby = $_POST['0_4'];
         
-        $addAccommodation = DB::update("UPDATE `accommodation` SET `name` = :name WHERE id = :id", ['active' => $active, 'userid' => $userid]);
+        // $addAccommodation = DB::update("UPDATE `accommodation` SET `name` = :name WHERE id = :id", ['active' => $active, 'userid' => $userid]);
     }
 
     public function readCategory()
