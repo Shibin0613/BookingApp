@@ -3,7 +3,6 @@ include "header.php";
 
 $AccommodationClass = new Accommodation();
 ?>
-<pre><?php print_r($accommodationTest); ?> </pre>
 
 <!DOCTYPE html>
 <html>
@@ -56,9 +55,13 @@ $AccommodationClass = new Accommodation();
 
             if (isset($_GET['minimumprice']) == !empty($_GET['minimumprice'])) {
                 $betweenArray['priceAdults'] = $_GET['minimumprice'];
+            } else {
+                $betweenArray['priceAdults'] = 0;
             }
             if (isset($_GET['maximumprice']) == !empty($_GET['maximumprice'])) {
                 $betweenArray['priceAdultMaximum'] = $_GET['maximumprice'];
+            } else {
+                $betweenArray['priceAdultMaximum'] = 10000;
             }
             if (isset($_GET['category']) == !empty($_GET['category'])) {
                 $filterArray['category'] = $_GET['category'];

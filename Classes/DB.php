@@ -61,6 +61,7 @@ $where = '';
             }
         }   
             $query = "SELECT * FROM $table $where";
+            echo $query;    
         // Prepare the query statement.
         $stmt = self::$pdo->prepare($query);
         // Execute the query.
