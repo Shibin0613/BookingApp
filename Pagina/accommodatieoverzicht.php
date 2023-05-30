@@ -25,8 +25,8 @@ $AccommodationClass = new Accommodation();
                     <label for="categorie">categorie</label>
                     <select name="category">
                         <option value="">Select...</option>
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
+                        <option value=""></option>
+                        <option value=""></option>
                     </select>
                     <input type="text" name="category" id="category" placeholder="categorie">
                     <label class="switch">Gas
