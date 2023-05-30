@@ -2,8 +2,7 @@
 include "header.php";
 
 $AccommodationClass = new Accommodation();
-$accommodationTest = $AccommodationClass->readAccommodation([]); ?>
-
+?>
 <pre><?php print_r($accommodationTest); ?> </pre>
 
 <!DOCTYPE html>
@@ -20,20 +19,31 @@ $accommodationTest = $AccommodationClass->readAccommodation([]); ?>
             <div class="filter-box">
                 <h3>Filter</h3>
                 <form action="" method="get">
-                    <label for="price">Prijs:</label>
-                    <input type="number" name="price" id="price">
-                    <label for="categorie">categorie:</label>
-                    <input type="text" name="category" id="category">
-                    <label for="price">gas:</label>
-                    <input type="text" name="gas" id="gas">
-                    <label for="price">water:</label>
-                    <input type="text" name="water" id="water">
-                    <label for="price">elektriciteit:</label>
-                    <input type="text" name="electricity" id="electricity">
-                    <label for="price">min personen:</label>
-                    <input type="number" name="minPeople" id="minPeople">
-                    <label for="price">max personen:</label>
-                    <input type="number" name="maxPeople" id="maxPeople">
+                    <label for="price">Prijs</label>
+                    <input type="number" name="minimumprice" id="minimumprice" placeholder="minimum prijs">
+                    <input type="number" name="maximumprice" id="maximumprice" placeholder="maximum prijs">
+                    <label for="categorie">categorie</label>
+                    <select name="category">
+                        <option value="">Select...</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                    <input type="text" name="category" id="category" placeholder="categorie">
+                    <label class="switch">Gas
+                        <input type="checkbox" id="gas" name="gas">
+                        <span class="slider round"></span>
+                    </label>
+                    <label class="switch">Water
+                        <input type="checkbox" id="water" name="water">
+                        <span class="slider round"></span>
+                    </label>
+                    <label class="switch">elektriciteit
+                        <input type="checkbox" id="electricity" name="electricity">
+                        <span class="slider round"></span>
+                    </label>
+                    <label for="price">personen</label>
+                    <input type="number" name="minPeople" id="minPeople" placeholder="minimum personen">
+                    <input type="number" name="maxPeople" id="maxPeople" placeholder="maximum personen">
                     <input type="submit" value="Filter">
                 </form>
             </div>
@@ -42,24 +52,40 @@ $accommodationTest = $AccommodationClass->readAccommodation([]); ?>
             <?php
 
             $filterArray = [];
-            
-            if (isset($_GET['price']) == !empty($_GET['price'])) {
-                $filterArray['priceAdults'] = $_GET['price'];
-            }if (isset($_GET['category']) == !empty($_GET['category'])) {
-                $filterArray['category'] = $_GET['category'];
-            }if (isset($_GET['gas']) == !empty($_GET['gas'])) {
-                $filterArray['gas'] = $_GET['gas'];
-            }if (isset($_GET['water']) == !empty($_GET['water'])) {
-                $filterArray['water'] = $_GET['water'];
-            }if (isset($_GET['electricity']) == !empty($_GET['electricity'])) {
-                $filterArray['electricity'] = $_GET['electricity'];
-            }if (isset($_GET['minPeople']) == !empty($_GET['minPeople'])) {
-                $filterArray['minimumPeople'] = $_GET['minPeople'];
-            }if (isset($_GET['maxPeople']) == !empty($_GET['maxPeople'])) {
-                $filterArray['maximumPeople'] = $_GET['maxPeople'];
-            }
+            $betweenArray = [];
 
-            $accommodations = $AccommodationClass->readAccommodation($filterArray);
+            if (isset($_GET['minimumprice']) == !empty($_GET['minimumprice'])) {
+                $betweenArray['priceAdults'] = $_GET['minimumprice'];
+            }
+            if (isset($_GET['maximumprice']) == !empty($_GET['maximumprice'])) {
+                $betweenArray['priceAdultMaximum'] = $_GET['maximumprice'];
+            }
+            if (isset($_GET['category']) == !empty($_GET['category'])) {
+                $filterArray['category'] = $_GET['category'];
+            }
+            if (isset($_GET['gas'])) {
+                $filterArray['gas'] = 1;
+            } else {
+                $filterArray['gas'] = 0;
+            }
+            if (isset($_GET['water'])) {
+                $filterArray['water'] = 1;
+            } else {
+                $filterArray['water'] = 0;
+            }
+            if (isset($_GET['electricity'])) {
+                $filterArray['electricity'] = 1;
+            } else {
+                $filterArray['electricity'] = 0;
+            }
+            // if (isset($_GET['minPeople']) == !empty($_GET['minPeople'])) {
+            //     $betweenArray['minimumPeople'] = $_GET['minPeople'];
+            // }
+            // if (isset($_GET['maxPeople']) == !empty($_GET['maxPeople'])) {
+            //     $filterArray['maximumPeople'] = $_GET['maxPeople'];
+            // }
+
+            $accommodations = $AccommodationClass->readAccommodation($filterArray, $betweenArray);
             $accommodationsLength = count($accommodations);
             for ($i = 0; $i < $accommodationsLength; $i++) :
 
