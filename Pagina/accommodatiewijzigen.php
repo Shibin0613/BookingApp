@@ -2,7 +2,7 @@
 include "header.php";
 
 $AccommodationClass = new Accommodation();
-$accommodationTest = $AccommodationClass->readAccommodation([]); ?>
+?>
 
 <!DOCTYPE html>
 <html>
@@ -19,11 +19,10 @@ $accommodationTest = $AccommodationClass->readAccommodation([]); ?>
     <div class="container">
         <div class="accommodations">
             <?php
-
             $filterArray = [];
-            
+            $betweenArray = [];
 
-            $accommodations = $AccommodationClass->readAccommodation($filterArray);
+            $accommodations = $AccommodationClass->readAccommodation($filterArray, $betweenArray);
             $accommodationsLength = count($accommodations);
             for ($i = 0; $i < $accommodationsLength; $i++) :
                 $image = $accommodations[$i]->images[0];

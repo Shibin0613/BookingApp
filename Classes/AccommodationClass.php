@@ -100,16 +100,26 @@ class Accommodation
 
     public function updateAccommodation()
     {
-            $id = $_POST['id'];
-            $name = $_POST['naam'];
-            $description = $_POST['beschrijving'];
-            $minimunPeople = $_POST['min'];
-            $maximunPeople = $_POST['max'];
-            $priceAdults = $_POST['18+'];
-            $priceKids = $_POST['4_18'];
-            $priceBaby = $_POST['0_4'];
+        $id = $_POST['id'];
+        $name = $_POST['naam'];
+        $description = $_POST['beschrijving'];
+        $minimunPeople = $_POST['min'];
+        $maximunPeople = $_POST['max'];
+        $priceAdults = $_POST['18+'];
+        $priceKids = $_POST['4-18'];
+        $priceBaby = $_POST['0-4'];
         
-        // $addAccommodation = DB::update("UPDATE `accommodation` SET `name` = :name WHERE id = :id", ['active' => $active, 'userid' => $userid]);
+        $updateAccommodation = DB::update("UPDATE `accommodation` SET `name` = :name, `minimumPeople` = :minimumPeople, `maximumPeople` = :maximumPeople, `priceAdults` = :priceAdults, `priceKids` = :priceKids, `priceBaby` = :priceBaby, `description` = :description WHERE id = :id", [
+            'name' => $name,
+            'minimumPeople' => $minimunPeople,
+            'maximumPeople' => $maximunPeople,
+            'priceAdults' => $priceAdults,
+            'priceKids' => $priceKids,
+            'priceBaby' => $priceBaby,
+            'description' => $description,
+            'id' => $id
+        ]);
+        return $updateAccommodation;
     }
 
     public function readCategory()
