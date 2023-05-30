@@ -77,6 +77,13 @@ class Accommodation
 
     public function deleteAccommodation()
     {
+        $id=$_POST['id'];
+        $accommodatietable = "accommodation";
+        $accommodatiedata = [
+            "id" => $id,
+        ];
+        $result = DB::delete($accommodatietable,$accommodatiedata);
+        return $result;
     }
 
     public function readAccommodation($filterArray, $betweenArray)
@@ -93,6 +100,16 @@ class Accommodation
 
     public function updateAccommodation()
     {
+            $id = $_POST['id'];
+            $name = $_POST['naam'];
+            $description = $_POST['beschrijving'];
+            $minimunPeople = $_POST['min'];
+            $maximunPeople = $_POST['max'];
+            $priceAdults = $_POST['18+'];
+            $priceKids = $_POST['4_18'];
+            $priceBaby = $_POST['0_4'];
+        
+        $addAccommodation = DB::update("UPDATE `accommodation` SET `name` = :name WHERE id = :id", ['active' => $active, 'userid' => $userid]);
     }
 
     public function readCategory()
