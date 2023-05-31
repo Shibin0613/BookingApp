@@ -1,5 +1,4 @@
 <?php include "../Classes/AccommodationClass.php";
-include "header.php";
 
 $AccommodationClass = new Accommodation();
 ?>
@@ -9,7 +8,6 @@ $AccommodationClass = new Accommodation();
 
 <head>
     <title>Accommodatieoverzicht</title>
-    <link rel="stylesheet" href="../Styles/css.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -25,7 +23,6 @@ $AccommodationClass = new Accommodation();
             $accommodations = $AccommodationClass->readAccommodation($filterArray, $betweenArray);
             $accommodationsLength = count($accommodations);
             for ($i = 0; $i < $accommodationsLength; $i++) :
-                $image = $accommodations[$i]->images[0];
                 ?>
                 <div class="accommodation">
                     <div class="info">
@@ -33,9 +30,10 @@ $AccommodationClass = new Accommodation();
                         <p>Prijs: <?= $accommodations[$i]->priceAdults ?></p>
                         <button type="button" style="float:right;" class="btn btn-primary" data-toggle="modal" data-target="#myModal<?=$accommodations[$i]->id?>">Wijzigen</button>
                         <p><?= $accommodations[$i]->description ?></p>
-                        <form action="../Handlers/accommodationHandler.php" method="POST" hidden>
+                        <form action="../Handlers/accommodationHandler.php" method="POST">
                           <input hidden name="id" value="<?php echo $accommodations[$i]->id ?>">
-                        </form><button style="float:right;" class="btn btn-danger" name="verwijderen">Verwijderen</button>
+                          <button style="float:right;" class="btn btn-danger" name="verwijderen" onclick="return checkdelete()">Verwijderen</button>
+                        </form>
                     </div>
                 
                 <!-- Popup -->
@@ -75,3 +73,9 @@ $AccommodationClass = new Accommodation();
 </body>
 
 </html>
+
+<script>
+function checkdelete(){
+  return confirm('Weet je zeker dat je deze accommodatie wil verwijderen?');
+}
+</script>

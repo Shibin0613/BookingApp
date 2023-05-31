@@ -78,11 +78,19 @@ class Accommodation
     public function deleteAccommodation()
     {
         $id=$_POST['id'];
-        $accommodatietable = "accommodation";
-        $accommodatiedata = [
-            "id" => $id,
+        $phototable = "photo";
+        $queryfoto = "DELETE FROM $phototable WHERE accommodationId= :id";
+        $fotodata = [
+            ":id" =>$id,
         ];
-        $result = DB::delete($accommodatietable,$accommodatiedata);
+        $result = DB::delete($queryfoto,$fotodata);
+
+        $accommodatietable = "accommodation";
+        $queryaccommodatie = "DELETE FROM $accommodatietable WHERE id = :id";
+        $accommodatiedata = [
+            ":id" => $id,
+        ];
+        $result = DB::delete($queryaccommodatie,$accommodatiedata);
         return $result;
     }
 
