@@ -7,15 +7,18 @@ use Controllers\DB;
 $accommodationService = new Accommodation();
 if (isset($_POST['submit'])) {
     $createdAccommodation = $accommodationService->addAccommodation($_FILES);
-
-    if ($createdAccommodation) :
-        echo "<script>alert('Accommodatie is toegevoegd')</script>"; ?>
-        <META HTTP-EQUIV="Refresh" CONTENT="0; URL=../pagina/accommodatietoevoegen.php">
-    <?php else :
-        echo "<script>alert('Het is niet gelukt om een accommodatie toe te voegen, probeer later opnieuw!')</script>"; ?>
-        <!-- <META HTTP-EQUIV="Refresh" CONTENT="0; URL=../pagina/accommodatietoevoegen.php"> -->
-    <?php
-    endif;
+}
+if(isset($_POST['submit'])){
+$createdAccommodation = $accommodationService->addAccommodation();
+            
+if($createdAccommodation = true) :
+echo "<script>alert('Accommodatie is toegevoegd')</script>"; ?>
+<META HTTP-EQUIV="Refresh" CONTENT="0; URL=../pagina/accommodatietoevoegen.php">
+<?php else :
+echo "<script>alert('Het is niet gelukt om een accommodatie toe te voegen, probeer later opnieuw!')</script>"; ?>
+<META HTTP-EQUIV="Refresh" CONTENT="0; URL=../pagina/accommodatietoevoegen.php">
+<?php
+endif;
 }
 
 if (isset($_POST['verwijderen'])) {
@@ -43,4 +46,3 @@ if (isset($_POST['wijzigen'])) {
 <?php
     endif;
 }
-?>
