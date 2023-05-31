@@ -38,6 +38,7 @@ $service = new Services();
     ?>
   </form>
   <form method="POST" action="../Handlers/bookingHandler.php">
+    
     <input hidden name='postcode' value='<?= $inputValues['postcode'] ?>'>
     <input hidden name='huisnummer' value='<?= $inputValues['huisnummer'] ?>'>
     <input hidden name='woonplaats' value='<?= $inputValues['woonplaats'] ?>'>

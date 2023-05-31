@@ -21,13 +21,17 @@ $AccommodationClass = new Accommodation();
                     <label for="price">Prijs</label>
                     <input type="number" name="minimumprice" id="minimumprice" placeholder="minimum prijs">
                     <input type="number" name="maximumprice" id="maximumprice" placeholder="maximum prijs">
-                    <label for="categorie">categorie</label>
+
+                    <label>Datum</label>
+                    <input type="date" name="startDate" id="startDate" placeholder="begin datum">
+                    <input type="date" name="endDate" id="endDate" placeholder="eind datum">
+                    <!-- <label for="categorie">categorie</label>
                     <select name="category">
                         <option value="">Select...</option>
                         <option value=""></option>
                         <option value=""></option>
-                    </select>
-                    <input type="text" name="category" id="category" placeholder="categorie">
+                    </select> -->
+                    <!-- <input type="text" name="category" id="category" placeholder="categorie"> -->
                     <label class="switch">Gas
                         <input type="checkbox" id="gas" name="gas">
                         <span class="slider round"></span>
@@ -40,9 +44,9 @@ $AccommodationClass = new Accommodation();
                         <input type="checkbox" id="electricity" name="electricity">
                         <span class="slider round"></span>
                     </label>
-                    <label for="price">personen</label>
+                    <!-- <label for="price">personen</label>
                     <input type="number" name="minPeople" id="minPeople" placeholder="minimum personen">
-                    <input type="number" name="maxPeople" id="maxPeople" placeholder="maximum personen">
+                    <input type="number" name="maxPeople" id="maxPeople" placeholder="maximum personen"> -->
                     <input type="submit" value="Filter">
                 </form>
             </div>
@@ -96,7 +100,7 @@ $AccommodationClass = new Accommodation();
                 $image = $accommodations[$i]->images[0];
             ?>
                 <div class="accommodation">
-                    <div class="image"><img src="'.$image.'"></div>
+                    <div class="image"><img src="<?= $image->photo ?>"></div>
                     <div class="info">
                         <h2><?= $accommodations[$i]->name ?></h2>
                         <p>Prijs: <?= $accommodations[$i]->priceAdults ?></p>

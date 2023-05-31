@@ -61,7 +61,6 @@ $where = '';
             }
         }   
             $query = "SELECT * FROM $table $where";
-            echo $query;    
         // Prepare the query statement.
         $stmt = self::$pdo->prepare($query);
         // Execute the query.
@@ -194,7 +193,7 @@ $where = '';
         $stmt->execute($params);
     }
 
-    public static function between(string $table, array $data = [], string $class, $extraQueryPart)
+    public static function between(string $table, array $data = [], string $class, $extraQueryPart = [])
     {
         if (count($extraQueryPart) != 0) {
             $teller = 0;
@@ -208,8 +207,12 @@ $where = '';
                 } elseif ($teller % 2 == 1) {
                     $between .= '"' . $v . '"';
                     $teller++;
+            } else {
+                
             }
         }
+    } else {
+        $between = '';
     }
         $accommodations = DB::select($table, $data, $class, $between);
         return $accommodations;
