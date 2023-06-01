@@ -91,23 +91,19 @@ class Services
             array_pop($data['data']);
             array_shift($data['data']);
 
+            $dataArray = array();
+
             foreach($data['data'] as $result)
             {
-                echo $result['dag']."<br>";
-                echo "mimimum temperatuur: ".$result['min_temp']."<br>";
-                echo "maximum temperatuur: ".$result['max_temp']."<br>";
-                echo "Weer: ".$result['toestand']."<br>";
-                echo "<br>";
-                $array = [
-                    'dag' => $result['dag'],
-                    'mintemp' => $result['min_temp'],
-                    'maxtemp' => $result['max_temp'],
-                    'toestand' => $result['toestand']
-                  ];
-                  
-
+                $data = array(
+                      "dag" => $result['dag'],
+                      "mintemp" => $result['min_temp'],
+                      "maxtemp" => $result['max_temp'],
+                      "toestand" => $result['toestand']
+                );
+                $dataArray[] = $data; 
             }
-            return $array;
-        }
+        }   
+        return $dataArray;
     }
 }
