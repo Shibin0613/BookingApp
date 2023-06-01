@@ -30,13 +30,6 @@ foreach($result as $info)
     //als de datum van vandaag gelijk staat met 1daybefore van een van de checkindatum
 
     if($todaydate == $adaybefore){
-        foreach ($weerApiValues as $result)
-        {
-            echo $result["dag"]."<br>";
-            echo $result["mintemp"]."<br>";
-            echo $result["maxtemp"]."<br>";
-            echo $result["toestand"];
-        }
         // Create email headers
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -58,7 +51,6 @@ foreach($result as $info)
             $message .= "maxtemp: ".$result['maxtemp'];
             $message .= "toestand: ".$result['toestand']."<br/>";
         }
-        echo $message;
         $message .= "Met vriendelijke groet," . "<br/>";
         $message .= "Boeking";
         $message .= "</body></html>";
