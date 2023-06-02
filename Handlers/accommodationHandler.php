@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
 if(isset($_POST['submit'])){
 $createdAccommodation = $accommodationService->addAccommodation();
             
-if($createdAccommodation = true) :
+if($createdAccommodation) :
 echo "<script>alert('Accommodatie is toegevoegd')</script>"; ?>
 <META HTTP-EQUIV="Refresh" CONTENT="0; URL=../pagina/accommodatietoevoegen.php">
 <?php else :
