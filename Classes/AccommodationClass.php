@@ -94,7 +94,7 @@ class Accommodation
         return $result;
     }
 
-    public function readAccommodation($filterArray, $betweenArray)
+    public function readAccommodation($filterArray, $betweenArray = [])
     {
 
         $accommodations = DB::between('accommodation', $filterArray, 'Accommodation', $betweenArray);
@@ -132,8 +132,7 @@ class Accommodation
 
     public function readCategory()
     {
-        $categorySelect = [];
-        $categories = DB::select('category', $categorySelect, 'Accommodation');
+        $categories = DB::select('category', [], 'Accommodation');
 
         return $categories;
     }
