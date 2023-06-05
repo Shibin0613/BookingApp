@@ -19,7 +19,7 @@ $AccommodationClass = new Accommodation();
                 <h3>Filter</h3>
                 <form action="" method="get">
                     <label for="price">Prijs</label>
-                    <input type="number" name="minimumprice" id="minimumprice" placeholder="minimum prijs">
+                    <input type="number" name="minimumprice" id="minimumprice" placeholder="minimum prijs" min="0">
                     <input type="number" name="maximumprice" id="maximumprice" placeholder="maximum prijs">
 
                     <label>Datum</label>
@@ -108,14 +108,16 @@ $AccommodationClass = new Accommodation();
                 <div class="accommodation">
                     <div class="image"><img src="<?= $image->photo ?>"></div>
                     <div class="info">
+                        <input hidden name="accommodationid" value="<?= $accommodations[$i]->id ?>">
                         <h2><?= $accommodations[$i]->name ?></h2>
                         <p>Prijs: <?= $accommodations[$i]->priceAdults ?></p>
                         <p><?= $accommodations[$i]->description ?></p>
+                        <button style="float:right" class="btn btn-primary" onclick="window.location.href='booking.php?id=<?= $accommodations[$i]->id?>'">Reserveren</button>
                     </div>
+                    <?php endfor ?>
                 </div>
-            <?php endfor ?>
-        </div>
-    </div>
+            </div>
+            </div>
 </body>
 
 </html>

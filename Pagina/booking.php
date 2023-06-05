@@ -1,10 +1,12 @@
 <?php include "header.php";
 include "../Functions/services.php";
 include "../Classes/AccommodationClass.php";
+include "../Classes/GuestClass.php";
 
 $service = new Services();
 $AccommodationClass = new Accommodation();
 
+$accommodationId = $_GET['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +71,7 @@ $AccommodationClass = new Accommodation();
     <input hidden name='postcode' value='<?= $inputValues['postcode'] ?>'>
     <input hidden name='huisnummer' value='<?= $inputValues['huisnummer'] ?>'>
     <input hidden name='woonplaats' value='<?= $inputValues['woonplaats'] ?>'>
+    <input hidden name="accommodationid" value='<?= $accommodationId;?>'>
     <div class="form-group">
       <label for="naam">Naam</label>
       <input type="text" class="form-control" id="naam" name="naam" required>
@@ -95,12 +98,12 @@ $AccommodationClass = new Accommodation();
       <input type="number" class="form-control" id="0-4" name="0-4" value="0" min="0" max="10">
     </div>
     <div class="form-group">
-      <label for="date">Vertrekdatum</label>
-      <input type="date" class="form-control" id="date" name="date" value="<?php echo date("Y-m-d", strtotime('+5 days')); ?>">
+      <label for="date">Checkin datum</label>
+      <input type="date" class="form-control" id="date" name="checkindate" value="<?php echo date("Y-m-d", strtotime('+5 days')); ?>">
     </div>
     <div class="form-group">
-      <label for="aantal">Aantal nachten</label>
-      <input type="number" class="form-control" id="aantal" name="aantal" value="1" min="1" max="14">
+      <label for="date">Checkout datum</label>
+      <input type="date" class="form-control" id="date" name="checkoutdate" value="<?php echo date("Y-m-d", strtotime('+10 days')); ?>">
     </div>
     <button type="submit" class="btn btn-primary" name="submit">Submit</button>
   </form>
