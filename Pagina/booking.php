@@ -2,8 +2,7 @@
 include "../Functions/services.php";
 
 $service = new Services();
-$txt = "help";
-echo "I need " . $txt;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
