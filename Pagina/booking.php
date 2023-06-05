@@ -2,7 +2,6 @@
 include "../Functions/services.php";
 
 $service = new Services();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +16,7 @@ $service = new Services();
 
 <body>
   <form method="POST" action="">
-    <?php if (isset($_SESSION['id'])) : ?>
+    <?php if (isset($_SESSION['userId'])) : ?>
       <div class="form-group">
         <label for="categorie">Categorie</label>
       </div>
