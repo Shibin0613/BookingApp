@@ -1,7 +1,7 @@
 
-var allCheckboxes = document.querySelectorAll('input[type=checkbox]');
-var allPlayers = Array.from(document.querySelectorAll('.player'));
-var checked = {};
+let allCheckboxes = document.querySelectorAll('input[type=checkbox]');
+let allPlayers = Array.from(document.querySelectorAll('.player'));
+let checked = {};
 
 getChecked('startingReserves');
 getChecked('injured');

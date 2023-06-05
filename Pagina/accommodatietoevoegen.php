@@ -15,7 +15,7 @@ $Accommodations = new Accommodation();
 </head>
 
 <body>
-<form method="POST" action="../Handlers/accommodationHandler.php">
+<form method="POST" action="../Handlers/accommodationHandler.php" enctype="multipart/form-data">
   <div class="form-group">
     <label for="naam">Naam</label>
     <input type="text" class="form-control" id="naam" name="naam" >
@@ -55,7 +55,8 @@ $Accommodations = new Accommodation();
     <label for="file">
     <i class="far fa-file-image"></i> &nbsp;
     Voeg foto toe
-    </label><input class="form-control" type="file" id="file" name="image" accept="image/*">
+    </label>
+    <input class="form-control" type="file" and accept="image/*" name="file[]" placeholder="Foto Toevoegen" id="fileToUpload" required multiple>
   </div>
   <div class="form-group">
     <label for="water">water</label>

@@ -22,7 +22,7 @@ class Accommodation
     public string $description;
     public string $createDate;
 
-    public function addAccommodation()
+    public function addAccommodation($files)
     {
         if(isset($_POST['gas'])){
             $gas = 1;
@@ -77,12 +77,27 @@ class Accommodation
 
     public function deleteAccommodation()
     {
+        $id=$_POST['id'];
+        $phototable = "photo";
+        $queryfoto = "DELETE FROM $phototable WHERE accommodationId= :id";
+        $fotodata = [
+            ":id" =>$id,
+        ];
+        $result = DB::delete($queryfoto,$fotodata);
+
+        $accommodatietable = "accommodation";
+        $queryaccommodatie = "DELETE FROM $accommodatietable WHERE id = :id";
+        $accommodatiedata = [
+            ":id" => $id,
+        ];
+        $result = DB::delete($queryaccommodatie,$accommodatiedata);
+        return $result;
     }
 
-    public function readAccommodation($filterArray)
+    public function readAccommodation($filterArray, $betweenArray)
     {
-        
-        $accommodations = DB::select('accommodation', $filterArray, 'Accommodation');
+
+        $accommodations = DB::between('accommodation', $filterArray, 'Accommodation', $betweenArray);
         $accommodationsLength = count($accommodations);
 
         for ($i = 0; $i < $accommodationsLength; $i++) {
@@ -93,25 +108,46 @@ class Accommodation
 
     public function updateAccommodation()
     {
+        $id = $_POST['id'];
+        $name = $_POST['naam'];
+        $description = $_POST['beschrijving'];
+        $minimunPeople = $_POST['min'];
+        $maximunPeople = $_POST['max'];
+        $priceAdults = $_POST['18+'];
+        $priceKids = $_POST['4-18'];
+        $priceBaby = $_POST['0-4'];
+        
+        $updateAccommodation = DB::update("UPDATE `accommodation` SET `name` = :name, `minimumPeople` = :minimumPeople, `maximumPeople` = :maximumPeople, `priceAdults` = :priceAdults, `priceKids` = :priceKids, `priceBaby` = :priceBaby, `description` = :description WHERE id = :id", [
+            'name' => $name,
+            'minimumPeople' => $minimunPeople,
+            'maximumPeople' => $maximunPeople,
+            'priceAdults' => $priceAdults,
+            'priceKids' => $priceKids,
+            'priceBaby' => $priceBaby,
+            'description' => $description,
+            'id' => $id
+        ]);
+        return $updateAccommodation;
     }
+
     public function readCategory()
     {
         $categorySelect = [];
         $categories = DB::select('category', $categorySelect, 'Accommodation');
-        
-        return $categories; 
+
+        return $categories;
     }
 
     public function readAccommodationPlanning()
     {
-$class = "Accommodation";
+        $class = "Accommodation";
         $table = "accommodation";
         $data = [];
         $accommodations = DB::select($table, $data, $class);
 
         $resultLength = count($accommodations);
 
-         for ($i = 0; $i < $resultLength; $i++) {
+        for ($i = 0; $i < $resultLength; $i++) {
             // $category = DB::select('category', ['id' => $accommodations[$i]], 'Accommodation');
             echo "
         {
@@ -119,8 +155,24 @@ $class = "Accommodation";
             title: '" . $accommodations[$i]->name . "',
         }, ";
          }
-        
-        
-    }
 
+        // $class = "Accommodation";
+        // $table = "accommodation";
+        // $data = [];
+        // $accommodation = DB::select($table, $data, $class);
+
+        // $resultLength = count($accommodation);
+
+        // for ($i = 0; $i < $resultLength; $i++) {
+        //     $category = DB::select('accommodation', ['id' => $accommodation[$i]->category], 'Accomodation');
+
+        //     echo "
+        // {
+        //     id: " . $accommodation[$i]->id . ",
+        //     title: '" . $accommodation[0]->name . "',
+        //     building: " . $category[0]->category . "'
+          
+        // }, ";
+        //}
+    }
 }

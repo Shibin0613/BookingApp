@@ -25,7 +25,7 @@ class DB
     }
 
     // Selects data from a MySQL database table.
-    public static function select(string $table, array $data = [], string $class): array
+    public static function select(string $table, array $data = [], string $class, $between = null): array
     {
         // Get the number of elements in the array.
         $count = count($data);
@@ -46,11 +46,15 @@ $where = '';
                 else {
                     $where .= ' ' . $k . ' = "' . $v . '" AND';
                 }
-
+                
                 // Increment the counter.
                 $teller++;
             }
-        } elseif ($count == 1) {
+            if ($between != null) {
+                $where .= $between;
+            }
+
+            } elseif ($count == 1) {
             $where = 'WHERE ';
             foreach ($data as $k => $v) {
                 $where .= ' ' . $k . ' = "' . $v . '"';
@@ -187,5 +191,30 @@ $where = '';
     {
         $stmt = self::$pdo->prepare($query);
         $stmt->execute($params);
+    }
+
+    public static function between(string $table, array $data = [], string $class, $extraQueryPart = [])
+    {
+        if (count($extraQueryPart) != 0) {
+            $teller = 0;
+            $collumn = '';
+            $between = '';
+            foreach ($extraQueryPart as $k => $v) {
+                if ($teller % 2 == 0 || $teller == 0) {
+                    $collumn = $k;
+                    $between .= ' AND ' . $collumn . ' BETWEEN "' . $v . '" AND ';
+                    $teller++;
+                } elseif ($teller % 2 == 1) {
+                    $between .= '"' . $v . '"';
+                    $teller++;
+            } else {
+                // do nothing
+            }
+        }
+    } else {
+        $between = '';
+    }
+        $accommodations = DB::select($table, $data, $class, $between);
+        return $accommodations;
     }
 }
