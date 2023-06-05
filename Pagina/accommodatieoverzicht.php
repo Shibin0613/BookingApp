@@ -25,13 +25,19 @@ $AccommodationClass = new Accommodation();
                     <label>Datum</label>
                     <input type="date" name="startDate" id="startDate" placeholder="begin datum">
                     <input type="date" name="endDate" id="endDate" placeholder="eind datum">
-                    <!-- <label for="categorie">categorie</label>
-                    <select name="category">
-                        <option value="">Select...</option>
-                        <option value=""></option>
-                        <option value=""></option>
-                    </select> -->
-                    <!-- <input type="text" name="category" id="category" placeholder="categorie"> -->
+                    <label for="categorie">Categorie</label>
+                    <select name="categorie">
+                        <?php
+                        $category = $Accommodations->readCategory();
+                        foreach ($category as $result) {
+                            $categorieid = $result->id;
+                            $categorienaam = $result->category;
+                            echo "
+                            <option value='" . $categorieid . "'>" . $categorienaam . "</option>
+                            ";
+                        }
+                        ?>
+                    </select>
                     <label class="switch">Gas
                         <input type="checkbox" id="gas" name="gas">
                         <span class="slider round"></span>

@@ -1,7 +1,10 @@
 <?php include "header.php";
 include "../Functions/services.php";
+include "../Classes/AccommodationClass.php";
 
 $service = new Services();
+$AccommodationClass = new Accommodation();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +22,16 @@ $service = new Services();
     <?php if (isset($_SESSION['userId'])) : ?>
       <div class="form-group">
         <label for="categorie">Categorie</label>
+        <?php
+        $category = $AccommodationClass->readCategory();
+                        foreach ($category as $result) {
+                            $categorieid = $result->id;
+                            $categorienaam = $result->category;
+                            echo "
+                            <option value='" . $categorieid . "'>" . $categorienaam . "</option>
+                            ";
+                        }
+                        ?>
       </div>
       <div class="form-group">
         <label for="accommodatie">Accommodatie</label>
