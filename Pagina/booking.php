@@ -2,6 +2,8 @@
 include "../Functions/services.php";
 
 $service = new Services();
+$txt = "help";
+echo "I need " . $txt;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +40,7 @@ $service = new Services();
     ?>
   </form>
   <form method="POST" action="../Handlers/bookingHandler.php">
-    
+
     <input hidden name='postcode' value='<?= $inputValues['postcode'] ?>'>
     <input hidden name='huisnummer' value='<?= $inputValues['huisnummer'] ?>'>
     <input hidden name='woonplaats' value='<?= $inputValues['woonplaats'] ?>'>

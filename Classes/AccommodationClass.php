@@ -24,21 +24,9 @@ class Accommodation
 
     public function addAccommodation($files)
     {
-        if (isset($_POST['gas'])) {
-            $gas = 1;
-        } else {
-            $gas = 0;
-        };
-        if (isset($_POST['elek'])) {
-            $elek = 1;
-        } else {
-            $elek = 0;
-        };
-        if (isset($_POST['water'])) {
-            $water = 1;
-        } else {
-            $water = 0;
-        };
+        $gas = isset($_POST['gas']);
+        $electricity = isset($_POST['elek']);
+        $water = isset($_POST['water']);
 
         $accommodation = [
             'category' => $_POST['categorie'],
@@ -46,7 +34,7 @@ class Accommodation
             'minimumPeople' => $_POST['min'],
             'maximumPeople' => $_POST['max'],
             'gas' => $gas,
-            'electricity' => $elek,
+            'electricity' => $electricity,
             'water' => $water,
             'priceAdults' => $_POST['18+'],
             'priceKids' => $_POST['4-18'],

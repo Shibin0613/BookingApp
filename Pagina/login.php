@@ -107,6 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST['email'] !== null && $_POST[
         session_start();
         $_SESSION['userId'] = $user[0]->id;
         header("location:planbord.php");
+        exit;
     } else {
         echo '<script>alert("uw inlog gegevens kloppen niet.")</script>';
     }
