@@ -24,79 +24,55 @@ class Accommodation
 
     public function addAccommodation($files)
     {
-        $gas = isset($_POST['gas']);
-        $electricity = isset($_POST['elek']);
-        $water = isset($_POST['water']);
-
-        $accommodation = [
-            'category' => $_POST['categorie'],
-            'name' => $_POST['naam'],
-            'minimumPeople' => $_POST['min'],
-            'maximumPeople' => $_POST['max'],
-            'gas' => $gas,
-            'electricity' => $electricity,
-            'water' => $water,
-            'priceAdults' => $_POST['18+'],
-            'priceKids' => $_POST['4-18'],
-            'priceBaby' => $_POST['0-4'],
-            'description' => $_POST['beschrijving'],
-            'createDate' => date('Y-m-d'),
-
-        ];
-
-        DB::insert('accommodation', $accommodation);
-        
-            if (!is_dir('../Fotos')) {
-                mkdir('../Fotos', 0777, true);
-            }
-        
-            $filenamesToSave = [];
-        $_FILES = $files;
-            $allowedMimeTypes = explode(',', "image/png, image/jpg, image/jpeg");
-            if (!empty($_FILES)) {
-                if (isset($_FILES['file']['error'])) {
-                    foreach ($_FILES['file']['error'] as $uploadedFileKey => $uploadedFileError) {
-                        if ($uploadedFileError === UPLOAD_ERR_NO_FILE) {
-                            $errors[] = 'Er is geen foto meegegeven';
-                        } elseif ($uploadedFileError === UPLOAD_ERR_OK) {
-                            $uploadedFileName = basename($_FILES['file']['name'][$uploadedFileKey]);
-        
-                            if ($_FILES['file']['size'][$uploadedFileKey] <= 50000000000) {
-                                $uploadedFileType = $_FILES['file']['type'][$uploadedFileKey];
-                                $uploadedFileTempName = $_FILES['file']['tmp_name'][$uploadedFileKey];
-        
-                                $uploadedFilePath = rtrim('../Foto', '/') . '/' . $uploadedFileName;
-        
-                                if (in_array($uploadedFileType, $allowedMimeTypes)) {
-                                    if (!move_uploaded_file($uploadedFileTempName, $uploadedFilePath)) {
-                                        $errors[] = 'Het bestand "' . $uploadedFileName . '" kon niet worden geupload';
-                                    } else {
-                                        $filenamesToSave[] = $uploadedFilePath;
-                                    }
-                                } else {
-                                    $errors[] = 'Ongeldig bestandstype "' . $uploadedFileName . '" . Wel geldig: JPG, JPEG, PNG, or GIF.';
-                                }
-                            } else {
-                                $errors[] = 'Het bestand van "' . $uploadedFileName . '" moet maximaal zijn: ' . (5000000000 / 1024) . ' KB';
-                            }
-                        }
-                    }
-                }
-            }
-        
+        if(isset($_POST['gas'])){
+            $gas = 1;
+            }else{
+            $gas = 0;
+            };
+            if(isset($_POST['elek'])){
+            $elek = 1;
+            }else{
+            $elek = 0;
+            };
+            if(isset($_POST['water'])){
+            $water = 1;
+            }else{
+            $water = 0;
+            };
+    
+            $accommodation = [
+                'category' => $_POST['categorie'],
+                'name' => $_POST['naam'],
+                'minimumPeople' => $_POST['min'],
+                'maximumPeople' =>$_POST['max'],
+                'gas' =>$gas,
+                'electricity' => $elek,
+                'water' => $water,
+                'priceAdults' =>$_POST['18+'],
+                'priceKids' =>$_POST['4-18'],
+                'priceBaby' =>$_POST['0-4'],
+                'description' =>$_POST['beschrijving'],
+                'createDate' => date('Y-m-d'),
+                
+            ];
+    
+            $addAccommodation = DB::insert('accommodation',$accommodation);
+    
+            $image = $_FILES['image']['name'];
+            $target = "../Foto/".basename($image);
+            move_uploaded_file($_FILES['image']['tmp_name'], $target);
+    
             $accommodation = [];
-            $selectAccommodation = DB::select('accommodation', $accommodation, 'Accommodation');
-            $lastAccommodationid = end($selectAccommodation)->id;
-            
-            foreach ($filenamesToSave as $filename) {
-                $phototable = "photo";
-                $photodata = [
-                    'photo' => $filename,
-                    'accommodationId' => $lastAccommodationid,
-                ];
-                $result = DB::insert($phototable,$photodata);
-            }
-            
+            $selectAccommodation= DB::select('accommodation',$accommodation,'Accommodation');
+            $lastAccommodationid = end($selectAccommodation)['id'];
+    
+            $phototable = "photo";
+            $photodata = [
+                'photo' => $image,
+                'accommodationId' => $lastAccommodationid,
+            ];
+            $result = DB::insert($phototable,$photodata,);
+            return $addAccommodation;
     }
 
     public function deleteAccommodation()
@@ -178,7 +154,7 @@ class Accommodation
             id: " . $accommodations[$i]->id . ",
             title: '" . $accommodations[$i]->name . "',
         }, ";
-        }
+         }
 
         // $class = "Accommodation";
         // $table = "accommodation";
@@ -195,7 +171,7 @@ class Accommodation
         //     id: " . $accommodation[$i]->id . ",
         //     title: '" . $accommodation[0]->name . "',
         //     building: " . $category[0]->category . "'
-
+          
         // }, ";
         //}
     }

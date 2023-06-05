@@ -11,15 +11,6 @@ $AccommodationClass = new Accommodation();
 <head>
 <meta charset='utf-8' />
 <script src='../Javascript/fullcalendar-scheduler-6.1.7/dist/index.global.js'></script>
-<?php
-  // include "header.php";
-  // use Controllers\DB;
-  //   $table = "users"; //Welke table je insert
-  //   $data = [];
-  //   $result1 = DB::select($table, $data);
-  //   $sql = "SELECT naam, startdatum, einddatum FROM boekingen";
-  //   $stmt = $conn->query($sql);
-?>
 <script>
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -36,10 +27,6 @@ $AccommodationClass = new Accommodation();
         meridiem: false,
        },
        resourceAreaColumns: [
-        {
-          headerContent: 'Categorie',
-          field: 'building'
-        },
         {
           headerContent: 'Accommodaties',
           field: 'title'
@@ -61,6 +48,19 @@ $AccommodationClass = new Accommodation();
 
 let array = []
 </script>
+
+<?php
+echo " tdyrtrydryd";
+
+++$AccommodationClass->readAccommodationAgenda();
+?>
+
+    //foreach ($accommodation as $row) : ?>
+
+       // resources.push("<?php //echo $row[1]; ?>");
+
+    <?php //endforeach ?>
+  
     
 <style>
 
