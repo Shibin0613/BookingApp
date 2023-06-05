@@ -28,7 +28,7 @@ $AccommodationClass = new Accommodation();
                     <label for="categorie">Categorie</label>
                     <select name="categorie">
                         <?php
-                        $category = $Accommodations->readCategory();
+                        $category = $AccommodationClass->readCategory();
                         foreach ($category as $result) {
                             $categorieid = $result->id;
                             $categorienaam = $result->category;
@@ -63,12 +63,12 @@ $AccommodationClass = new Accommodation();
             $filterArray = [];
             $betweenArray = [];
 
-            if (isset($_GET['minimumprice']) && trim($_POST['minimumprice']) !== "") {
+            if (isset($_POST['minimumprice']) && trim($_POST['minimumprice']) !== "") {
                 $betweenArray['priceAdults'] = $_GET['minimumprice'];
             } else {
                 $betweenArray['priceAdults'] = 0;
             }
-            if (isset($_GET['maximumprice']) && trim($_POST['maximumprice']) !== "") {
+            if (isset($_POST['maximumprice']) && trim($_POST['maximumprice']) !== "") {
                 $betweenArray['priceAdultMaximum'] = $_GET['maximumprice'];
             } else {
                 $betweenArray['priceAdultMaximum'] = 10000;
