@@ -53,13 +53,13 @@ class Services
           }else{
               echo "<script>alert('De postcode bestaat niet')</script>";
           }
-          }
           $array = [
-            'postcode' => $postcode,
-            'huisnummer' => $huisnummer,
-            'woonplaats' => $woonplaats
-          ];
-          return $array;
+              'postcode' => $postcode,
+              'huisnummer' => $huisnummer,
+              'woonplaats' => $woonplaats
+            ];
+            return $array;
+        }
     }
 
     public function weatherApi()
