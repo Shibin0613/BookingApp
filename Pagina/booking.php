@@ -37,6 +37,18 @@ $AccommodationClass = new Accommodation();
       </div>
       <div class="form-group">
         <label for="accommodatie">Accommodatie</label>
+        <select name="accommodatie">
+          <?php
+          $accommodatie = $AccommodationClass->readAccommodation([]);
+          foreach ($accommodatie as $result) {
+            $categorieid = $result->id;
+            $categorienaam = $result->name;
+            echo "
+                            <option value='" . $categorieid . "'>" . $categorienaam . "</option>
+                            ";
+          }
+          ?>
+        </select>
       </div>
     <?php endif ?>
     <div class="form-group">
@@ -70,7 +82,6 @@ $AccommodationClass = new Accommodation();
       <label for="email">Email</label>
       <input type="email" class="form-control" id="email" name="email" required>
     </div>
-    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
     <div class="form-group">
       <label for="18+">18+ jaar</label>
       <input type="number" class="form-control" id="18+" name="18+" value="1" min="1" max="10">
@@ -91,8 +102,9 @@ $AccommodationClass = new Accommodation();
       <label for="aantal">Aantal nachten</label>
       <input type="number" class="form-control" id="aantal" name="aantal" value="1" min="1" max="14">
     </div>
+    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
   </form>
-
+  
 </body>
 
 </html>
