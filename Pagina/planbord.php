@@ -46,22 +46,8 @@ $AccommodationClass = new Accommodation();
 });
 
 
-let array = []
+
 </script>
-
-<?php
-echo " tdyrtrydryd";
-
-++$AccommodationClass->readAccommodationAgenda();
-?>
-
-    //foreach ($accommodation as $row) : ?>
-
-       // resources.push("<?php //echo $row[1]; ?>");
-
-    <?php //endforeach ?>
-  
-    
 <style>
 
   body {
