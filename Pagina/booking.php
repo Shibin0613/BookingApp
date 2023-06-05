@@ -2,8 +2,6 @@
 include "../Functions/services.php";
 
 $service = new Services();
-$txt = "help";
-echo "I need " . $txt;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +16,7 @@ echo "I need " . $txt;
 
 <body>
   <form method="POST" action="">
-    <?php if (isset($_SESSION['id'])) : ?>
+    <?php if (isset($_SESSION['userId'])) : ?>
       <div class="form-group">
         <label for="categorie">Categorie</label>
       </div>
