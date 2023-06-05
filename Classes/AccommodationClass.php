@@ -71,7 +71,7 @@ class Accommodation
                 'photo' => $image,
                 'accommodationId' => $lastAccommodationid,
             ];
-            $result = DB::insert($phototable,$photodata,'Accommodation');
+            $result = DB::insert($phototable,$photodata,);
             return $addAccommodation;
     }
 
