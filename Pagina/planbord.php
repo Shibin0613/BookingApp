@@ -37,10 +37,6 @@ $AccommodationClass = new Accommodation();
        },
        resourceAreaColumns: [
         {
-          headerContent: 'Categorie',
-          field: 'building'
-        },
-        {
           headerContent: 'Accommodaties',
           field: 'title'
         },
