@@ -1,7 +1,6 @@
 <?php
 include 'PhotoClass.php';
 require_once "../vendor/autoload.php";
-require_once 'GuestClass.php';
 
 use Controllers\DB;
 

@@ -24,14 +24,14 @@ DB::connect();
       <div class="header-container">
         <nav class="nav">
           <ul class="nav-list">
+          <li class="nav-item"><a href="planbord.php">Planbord</a></li>
             <li class="nav-item"><a href="accommodatietoevoegen.php">Accommodatie toevoegen</a></li>
-            <li class="nav-item"><a href="accommodatieoverzicht.php">Accommodaties</a></li>
+            <li class="nav-item"><a href="accommodatiewijzigen.php">Accommodaties</a></li>
             <li class="nav-item"><a href="booking.php">Boeken</a></li>
-            <li class="nav-item"><a href="planbord.php">Planbord</a></li>
             <li class="nav-item">
               <form action="" method="POST"><button name="uitlog">Uitloggen</button></form>
             </li>
-            <li><?php endif;
+            <li><?php
               if (isset($_POST['uitlog'])) {
                 session_start();
                 session_destroy();
@@ -42,6 +42,20 @@ DB::connect();
             </li>
           </ul>
     </header>
+    <?php 
+      elseif(!isset($_SESSION['userId'])) : ?>
+        <header class="header">
+          <div class="header-container">
+            <nav class="nav">
+              <ul class="nav-list">
+                <li class="nav-item">
+                  <a href="login.php">Inloggen</a></li>
+                </li>
+                <li><?php endif;
+                  ?>
+                </li>
+              </ul>
+        </header>
 
 
 

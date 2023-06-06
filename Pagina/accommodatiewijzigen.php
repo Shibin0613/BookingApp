@@ -1,4 +1,5 @@
-<?php 
+<?php
+include "header.php"; 
 include "../Classes/AccommodationClass.php";
 
 $AccommodationClass = new Accommodation();
