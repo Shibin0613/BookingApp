@@ -5,8 +5,9 @@ include "../Classes/GuestClass.php";
 
 $service = new Services();
 $AccommodationClass = new Accommodation();
-
+if (isset($_GET['id'])) {
 $accommodationId = $_GET['id'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,8 +37,8 @@ $accommodationId = $_GET['id'];
             $categorieid = $result->id;
             $categorienaam = $result->category;
             echo "
-                            <option value='" . $categorieid . "'>" . $categorienaam . "</option>
-                            ";
+            <option value='" . $categorieid . "'>" . $categorienaam . "</option>
+            ";
           }
           ?>
         </select>
@@ -51,8 +52,8 @@ $accommodationId = $_GET['id'];
             $categorieid = $result->id;
             $categorienaam = $result->name;
             echo "
-                            <option value='" . $categorieid . "'>" . $categorienaam . "</option>
-                            ";
+            <option value='" . $categorieid . "'>" . $categorienaam . "</option>
+            ";
           }
           ?>
         </select>
@@ -127,7 +128,7 @@ $accommodationId = $_GET['id'];
     <input hidden name='postcode' value='<?= $inputValues['postcode'] ?>'>
     <input hidden name='huisnummer' value='<?= $inputValues['huisnummer'] ?>'>
     <input hidden name='woonplaats' value='<?= $inputValues['woonplaats'] ?>'>
-    <input hidden name="accommodationid" value='<?= $accommodationId;?>'>
+    <input hidden name="accommodationid" value='<?= $accommodationId?>'>
     <div class="form-group">
       <label for="naam">Naam</label>
       <input type="text" class="form-control" id="naam" name="naam" required>

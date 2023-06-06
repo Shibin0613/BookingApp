@@ -114,8 +114,8 @@ $AccommodationClass = new Accommodation();
                         <p><?= $accommodations[$i]->description ?></p>
                         <button style="float:right" class="btn btn-primary" onclick="window.location.href='booking.php?id=<?= $accommodations[$i]->id?>'">Reserveren</button>
                     </div>
+                    </div>
                     <?php endfor ?>
-                </div>
             </div>
             </div>
 </body>
