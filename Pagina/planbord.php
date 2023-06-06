@@ -32,14 +32,14 @@ $AccommodationClass = new Accommodation();
           field: 'title'
         },
     ],
-    resources: [ <?=$AccommodationClass->readAccommodationPlanning();?>
+    resources: [ <?php echo $AccommodationClass->readAccommodationPlanning();?> ],
 
-      // { id: 'a', title: 'Auditorium A' },
-      //   { id: 'b', title: 'Auditorium B', eventColor: 'green' },
-      //   { id: 'c', title: 'Auditorium C', eventColor: 'orange' },
-    ],   
-    events: [<?=$BookingClass->readBookingPlanning();?>],
+    events: [<?php echo $BookingClass->readBookingPlanning();?>],
+    eventClick: function(info) {
+      const email = info.event._def.extendedProps.email;
+      console.log(email);
 
+    },
   });
 
     calendar.render();

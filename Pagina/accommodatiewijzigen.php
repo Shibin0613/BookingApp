@@ -36,7 +36,8 @@ $AccommodationClass = new Accommodation();
                           <button style="float:right;" class="btn btn-danger" name="verwijderen" onclick="return checkdelete()">Verwijderen</button>
                         </form>
                     </div>
-                
+                    
+                    
                 <!-- Popup -->
                 <div class="modal fade" id="myModal<?=$accommodations[$i]->id?>" role="dialog">
                   <div class="modal-dialog">
