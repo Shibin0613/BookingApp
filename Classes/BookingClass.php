@@ -11,7 +11,6 @@ class Booking
     public int $accommodationId;
     public int $guestId;
     public int $days;
-    public string $createdDate;
     public string $checkInDate;
     public string $checkOutDate;
     public int $people;
@@ -20,14 +19,37 @@ class Booking
 
     public function createBooking()
     {
+        $createdate = date("Y-m-d");
+        $adult = $_POST['18+'];
+        $kids = $_POST['4-18'];
+        $baby = $_POST['0-4'];
+        $people = $adult+$baby+$baby;
+
+        $guesttable = "guests";
+        $guestdata = [];
+        $result = DB::select($guesttable,$guestdata,'Booking');
+        $guestid = end($result)->id;
+
+        $bookingtable = "booking";
+        $bookingdata = [
+            'accommodationId' => $_POST['accommodationid'],
+            'guestId' => $guestid,
+            'createDate' => $createdate,
+            'checkIndate' => $_POST['checkindate'],
+            'checkOutDate' => $_POST['checkoutdate'],
+            'people' => $people,
+            'price' => 0,
+            'paid' => 0,
+        ];
+        $createbooking = DB::insert($bookingtable, $bookingdata);
     }
 
-        public function readBookingPlanning()
-        {
-            $class = "Booking";
-            $table = "booking";
-            $data = [];
-            $bookings = DB::select($table, $data, $class);
+    public function readBookingPlanning()
+    {
+        $class = "Booking";
+        $table = "booking";
+        $data = [];
+        $bookings = DB::select($table, $data, $class);
 
             $resultLength = count($bookings);
            

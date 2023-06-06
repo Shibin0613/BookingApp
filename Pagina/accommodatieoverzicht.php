@@ -19,7 +19,7 @@ $AccommodationClass->test();
                 <h3>Filter</h3>
                 <form action="" method="get">
                     <label for="price">Prijs</label>
-                    <input type="number" name="minimumprice" id="minimumprice" placeholder="minimum prijs">
+                    <input type="number" name="minimumprice" id="minimumprice" placeholder="minimum prijs" min="0">
                     <input type="number" name="maximumprice" id="maximumprice" placeholder="maximum prijs">
 
                     <label>Datum</label>
@@ -28,7 +28,7 @@ $AccommodationClass->test();
                     <label for="categorie">Categorie</label>
                     <select name="categorie">
                         <?php
-                        $category = $Accommodations->readCategory();
+                        $category = $AccommodationClass->readCategory();
                         foreach ($category as $result) {
                             $categorieid = $result->id;
                             $categorienaam = $result->category;
@@ -63,12 +63,12 @@ $AccommodationClass->test();
             $filterArray = [];
             $betweenArray = [];
 
-            if (isset($_GET['minimumprice']) && trim($_POST['minimumprice']) !== "") {
+            if (isset($_POST['minimumprice']) && trim($_POST['minimumprice']) !== "") {
                 $betweenArray['priceAdults'] = $_GET['minimumprice'];
             } else {
                 $betweenArray['priceAdults'] = 0;
             }
-            if (isset($_GET['maximumprice']) && trim($_POST['maximumprice']) !== "") {
+            if (isset($_POST['maximumprice']) && trim($_POST['maximumprice']) !== "") {
                 $betweenArray['priceAdultMaximum'] = $_GET['maximumprice'];
             } else {
                 $betweenArray['priceAdultMaximum'] = 10000;
@@ -108,14 +108,16 @@ $AccommodationClass->test();
                 <div class="accommodation">
                     <div class="image"><img src="<?= $image->photo ?>"></div>
                     <div class="info">
+                        <input hidden name="accommodationid" value="<?= $accommodations[$i]->id ?>">
                         <h2><?= $accommodations[$i]->name ?></h2>
                         <p>Prijs: <?= $accommodations[$i]->priceAdults ?></p>
                         <p><?= $accommodations[$i]->description ?></p>
+                        <button style="float:right" class="btn btn-primary" onclick="window.location.href='booking.php?id=<?= $accommodations[$i]->id?>'">Reserveren</button>
                     </div>
-                </div>
-            <?php endfor ?>
-        </div>
-    </div>
+                    </div>
+                    <?php endfor ?>
+            </div>
+            </div>
 </body>
 
 </html>

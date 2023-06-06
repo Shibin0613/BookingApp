@@ -50,16 +50,17 @@ class Services
               <input type='text' class='form-control' id='woonplaats' name='woonplaats' value='".$woonplaats."' readonly>
               </div>
               ";
+              $array = [
+                'postcode' => $postcode,
+                'huisnummer' => $huisnummer,
+                'woonplaats' => $woonplaats
+              ];
+              return $array;
           }else{
               echo "<script>alert('De postcode bestaat niet')</script>";
           }
-          }
-          $array = [
-            'postcode' => $postcode,
-            'huisnummer' => $huisnummer,
-            'woonplaats' => $woonplaats
-          ];
-          return $array;
+        }  
+          
     }
 
     public function weatherApi()
