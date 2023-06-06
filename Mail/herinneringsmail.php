@@ -17,8 +17,8 @@ foreach($result as $info)
 {
     
     $checkindate = $info->checkInDate;
-    $todaydate = date("Y-m-d");
-    $adaybefore = date('Y-m-d', strtotime($checkindate . ' -1 day'));
+    $todaydate = date("Y-m-d H:i:s");
+    $adaybefore = date('Y-m-d H:i:s', strtotime($checkindate . ' -24 hours'));
     //voor de booking rol met de guestinfo wordt hierbij gehaald uit de database
     $guesttable = "guests";
     $guestdata = [

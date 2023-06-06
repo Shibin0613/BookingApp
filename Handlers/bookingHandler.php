@@ -1,15 +1,17 @@
 <?php
 include_once("../Classes/GuestClass.php");
-include"../pagina/header.php";
+include_once("../Classes/BookingClass.php");
+include "../pagina/header.php";
 use Controllers\DB;
 
 $guestService = new Guests();
+$bookingService = new Booking();
 
 if(empty($_POST['naam'] && $_POST['email'])){
     header('location: ../pagina/booking.php');
 }else{
     $createdGuest = $guestService->createGuest();
-  
+    $bookingService->createBooking();
     if($createdGuest) :
       echo "<script>alert('Boeking is aangemaakt')</script>"; ?>
       <META HTTP-EQUIV="Refresh" CONTENT="0; URL=../pagina/accommodatieoverzicht.php">
