@@ -53,16 +53,16 @@ class Booking
 
             $resultLength = count($bookings);
            
-            for ($i = 0; $i <= $resultLength; $i++) {
-                $accommodation = DB::select('accommodation', ['id' => $bookings[$i]->accommodationId], 'Booking');
-                $start = new DateTime($bookings[$i]->checkInDate);
-                $end = new DateTime($bookings[$i]->checkOutDate);
+            foreach ($bookings as $booking) {
+                $accommodation = DB::select('accommodation', ['id' => $booking->accommodationId], 'Booking');
+                $start = new DateTime($booking->checkInDate);
+                $end = new DateTime($booking->checkOutDate);
                 $guests = DB::select("guests", [], 'Guests');
                 echo "
                 {
-                id: " . $bookings[$i]->id . ",
+                id: " . $booking->id . ",
                 title: '" . $accommodation[0]->name . "',
-                resourceId: " . $accommodation[$i]->id . ",
+                resourceId: " . $accommodation[0]->id . ",
                 start: '" . $start->format('Y-m-d\TH:i:s') . "',
                 end: '" . $end->format('Y-m-d\TH:i:s') . "',
                 editable: true,
