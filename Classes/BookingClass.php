@@ -70,7 +70,7 @@ class Booking
                 email: '" . $guests[0]->email . "',
                 residence: '" . $guests[0]->residence . "',
                 postalCode: '" . $guests[0]->postalCode ."',
-            }";
+            },";
             }
         }
 
