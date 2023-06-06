@@ -81,5 +81,12 @@ class Booking
 
     public function deleteBooking()
     {
+        $id=$_POST['id'];
+        $bookingtable = "booking";
+        $querybooking = "DELETE FROM $bookingtable WHERE accommodationId= :id";
+        $bookingdata = [
+            ":id" => $id,
+        ];
+        $result = DB::delete($querybooking,$bookingdata);
     }
 }

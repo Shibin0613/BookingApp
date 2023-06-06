@@ -55,12 +55,13 @@ class Accommodation
                 'description' =>$_POST['beschrijving'],
                 'createDate' => date('Y-m-d'),
                 
+                
             ];
     
             DB::insert('accommodation', $accommodation);
         
-            if (!is_dir('../Fotos')) {
-                mkdir('../Fotos', 0777, true);
+            if (!is_dir('../Foto')) {
+                mkdir('../Foto', 0777, true);
             }
         
             $filenamesToSave = [];
@@ -114,21 +115,22 @@ class Accommodation
 
     public function deleteAccommodation() 
     {
-    //     $id=$_POST['id'];
-    //     $phototable = "photo";
-    //     $queryfoto = "DELETE FROM $phototable WHERE accommodationId= :id";
-    //     $fotodata = [
-    //         ":id" =>$id,
-    //     ];
-    //     $result = DB::delete($queryfoto,$fotodata);
+        $id=$_POST['id'];
+        $phototable = "photo";
+        $queryfoto = "DELETE FROM $phototable WHERE accommodationId= :id";
+        $fotodata = [
+            ":id" => $id,
+        ];
+        $result = DB::delete($queryfoto,$fotodata);
 
-    //     $accommodatietable = "accommodation";
-    //     $queryaccommodatie = "DELETE FROM $accommodatietable WHERE id = :id";
-    //     $accommodatiedata = [
-    //         ":id" => $id,
-    //     ];
-    //     $result = DB::delete($queryaccommodatie,$accommodatiedata);
-    //     return $result;
+        $accommodatietable = "accommodation";
+        $queryaccommodatie = "DELETE FROM $accommodatietable WHERE id = :id";
+        $accommodatiedata = [
+            ":id" => $id,
+        ];
+        DB::delete($queryaccommodatie,$accommodatiedata); 
+
+        return $result;
     }
 
     public function readAccommodation($filterArray, $betweenArray = [])
