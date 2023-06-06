@@ -14,6 +14,8 @@ $AccommodationClass = new Accommodation();
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
   <title>booking</title>
 </head>
 
@@ -21,8 +23,11 @@ $AccommodationClass = new Accommodation();
   <form method="POST" action="">
     <?php if (isset($_SESSION['userId'])) : ?>
       <div class="form-group">
+
+
+
         <label for="categorie">Categorie</label>
-        <select name="categorie">
+        <select name="categorie" id="categoryDropdown" onchange="updateSecondDropdown()">
           <?php
           $category = $AccommodationClass->readCategory();
           foreach ($category as $result) {
@@ -37,7 +42,7 @@ $AccommodationClass = new Accommodation();
       </div>
       <div class="form-group">
         <label for="accommodatie">Accommodatie</label>
-        <select name="accommodatie">
+        <select name="accommodatie" id="accommodationDropdown">
           <?php
           $accommodatie = $AccommodationClass->readAccommodation([]);
           foreach ($accommodatie as $result) {
@@ -49,6 +54,57 @@ $AccommodationClass = new Accommodation();
           }
           ?>
         </select>
+
+
+
+        <!DOCTYPE html>
+        <html>
+
+        <body>
+          <script>
+            function updateSecondDropdown() {
+              var firstDropdown = document.getElementById("categoryDropdown");
+              var secondDropdown = document.getElementById("accommodationDropdown");
+
+              // Clear existing options
+              secondDropdown.innerHTML = "";
+
+              // Get the selected option from the first dropdown
+              var selectedOption = firstDropdown.value;
+
+              // Make an AJAX request to the PHP script
+              $.ajax({
+                type: "POST",
+                url: "../Handlers/fetchAccommodations.php", // Separate PHP script for fetching data
+                data: {
+                  variable: selectedOption
+                },
+                success: function(response) {
+                  // Handle the response from the PHP script
+                  var accommodations = JSON.parse(response);
+                  accommodations.forEach(function(accommodation) {
+                    addOption(secondDropdown, accommodation.name, accommodation.id);
+                  });
+                }
+              });
+
+            }
+
+            function addOption(selectElement, optionText, optionId) {
+              var option = document.createElement("option");
+              option.text = optionText;
+              option.value = optionId;
+              selectElement.add(option);
+            }
+          </script>
+
+        </body>
+
+        </html>
+
+
+
+
       </div>
     <?php endif ?>
     <div class="form-group">
@@ -104,7 +160,7 @@ $AccommodationClass = new Accommodation();
     </div>
     <button type="submit" class="btn btn-primary" name="submit">Submit</button>
   </form>
-  
+
 </body>
 
 </html>
