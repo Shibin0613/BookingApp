@@ -5,8 +5,9 @@ include "../Classes/GuestClass.php";
 
 $service = new Services();
 $AccommodationClass = new Accommodation();
-
+if (isset($_GET['id'])) {
 $accommodationId = $_GET['id'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
