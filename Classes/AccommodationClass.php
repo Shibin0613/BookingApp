@@ -1,6 +1,7 @@
 <?php
 include 'PhotoClass.php';
 require_once "../vendor/autoload.php";
+require_once 'GuestClass.php';
 
 use Controllers\DB;
 
@@ -75,23 +76,23 @@ class Accommodation
             return $addAccommodation;
     }
 
-    public function deleteAccommodation()
+    public function deleteAccommodation() 
     {
-        $id=$_POST['id'];
-        $phototable = "photo";
-        $queryfoto = "DELETE FROM $phototable WHERE accommodationId= :id";
-        $fotodata = [
-            ":id" =>$id,
-        ];
-        $result = DB::delete($queryfoto,$fotodata);
+    //     $id=$_POST['id'];
+    //     $phototable = "photo";
+    //     $queryfoto = "DELETE FROM $phototable WHERE accommodationId= :id";
+    //     $fotodata = [
+    //         ":id" =>$id,
+    //     ];
+    //     $result = DB::delete($queryfoto,$fotodata);
 
-        $accommodatietable = "accommodation";
-        $queryaccommodatie = "DELETE FROM $accommodatietable WHERE id = :id";
-        $accommodatiedata = [
-            ":id" => $id,
-        ];
-        $result = DB::delete($queryaccommodatie,$accommodatiedata);
-        return $result;
+    //     $accommodatietable = "accommodation";
+    //     $queryaccommodatie = "DELETE FROM $accommodatietable WHERE id = :id";
+    //     $accommodatiedata = [
+    //         ":id" => $id,
+    //     ];
+    //     $result = DB::delete($queryaccommodatie,$accommodatiedata);
+    //     return $result;
     }
 
     public function readAccommodation($filterArray, $betweenArray)
