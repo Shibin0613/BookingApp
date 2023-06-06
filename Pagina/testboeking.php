@@ -5,6 +5,7 @@ if (isset($_POST['checkadres'])) {
     // Set up your Kadaster API credentials
     $clientId = 'YOUR_CLIENT_ID'; // Replace with your actual client ID
     $clientSecret = 'YOUR_CLIENT_SECRET'; // Replace with your actual client secret
+
     // Create a request URL
     $requestUrl = 'https://geodata.nationaalgeoregister.nl/locatieserver/v3/free?q=' . urlencode($postcode) . '&fq=type:adres&rows=1';
 
