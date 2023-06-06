@@ -122,22 +122,12 @@ class Accommodation
         ];
         $result = DB::delete($queryfoto,$fotodata);
 
-        $bookingtable = "booking";
-        $bookingdata = [
-            'accommodationId' => $id,
+        $accommodatietable = "accommodation";
+        $queryaccommodatie = "DELETE FROM $accommodatietable WHERE id = :id";
+        $accommodatiedata = [
+            ":id" => $id,
         ];
-        $result = DB::select($bookingtable,$bookingdata,'Accommodation');
-        if(isset($result['id'])){
-            $querybooking = "DELETE FROM $bookingtable WHERE accommodationId = :id";
-
-            $result = DB::delete($querybooking,$bookingdata);
-            $accommodatietable = "accommodation";
-            $queryaccommodatie = "DELETE FROM $accommodatietable WHERE id = :id";
-            $accommodatiedata = [
-                ":id" => $id,
-            ];
-            $result = DB::delete($queryaccommodatie,$accommodatiedata); 
-        }
+        DB::delete($queryaccommodatie,$accommodatiedata); 
 
         return $result;
     }

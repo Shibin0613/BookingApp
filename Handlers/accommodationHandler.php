@@ -1,10 +1,13 @@
 <?php
 include_once("../Classes/AccommodationClass.php");
+include_once("../Classes/BookingClass.php");
 include "../pagina/header.php";
 
 use Controllers\DB;
 
 $accommodationService = new Accommodation();
+$bookingService = new Booking();
+
 if (isset($_POST['submit'])) {
     $createdAccommodation = $accommodationService->addAccommodation($_FILES);
 }
@@ -22,9 +25,10 @@ endif;
 }
 
 if (isset($_POST['verwijderen'])) {
+    $deletedBooking = $bookingService->deleteBooking();
     $deletedAccommodation = $accommodationService->deleteAccommodation();
 
-    if ($deletedAccommodation) :
+    if ($deletedAccommodation == false) :
         echo "<script>alert('Accommodatie is verwijderd')</script>"; ?>
         <META HTTP-EQUIV="Refresh" CONTENT="0; URL=../pagina/accommodatiewijzigen.php">
     <?php else :
