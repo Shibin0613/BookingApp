@@ -54,12 +54,13 @@ class Accommodation
                 'description' =>$_POST['beschrijving'],
                 'createDate' => date('Y-m-d'),
                 
+                
             ];
     
             DB::insert('accommodation', $accommodation);
         
-            if (!is_dir('../Fotos')) {
-                mkdir('../Fotos', 0777, true);
+            if (!is_dir('../Foto')) {
+                mkdir('../Foto', 0777, true);
             }
         
             $filenamesToSave = [];
