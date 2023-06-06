@@ -11,6 +11,7 @@ $AccommodationClass = new Accommodation();
 <head>
 <meta charset='utf-8' />
 <script src='../Javascript/fullcalendar-scheduler-6.1.7/dist/index.global.js'></script>
+
 <script>
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -36,8 +37,13 @@ $AccommodationClass = new Accommodation();
 
     events: [<?php echo $BookingClass->readBookingPlanning();?>],
     eventClick: function(info) {
+      const name = info.event._def.extendedProps.name;
       const email = info.event._def.extendedProps.email;
-      console.log(email);
+      const residence = info.event._def.extendedProps.residence;
+      const postalCode = info.event._def.extendedProps.postalCode;
+      console.log(name, email, residence, postalCode);
+
+  
 
     },
   });

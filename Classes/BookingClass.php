@@ -68,8 +68,8 @@ class Booking
                 editable: true,
                 name: '" . $guests[0]->name . "',
                 email: '" . $guests[0]->email . "',
-                postalCode: '" . $guests[0]->postalCode ."',
                 residence: '" . $guests[0]->residence . "',
+                postalCode: '" . $guests[0]->postalCode ."',
             }";
             }
         }
