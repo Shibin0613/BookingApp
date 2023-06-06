@@ -59,6 +59,7 @@ class Accommodation
             $addAccommodation = DB::insert('accommodation',$accommodation);
     
             $image = $_FILES['image']['name'];
+            
             $target = "../Foto/".basename($image);
             move_uploaded_file($_FILES['image']['tmp_name'], $target);
     
