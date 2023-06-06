@@ -1,7 +1,7 @@
 <?php include "header.php";
 include "../Functions/services.php";
 include "../Classes/AccommodationClass.php";
-include "../Classes/GuestClass.php";
+require_once "../Classes/GuestClass.php";
 
 $service = new Services();
 $AccommodationClass = new Accommodation();

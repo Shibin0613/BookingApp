@@ -1,5 +1,5 @@
 <?php
-include 'UserClass.php';
+require_once 'UserClass.php';
 use Controllers\DB;
 
 class Guests extends Users

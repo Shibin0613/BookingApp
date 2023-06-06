@@ -1,5 +1,5 @@
 <?php
-include 'UserClass.php';
+require_once 'UserClass.php';
 class Admin extends Users
 {
     public string $password;
