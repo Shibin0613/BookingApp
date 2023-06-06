@@ -53,7 +53,7 @@ class Booking
 
             $resultLength = count($bookings);
            
-            for ($i = 0; $i < $resultLength; $i++) {
+            for ($i = 0; $i <= $resultLength; $i++) {
                 $accommodation = DB::select('accommodation', ['id' => $bookings[$i]->accommodationId], 'Booking');
                 $start = new DateTime($bookings[$i]->checkInDate);
                 $end = new DateTime($bookings[$i]->checkOutDate);

@@ -43,11 +43,17 @@ $AccommodationClass = new Accommodation();
       const email = info.event._def.extendedProps.email;
       const residence = info.event._def.extendedProps.residence;
       const postalCode = info.event._def.extendedProps.postalCode;
-      console.log(name, email, residence, postalCode);
 
-      Swal.fire(name + email + residence + postalCode);
+      const content = '<div>' +
+                    '<h5>Naam: ' + name + '</h5>' +
+                    '<h5>E-mail: ' + email + '</h5>' +
+                    '<h5>Stad: ' + residence + '</h5>' +
+                    '<h5>PostCode: ' + postalCode + '</h5>' +
+                  '</div>';
 
-  
+  Swal.fire({
+    html: content
+  });
 
     },
   });
