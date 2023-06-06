@@ -7,6 +7,8 @@ $service = new Services();
 $AccommodationClass = new Accommodation();
 if (isset($_GET['id'])) {
 $accommodationId = $_GET['id'];
+}else{
+  header("location:accommodatieoverzicht.php");
 }
 ?>
 <!DOCTYPE html>

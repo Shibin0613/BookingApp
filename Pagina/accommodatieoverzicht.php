@@ -116,8 +116,7 @@ $AccommodationClass = new Accommodation();
                     </div>
                     </div>
                     <?php endfor ?>
+                </div>
             </div>
-            </div>
-</body>
-
-</html>
+        </body>
+    </html>

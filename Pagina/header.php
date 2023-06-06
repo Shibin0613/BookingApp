@@ -43,7 +43,7 @@ DB::connect();
           </ul>
     </header>
     <?php 
-      elseif(!isset($_SESSION['userId'])) : ?>
+      elseif($_SERVER['REQUEST_URI']) : ?>
         <header class="header">
           <div class="header-container">
             <nav class="nav">
