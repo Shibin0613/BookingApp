@@ -56,23 +56,59 @@ class Accommodation
                 
             ];
     
-            $addAccommodation = DB::insert('accommodation',$accommodation);
-    
-            $image = $_FILES['image']['name'];
-            $target = "../Foto/".basename($image);
-            move_uploaded_file($_FILES['image']['tmp_name'], $target);
-    
+            DB::insert('accommodation', $accommodation);
+        
+            if (!is_dir('../Fotos')) {
+                mkdir('../Fotos', 0777, true);
+            }
+        
+            $filenamesToSave = [];
+        $_FILES = $files;
+            $allowedMimeTypes = explode(',', "image/png, image/jpg, image/jpeg");
+            if (!empty($_FILES)) {
+                if (isset($_FILES['file']['error'])) {
+                    foreach ($_FILES['file']['error'] as $uploadedFileKey => $uploadedFileError) {
+                        if ($uploadedFileError === UPLOAD_ERR_NO_FILE) {
+                            $errors[] = 'Er is geen foto meegegeven';
+                        } elseif ($uploadedFileError === UPLOAD_ERR_OK) {
+                            $uploadedFileName = basename($_FILES['file']['name'][$uploadedFileKey]);
+        
+                            if ($_FILES['file']['size'][$uploadedFileKey] <= 50000000000) {
+                                $uploadedFileType = $_FILES['file']['type'][$uploadedFileKey];
+                                $uploadedFileTempName = $_FILES['file']['tmp_name'][$uploadedFileKey];
+        
+                                $uploadedFilePath = rtrim('../Foto', '/') . '/' . $uploadedFileName;
+        
+                                if (in_array($uploadedFileType, $allowedMimeTypes)) {
+                                    if (!move_uploaded_file($uploadedFileTempName, $uploadedFilePath)) {
+                                        $errors[] = 'Het bestand "' . $uploadedFileName . '" kon niet worden geupload';
+                                    } else {
+                                        $filenamesToSave[] = $uploadedFilePath;
+                                    }
+                                } else {
+                                    $errors[] = 'Ongeldig bestandstype "' . $uploadedFileName . '" . Wel geldig: JPG, JPEG, PNG, or GIF.';
+                                }
+                            } else {
+                                $errors[] = 'Het bestand van "' . $uploadedFileName . '" moet maximaal zijn: ' . (5000000000 / 1024) . ' KB';
+                            }
+                        }
+                    }
+                }
+            }
+        
             $accommodation = [];
-            $selectAccommodation= DB::select('accommodation',$accommodation,'Accommodation');
-            $lastAccommodationid = end($selectAccommodation)['id'];
-    
-            $phototable = "photo";
-            $photodata = [
-                'photo' => $image,
-                'accommodationId' => $lastAccommodationid,
-            ];
-            $result = DB::insert($phototable,$photodata,);
-            return $addAccommodation;
+            $selectAccommodation = DB::select('accommodation', $accommodation, 'Accommodation');
+            $lastAccommodationid = end($selectAccommodation)->id;
+            
+            foreach ($filenamesToSave as $filename) {
+                $phototable = "photo";
+                $photodata = [
+                    'photo' => $filename,
+                    'accommodationId' => $lastAccommodationid,
+                ];
+                $result = DB::insert($phototable,$photodata);
+            }
+            
     }
 
     public function deleteAccommodation()
