@@ -7,9 +7,6 @@ use Controllers\DB;
 $accommodationService = new Accommodation();
 if (isset($_POST['submit'])) {
     $createdAccommodation = $accommodationService->addAccommodation($_FILES);
-}
-if(isset($_POST['submit'])){
-$createdAccommodation = $accommodationService->addAccommodation();
             
 if($createdAccommodation) :
 echo "<script>alert('Accommodatie is toegevoegd')</script>"; ?>
