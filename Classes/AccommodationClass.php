@@ -114,21 +114,32 @@ class Accommodation
 
     public function deleteAccommodation() 
     {
-    //     $id=$_POST['id'];
-    //     $phototable = "photo";
-    //     $queryfoto = "DELETE FROM $phototable WHERE accommodationId= :id";
-    //     $fotodata = [
-    //         ":id" =>$id,
-    //     ];
-    //     $result = DB::delete($queryfoto,$fotodata);
+        $id=$_POST['id'];
+        $phototable = "photo";
+        $queryfoto = "DELETE FROM $phototable WHERE accommodationId= :id";
+        $fotodata = [
+            ":id" => $id,
+        ];
+        $result = DB::delete($queryfoto,$fotodata);
 
-    //     $accommodatietable = "accommodation";
-    //     $queryaccommodatie = "DELETE FROM $accommodatietable WHERE id = :id";
-    //     $accommodatiedata = [
-    //         ":id" => $id,
-    //     ];
-    //     $result = DB::delete($queryaccommodatie,$accommodatiedata);
-    //     return $result;
+        $bookingtable = "booking";
+        $bookingdata = [
+            'accommodationId' => $id,
+        ];
+        $result = DB::select($bookingtable,$bookingdata,'Accommodation');
+        if(isset($result['id'])){
+            $querybooking = "DELETE FROM $bookingtable WHERE accommodationId = :id";
+
+            $result = DB::delete($querybooking,$bookingdata);
+            $accommodatietable = "accommodation";
+            $queryaccommodatie = "DELETE FROM $accommodatietable WHERE id = :id";
+            $accommodatiedata = [
+                ":id" => $id,
+            ];
+            $result = DB::delete($queryaccommodatie,$accommodatiedata); 
+        }
+
+        return $result;
     }
 
     public function readAccommodation($filterArray, $betweenArray = [])
