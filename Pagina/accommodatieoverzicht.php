@@ -2,6 +2,7 @@
 include "header.php";
 
 $AccommodationClass = new Accommodation();
+$AccommodationClass->test();
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +12,6 @@ $AccommodationClass = new Accommodation();
     <title>Accommodatieoverzicht</title>
     <link rel="stylesheet" href="../Styles/css.css">
 </head>
-
 <body>
     <div class="container">
         <div class="sidebar">

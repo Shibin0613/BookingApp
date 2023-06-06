@@ -1,6 +1,7 @@
 <?php
 include 'PhotoClass.php';
 require_once "../vendor/autoload.php";
+require_once 'GuestClass.php';
 
 use Controllers\DB;
 
@@ -112,13 +113,13 @@ class Accommodation
             
     }
 
-    public function deleteAccommodation()
+    public function deleteAccommodation() 
     {
         $id=$_POST['id'];
         $phototable = "photo";
         $queryfoto = "DELETE FROM $phototable WHERE accommodationId= :id";
         $fotodata = [
-            ":id" =>$id,
+            ":id" => $id,
         ];
         $result = DB::delete($queryfoto,$fotodata);
 
@@ -127,7 +128,8 @@ class Accommodation
         $accommodatiedata = [
             ":id" => $id,
         ];
-        $result = DB::delete($queryaccommodatie,$accommodatiedata);
+        DB::delete($queryaccommodatie,$accommodatiedata); 
+
         return $result;
     }
 

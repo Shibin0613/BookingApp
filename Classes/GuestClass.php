@@ -7,6 +7,7 @@ class Guests extends Users
     public string $postalCode;
     public string $houseNumber;
     public string $residence;
+    public string $createDate;
 
     public function createGuest() 
     {
@@ -56,6 +57,9 @@ class Guests extends Users
 
     public function readGuest($id)
     {
-        
+        $class = "Guest";
+        $table = "guest";
+        $data = [];
+        $guest = DB::select($table, $data, $class);
     } 
 }
