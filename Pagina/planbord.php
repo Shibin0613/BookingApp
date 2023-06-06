@@ -9,6 +9,8 @@ $AccommodationClass = new Accommodation();
 <!DOCTYPE html>
 <html>
 <head>
+<script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="../node_modules/sweetalert2/dist/sweetalert2.min.css"></script>
 <meta charset='utf-8' />
 <script src='../Javascript/fullcalendar-scheduler-6.1.7/dist/index.global.js'></script>
 
@@ -43,6 +45,8 @@ $AccommodationClass = new Accommodation();
       const postalCode = info.event._def.extendedProps.postalCode;
       console.log(name, email, residence, postalCode);
 
+      Swal.fire(name + email + residence + postalCode);
+
   
 
     },
@@ -68,6 +72,7 @@ $AccommodationClass = new Accommodation();
     margin: 50px auto;
   }
 
+  
 </style>
 </head>
 <body>
