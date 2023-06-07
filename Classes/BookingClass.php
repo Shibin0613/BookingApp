@@ -24,7 +24,8 @@ class Booking
         $kids = $_POST['4-18'];
         $baby = $_POST['0-4'];
         $people = $adult+$baby+$baby;
-
+        $categorie = $_POST['categorie'];
+        $accommodation = $_POST['accomodatie'];
         $guesttable = "guests";
         $guestdata = [];
         $result = DB::select($guesttable,$guestdata,'Booking');
@@ -40,6 +41,8 @@ class Booking
             'people' => $people,
             'price' => 0,
             'paid' => 0,
+            'categorie' => $_POST['categorie'],
+            'accommodation' => $_POST['accomodatie'],
         ];
         $createbooking = DB::insert($bookingtable, $bookingdata);
     }
