@@ -20,64 +20,11 @@ $accommodationId = $_GET['id'];
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
   <title>booking</title>
 </head>
 
 <body>
   <form method="POST" action="">
-    
-
-
-
-        <!DOCTYPE html>
-        <html>
-
-        <body>
-          <script>
-            function updateSecondDropdown() {
-              var firstDropdown = document.getElementById("categoryDropdown");
-              var secondDropdown = document.getElementById("accommodationDropdown");
-
-              // Clear existing options
-              secondDropdown.innerHTML = "";
-
-              // Get the selected option from the first dropdown
-              var selectedOption = firstDropdown.value;
-
-              // Make an AJAX request to the PHP script
-              $.ajax({
-                type: "POST",
-                url: "../Handlers/fetchAccommodations.php", // Separate PHP script for fetching data
-                data: {
-                  variable: selectedOption
-                },
-                success: function(response) {
-                  // Handle the response from the PHP script
-                  var accommodations = JSON.parse(response);
-                  accommodations.forEach(function(accommodation) {
-                    addOption(secondDropdown, accommodation.name, accommodation.id);
-                  });
-                }
-              });
-
-            }
-
-            function addOption(selectElement, optionText, optionId) {
-              var option = document.createElement("option");
-              option.text = optionText;
-              option.value = optionId;
-              selectElement.add(option);
-            }
-          </script>
-
-        </body>
-
-        </html>
-
-
-
-
       </div>
     <div class="form-group">
       <label for="postcode">Postcode</label>
@@ -114,16 +61,17 @@ $accommodationId = $_GET['id'];
     </div>
     <div class="form-group">
       <label for="18+">18+ jaar</label>
-      <input type="number" class="form-control" id="18+" name="18+" value="1" min="1" max="10">
+      <input type="number" class="form-control" id="inputNumber1" name="number1" value="1" min="1" max="10">
     </div>
     <div class="form-group">
       <label for="4-18">4-18 jaar</label>
-      <input type="number" class="form-control" id="4-18" name="4-18" value="0" min="0" max="10">
+      <input type="number" class="form-control" id="inputNumber2" name="number2" value="0" min="0" max="10">
     </div>
     <div class="form-group">
       <label for="0-4">0-4 jaar</label>
-      <input type="number" class="form-control" id="0-4" name="0-4" value="0" min="0" max="10">
+      <input type="number" class="form-control" id="inputNumber3" name="number3" value="0" min="0" max="10">
     </div>
+    Totale bedrag: €<div id ="result"></div><br>
     <div class="form-group">
       <label for="date">Checkin datum</label>
       <input type="date" class="form-control" id="date" name="checkindate" value="<?php echo date("Y-m-d", strtotime('+5 days')); ?>">
@@ -132,8 +80,56 @@ $accommodationId = $_GET['id'];
       <label for="date">Checkout datum</label>
       <input type="date" class="form-control" id="date" name="checkoutdate" value="<?php echo date("Y-m-d", strtotime('+10 days')); ?>">
     </div>
+    
+    <input id="resultInput">
+    <script>
+      var resultInput = '<input type="hidden" id="resultInput" name="result" value="' + response + '">';
+    </script>
+    <?php
+    use Controllers\DB;
+    $accommodationtable = "accommodation";
+    $accommodationdata = [
+      'id' => $accommodationId,
+    ];
+    $accommodation=DB::select($accommodationtable,$accommodationdata,"Accommodation");
+    ?>
+
     <button type="submit" class="btn btn-primary" name="submit">Submit</button>
   </form>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    var priceAdults = <?php echo $accommodation[0]->priceAdults; ?>;
+    var priceKids = <?php echo $accommodation[0]->priceKids; ?>;
+    var priceBaby = <?php echo $accommodation[0]->priceBaby; ?>;
+    $('input[type="number"]').on('input', function() {
+      var inputNumber1 = $('#inputNumber1').val();
+      var inputNumber2 = $('#inputNumber2').val();
+      var inputNumber3 = $('#inputNumber3').val();
+
+      $.ajax({
+        url: 'prijs.php',
+        type: 'POST',
+        data: {
+          number1: inputNumber1,
+          number2: inputNumber2,
+          number3: inputNumber3,
+          priceAdults: priceAdults,
+          priceKids: priceKids,
+          priceBaby: priceBaby },
+          success: function(response) {
+            var resultDiv = '<div id="result">' + response + '</div>';
+            var resultInput = '<input hidden id="resultInput" name="result" value="' + response + '">';
+            $('#result').replaceWith(resultDiv);
+            $('#resultInput').replaceWith(resultInput);
+          }
+      });
+    });
+  });
+  
+</script>
 
 </body>
 
