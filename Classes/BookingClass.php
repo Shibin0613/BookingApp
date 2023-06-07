@@ -20,16 +20,18 @@ class Booking
     public function createBooking()
     {
         $createdate = date("Y-m-d");
-        $adult = $_POST['18+'];
-        $kids = $_POST['4-18'];
-        $baby = $_POST['0-4'];
+        $adult = $_POST['number1'];
+        $kids = $_POST['number2'];
+        $baby = $_POST['number3'];
         $people = $adult+$baby+$baby;
-        $categorie = $_POST['categorie'];
-        $accommodation = $_POST['accomodatie'];
+        $price =$_POST['result'];
+
         $guesttable = "guests";
         $guestdata = [];
         $result = DB::select($guesttable,$guestdata,'Booking');
         $guestid = end($result)->id;
+        $achternaam = end($result)->name;
+        $email = end($result)->email;
 
         $bookingtable = "booking";
         $bookingdata = [
@@ -39,12 +41,49 @@ class Booking
             'checkIndate' => $_POST['checkindate'],
             'checkOutDate' => $_POST['checkoutdate'],
             'people' => $people,
-            'price' => 0,
+            'price' => $price,
             'paid' => 0,
-            'categorie' => $_POST['categorie'],
-            'accommodation' => $_POST['accomodatie'],
         ];
         $createbooking = DB::insert($bookingtable, $bookingdata);
+
+        $accommodationid = $_POST['accommodationid'];
+        $accommodatietable = "accommodation";
+        $accommodationdata = [
+            'id' => $accommodationid,
+        ];
+        $result = DB::select($accommodatietable,$accommodationdata,'Users');
+        $name = $result[0]->name;
+        
+        $boekingtable = "booking";
+        $boekingdata = [];
+        $result = DB::select($boekingtable,$boekingdata,'Users');
+        $checkindate = end($result)->checkInDate;
+        $checkoutdate = end($result)->checkOutDate;
+        $price = end($result)->price;
+        $betaald = "niet betaald";
+
+        // Create email headers
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+        $headers .= 'X-Mailer: PHP/' . phpversion();
+
+        // Create email subject(onderwerp)
+        $subject = "Je hebt een boeking gemaakt";
+        
+        // Create email message
+        $message = "<html><body>";
+        $message .= "<br/>";
+        $message .= "Beste heer of mevrouw $achternaam, " . "<br/>";
+        $message .= "Je hebt zonet een boeking gedaan, hierbij de factuur" . "<br/><br/>";
+        $message .= "<table><tr><th>Naam</th><th>Checkin datum</th><th>Checkout datum</th><th>Bedrag</th><th>Betaald</th></tr>";
+        $message .= "<td>$name</td><td>$checkindate</td><td>$checkoutdate</td><td>$price</td><td>$betaald</td></tr></table>" . "<br/><br/>";
+        $message .= "Te betalen binenn 7 dagen op rekening NL40ABNA012345678 onder vermelding van factuurnummer" . "<br/><br/>";
+        
+        $message .= "Met vriendelijke groet," . "<br/>";
+        $message .= "Boeking";
+        $message .= "</body></html>";
+
+        mail($email, $subject, $message, $headers);
     }
 
     public function readBookingPlanning()
