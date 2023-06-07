@@ -85,6 +85,7 @@ $accommodationId = $_GET['id'];
     </div>
     <div class="form-group">
       <label for="huisnummer">Huisnummer</label>
+      
       <input type="text" class="form-control" id="huisnummer" name="huisnummer" required>
     </div>
     <button name="checkadres">Check adres</button>
