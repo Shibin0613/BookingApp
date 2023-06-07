@@ -52,8 +52,17 @@ $AccommodationClass = new Accommodation();
                   '</div>';
 
   Swal.fire({
-    html: content
-  });
+    html: content,
+    showCancelButton: true,
+  confirmButtonColor: 'green',
+  cancelButtonColor: 'red',
+  confirmButtonText: 'Betaald',
+  cancelButtonText: 'Niet betaald',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      
+    }
+  })
 
     },
   });
