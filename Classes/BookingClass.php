@@ -92,14 +92,21 @@ class Booking
         $table = "booking";
         $data = [];
         $bookings = DB::select($table, $data, $class);
-
             $resultLength = count($bookings);
-           
             foreach ($bookings as $booking) {
                 $accommodation = DB::select('accommodation', ['id' => $booking->accommodationId], 'Booking');
                 $start = new DateTime($booking->checkInDate);
                 $end = new DateTime($booking->checkOutDate);
                 $guest = DB::select("guests", ['id' => $booking->guestId], 'Guests');
+
+                if ($booking->paid === true) {
+                    $color = 'green';
+                } else if ($booking->paid === false) {
+                    $color = 'red';
+                } else {
+                    echo "There is an error with your booking";
+                }
+
                 echo "
                 {
                 id: " . $booking->id . ",
@@ -107,11 +114,13 @@ class Booking
                 resourceId: " . $accommodation[0]->id . ",
                 start: '" . $start->format('Y-m-d\TH:i:s') . "',
                 end: '" . $end->format('Y-m-d\TH:i:s') . "',
+                color: '" . $color . "',
                 editable: true,
                 name: '" . $guest[0]->name . "',
                 email: '" . $guest[0]->email . "',
                 residence: '" . $guest[0]->residence . "',
                 postalCode: '" . $guest[0]->postalCode ."',
+               
             },";
             }
         }
