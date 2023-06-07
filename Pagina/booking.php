@@ -26,39 +26,7 @@ $accommodationId = $_GET['id'];
 
 <body>
   <form method="POST" action="">
-    <?php if (isset($_SESSION['userId'])) : ?>
-      <div class="form-group">
-
-
-
-        <label for="categorie">Categorie</label>
-        <select name="categorie" id="categoryDropdown" onchange="updateSecondDropdown()">
-          <?php
-          $category = $AccommodationClass->readCategory();
-          foreach ($category as $result) {
-            $categorieid = $result->id;
-            $categorienaam = $result->category;
-            echo "
-            <option value='" . $categorieid . "'>" . $categorienaam . "</option>
-            ";
-          }
-          ?>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="accommodatie">Accommodatie</label>
-        <select name="accommodatie" id="accommodationDropdown">
-          <?php
-          $accommodatie = $AccommodationClass->readAccommodation([]);
-          foreach ($accommodatie as $result) {
-            $categorieid = $result->id;
-            $categorienaam = $result->name;
-            echo "
-            <option value='" . $categorieid . "'>" . $categorienaam . "</option>
-            ";
-          }
-          ?>
-        </select>
+    
 
 
 
@@ -111,7 +79,6 @@ $accommodationId = $_GET['id'];
 
 
       </div>
-    <?php endif ?>
     <div class="form-group">
       <label for="postcode">Postcode</label>
       <input type="text" class="form-control" id="postcode" name="postcode" required>
