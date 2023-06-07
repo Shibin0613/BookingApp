@@ -57,7 +57,7 @@ class Booking
                 $accommodation = DB::select('accommodation', ['id' => $booking->accommodationId], 'Booking');
                 $start = new DateTime($booking->checkInDate);
                 $end = new DateTime($booking->checkOutDate);
-                $guests = DB::select("guests", [], 'Guests');
+                $guest = DB::select("guests", ['id' => $booking->guestId], 'Guests');
                 echo "
                 {
                 id: " . $booking->id . ",
@@ -66,10 +66,10 @@ class Booking
                 start: '" . $start->format('Y-m-d\TH:i:s') . "',
                 end: '" . $end->format('Y-m-d\TH:i:s') . "',
                 editable: true,
-                name: '" . $guests[0]->name . "',
-                email: '" . $guests[0]->email . "',
-                residence: '" . $guests[0]->residence . "',
-                postalCode: '" . $guests[0]->postalCode ."',
+                name: '" . $guest[0]->name . "',
+                email: '" . $guest[0]->email . "',
+                residence: '" . $guest[0]->residence . "',
+                postalCode: '" . $guest[0]->postalCode ."',
             },";
             }
         }
