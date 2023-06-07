@@ -109,7 +109,7 @@ class Accommodation
                 ];
                 $result = DB::insert($phototable,$photodata);
             }
-            
+            return 1;
     }
 
     public function deleteAccommodation() 

@@ -9,9 +9,8 @@ $accommodationService = new Accommodation();
 $bookingService = new Booking();
 
 if (isset($_POST['submit'])) {
-    $createdAccommodation = $accommodationService->addAccommodation($_FILES);
 
-    if ($createdAccommodation) :
+    if ($accommodationService->addAccommodation($_FILES)) :
         echo "<script>alert('Accommodatie is toegevoegd')</script>"; ?>
         <META HTTP-EQUIV="Refresh" CONTENT="0; URL=../pagina/accommodatietoevoegen.php">
     <?php else :
