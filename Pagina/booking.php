@@ -61,7 +61,6 @@ $accommodationId = $_GET['id'];
       <label for="naam">Naam</label>
       <input type="text" class="form-control" id="naam" name="naam" required>
     </div>
-    <input type="hidden" name="datum" type="date" value="<?= date("Y-m-d"); ?>">
     <div class="form-group">
       <label for="achternaam">Achternaam</label>
       <input type="text" class="form-control" id="achternaam" name="achternaam" required>
@@ -72,7 +71,7 @@ $accommodationId = $_GET['id'];
     </div>
     <div class="form-group">
       <label for="18+">18+ jaar</label>
-      <input type="number" class="form-control" id="inputNumber1" name="number1" value="1" min="1" max="5">
+      <input type="number" class="form-control" id="inputNumber1" name="number1" value="0" min="1" max="5">
     </div>
     <div class="form-group">
       <label for="4-18">4-18 jaar</label>
