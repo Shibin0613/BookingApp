@@ -12,6 +12,15 @@ $Accommodations = new Accommodation();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>booking</title>
+    <?php  if(isset($_SESSION['userId'])){
+    // User is logged in
+   
+    // You can redirect the user to a different page or perform other actions here
+} else {
+    // User is not logged in
+  header('Location:login.php');
+    // Check if the login form is submitted
+} ?>
 </head>
 
 <body>
