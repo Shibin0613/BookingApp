@@ -23,7 +23,18 @@ class Accommodation
     public string $createDate;
 
     public function addAccommodation($files)
-    {
+    {       
+        
+        $min = isset($_POST['min']) ? $_POST['min'] : null;
+        $max = isset($_POST['max']) ? $_POST['max'] : null;
+
+        $min = intval($min);
+        $max = intval($max);
+
+        if ($min < 1 || $min > 6 || $max < 4 || $max > 14 || $min > $max) {
+                die("Zorg dat de min/max personen kloppen.");
+            } 
+
         if(isset($_POST['gas'])){
             $gas = 1;
             }else{
@@ -56,6 +67,8 @@ class Accommodation
                 
                 
             ];
+
+           
     
             DB::insert('accommodation', $accommodation);
         

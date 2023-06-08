@@ -62,6 +62,7 @@ $where = '';
         }   
             $query = "SELECT * FROM $table $where";
         // Prepare the query statement.
+        echo $query;
         $stmt = self::$pdo->prepare($query);
         // Execute the query.
         $stmt->execute();
@@ -195,6 +196,7 @@ $where = '';
 
     public static function between(string $table, array $data = [], string $class, $extraQueryPart = [])
     {
+        var_dump($extraQueryPart);
         if (count($extraQueryPart) != 0) {
             $teller = 0;
             $collumn = '';
