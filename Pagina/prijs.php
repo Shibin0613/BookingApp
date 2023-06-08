@@ -22,8 +22,14 @@ if (
   $result2 = $number2 * $priceKids;
   $result3 = $number3 * $priceBaby;
   
-  $result = $result1 + $result2 + $result3; 
+  $bedrag = $result1 + $result2 + $result3; 
+  
+  $toeristbelasting = 2.3;
 
+  $toeristenbelasting = $number1*$toeristbelasting+$number2*$toeristbelasting+$number3*$toeristbelasting;
+  
+  $result = $bedrag+$toeristenbelasting;
   echo $result;
 }
+
 ?>

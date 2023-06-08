@@ -39,6 +39,16 @@ $accommodationId = $_GET['id'];
     <?php
     $inputValues = $service->addressAPI();
     ?>
+    
+    <?php
+    use Controllers\DB;
+    $accommodationtable = "accommodation";
+    $accommodationdata = [
+      'id' => $accommodationId,
+    ];
+    $accommodation=DB::select($accommodationtable,$accommodationdata,"Accommodation");
+    ?>
+
   </form>
   <form method="POST" action="../Handlers/bookingHandler.php">
 
@@ -71,32 +81,22 @@ $accommodationId = $_GET['id'];
       <label for="0-4">0-4 jaar</label>
       <input type="number" class="form-control" id="inputNumber3" name="number3" value="0" min="0" max="10">
     </div>
-    Totale bedrag: €<div id ="result"></div><br>
+    <div id="result"></div><br>
     <div class="form-group">
       <label for="date">Checkin datum</label>
       <input type="date" class="form-control" id="date" name="checkindate" value="<?php echo date("Y-m-d", strtotime('+5 days')); ?>">
     </div>
     <div class="form-group">
       <label for="date">Checkout datum</label>
-      <input type="date" class="form-control" id="date" name="checkoutdate" value="<?php echo date("Y-m-d", strtotime('+10 days')); ?>">
+      <input type="date" class="form-control" id="datePickerId" name="checkoutdate" value="<?php echo date("Y-m-d", strtotime('+10 days')); ?>">
     </div>
-    
-    <input id="resultInput">
+    <input hidden id="resultInput">
     <script>
-      var resultInput = '<input type="hidden" id="resultInput" name="result" value="' + response + '">';
+      var resultInput = '<input hidden id="resultInput" name="result" value="' + response + '">';
     </script>
-    <?php
-    use Controllers\DB;
-    $accommodationtable = "accommodation";
-    $accommodationdata = [
-      'id' => $accommodationId,
-    ];
-    $accommodation=DB::select($accommodationtable,$accommodationdata,"Accommodation");
-    ?>
 
-    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+    <button type="submit" class="btn btn-primary" name="submit">Reserveren</button>
   </form>
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -120,7 +120,7 @@ $accommodationId = $_GET['id'];
           priceKids: priceKids,
           priceBaby: priceBaby },
           success: function(response) {
-            var resultDiv = '<div id="result">' + response + '</div>';
+            var resultDiv = '<div id="result">Totalebedrag: €' + response + '</div>';
             var resultInput = '<input hidden id="resultInput" name="result" value="' + response + '">';
             $('#result').replaceWith(resultDiv);
             $('#resultInput').replaceWith(resultInput);
@@ -129,6 +129,18 @@ $accommodationId = $_GET['id'];
     });
   });
   
+</script>
+<script>
+  var today = new Date();
+  today.setDate(today.getDate() + 10); // Add five days to the current date
+
+  var year = today.getFullYear();
+  var month = String(today.getMonth() + 1).padStart(2, '0');
+  var day = String(today.getDate()).padStart(2, '0');
+  var datePattern = year + '-' + month + '-' + day;
+
+  document.getElementById("datePickerId").value = datePattern;
+  document.getElementById("datePickerId").min = datePattern;
 </script>
 
 </body>
