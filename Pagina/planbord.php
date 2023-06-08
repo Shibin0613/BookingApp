@@ -15,7 +15,15 @@ $AccommodationClass = new Accommodation();
   <meta charset='utf-8' />
   <script src='../Javascript/fullcalendar-scheduler-6.1.7/dist/index.global.js'></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+  <?php  if(isset($_SESSION['userId'])){
+    // User is logged in
+   
+    // You can redirect the user to a different page or perform other actions here
+} else {
+    // User is not logged in
+  header('Location:login.php');
+    // Check if the login form is submitted
+} ?>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

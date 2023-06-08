@@ -13,6 +13,15 @@ $AccommodationClass = new Accommodation();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <?php  if(isset($_SESSION['userId'])){
+    // User is logged in
+   
+    // You can redirect the user to a different page or perform other actions here
+} else {
+    // User is not logged in
+  header('Location:login.php');
+    // Check if the login form is submitted
+} ?>
 </head>
 
 <body>
@@ -31,7 +40,7 @@ $AccommodationClass = new Accommodation();
                         <h2><?= $accommodations[$i]->name ?></h2>
                         <p>Prijs: <?= $accommodations[$i]->priceAdults ?></p>
                         <button type="button" style="float:right;" class="btn btn-primary" data-toggle="modal" data-target="#myModal<?=$accommodations[$i]->id?>">Wijzigen</button>
-                        <p><?= $accommodations[$i]->description ?></p>
+                        <p><?= $accommodations[$i]->description ?></p><br>
                         <form action="../Handlers/accommodationHandler.php" method="POST">
                           <input hidden name="id" value="<?php echo $accommodations[$i]->id ?>">
                           <button style="float:right;" class="btn btn-danger" name="verwijderen" onclick="return checkdelete()">Verwijderen</button>

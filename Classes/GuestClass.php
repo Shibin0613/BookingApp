@@ -17,7 +17,7 @@ class Guests extends Users
         $postalCode = $_POST['postcode'];
         $houseNumber = $_POST['huisnummer'];
         $woonplaats = $_POST['woonplaats'];
-        $datum = $_POST['datum'];
+        $datum = date("Y-m-d");
         
         $guesttable = "guests";
         $guestdata = [
