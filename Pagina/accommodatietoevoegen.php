@@ -80,13 +80,33 @@ $Accommodations = new Accommodation();
     <input type="checkbox" class="form-control" id="gas" name="gas">
   </div>
   <div class="form-group">
-    <label for="min">Min</label>
-    <input type="number" style="width:40%;" class="form-control" id="min" name="min" value="2" min="1" max="6">
-  </div>
-  <div class="form-group">
-    <label for="max">Max</label>
-    <input type="number" style="width:40%;" class="form-control" id="max" name="max" value="4" min="4" max="14">
-  </div>
+  <label for="min">Min</label>
+  <input type="number" style="width:40%;" class="form-control" id="min" name="min" value="2" min="1" max="6">
+</div>
+<div class="form-group">
+  <label for="max">Max</label>
+  <input type="number" style="width:40%;" class="form-control" id="max" name="max" value="4" min="4" max="14">
+</div>
+
+<script>
+  // Get the input elements
+  const minInput = document.getElementById('min');
+  const maxInput = document.getElementById('max');
+
+  // Add an event listener to the form submit event
+  document.getElementById('your-form-id').addEventListener('submit', function(event) {
+    // Retrieve the current values of min and max inputs
+    const min = parseInt(minInput.value);
+    const max = parseInt(maxInput.value);
+
+    // Validate the input values
+    if (min < 1 || min > 6 || max < 4 || max > 14 || min > max) {
+      event.preventDefault(); // Prevent form submission
+      alert('Vul geldige waarden in voor min en max.');
+    }
+  });
+</script>
+
   <button type="submit" class="btn btn-primary" name="submit">Submit</button>
   <div style="float:right">
   *: Per nacht per persoon
