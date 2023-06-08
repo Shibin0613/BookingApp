@@ -29,7 +29,7 @@ class DB
     {
         // Get the number of elements in the array.
         $count = count($data);
-
+// echo "<pre> Between is: ", $between, "</pre>";
         // Initialize a variable to hold the WHERE clause.
 $where = '';
         // If there are multiple elements in the array, loop through them and construct the WHERE clause.
@@ -50,18 +50,19 @@ $where = '';
                 // Increment the counter.
                 $teller++;
             }
-            if ($between != null) {
-                $where .= $between;
-            }
-
-            } elseif ($count == 1) {
+            
+        } elseif ($count == 1) {
             $where = 'WHERE ';
             foreach ($data as $k => $v) {
                 $where .= ' ' . $k . ' = "' . $v . '"';
             }
         }   
+        if ($between != null) {
+            $where .= $between;
+        }
             $query = "SELECT * FROM $table $where";
         // Prepare the query statement.
+        // echo $query;
         $stmt = self::$pdo->prepare($query);
         // Execute the query.
         $stmt->execute();
@@ -202,7 +203,11 @@ $where = '';
             foreach ($extraQueryPart as $k => $v) {
                 if ($teller % 2 == 0 || $teller == 0) {
                     $collumn = $k;
+                    if ($teller == 0 && empty($data)) {
+                    $between .= ' ' . $collumn . ' BETWEEN "' . $v . '" AND ';
+                    } else {
                     $between .= ' AND ' . $collumn . ' BETWEEN "' . $v . '" AND ';
+                    }
                     $teller++;
                 } elseif ($teller % 2 == 1) {
                     $between .= '"' . $v . '"';

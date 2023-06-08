@@ -10,6 +10,49 @@ $AccommodationClass = new Accommodation();
 <head>
     <title>Accommodatieoverzicht</title>
     <link rel="stylesheet" href="../Styles/css.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Function to handle form submission and update accommodations
+            function updateAccommodations() {
+                var minimumPrice = $('#minimumprice').val();
+                var maximumPrice = $('#maximumprice').val();
+                var category = $('select[name="categorie"]').val();
+                var gas = $('#gas').is(':checked') ? 1 : 0;
+                var water = $('#water').is(':checked') ? 1 : 0;
+                var electricity = $('#electricity').is(':checked') ? 1 : 0;
+                var startDate = $('#startdate').val();
+                var endDate = $('#enddate').val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: '../Handlers/updateAccommodations.php',
+                    data: {
+                        minimumprice: minimumPrice,
+                        maximumprice: maximumPrice,
+                        category: category,
+                        gas: gas,
+                        water: water,
+                        electricity: electricity,
+                        startdate: startDate,
+                        enddate: endDate
+                    },
+                    success: function(data) {
+                        $('.accommodations').html(data);
+                    }
+                });
+            }
+
+            // Bind the form submission event to the updateAccommodations function
+            $('form').submit(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                updateAccommodations();
+            });
+
+            // Initial update when the page loads
+            updateAccommodations();
+        });
+    </script>
 </head>
 
 <body>
@@ -17,14 +60,10 @@ $AccommodationClass = new Accommodation();
         <div class="sidebar">
             <div class="filter-box">
                 <h3>Filter</h3>
-                <form action="" method="get">
+                <form>
                     <label for="price">Prijs</label>
                     <input type="number" name="minimumprice" id="minimumprice" placeholder="minimum prijs" min="0">
                     <input type="number" name="maximumprice" id="maximumprice" placeholder="maximum prijs">
-
-                    <label>Datum</label>
-                    <input type="date" name="startDate" id="startDate" placeholder="begin datum">
-                    <input type="date" name="endDate" id="endDate" placeholder="eind datum">
                     <label for="categorie">Categorie</label>
                     <select name="categorie">
                         <?php
@@ -50,73 +89,20 @@ $AccommodationClass = new Accommodation();
                         <input type="checkbox" id="electricity" name="electricity">
                         <span class="slider round"></span>
                     </label>
-                    <!-- <label for="price">personen</label>
-                    <input type="number" name="minPeople" id="minPeople" placeholder="minimum personen">
-                    <input type="number" name="maxPeople" id="maxPeople" placeholder="maximum personen"> -->
+                    <label for="startdate">Start Date</label>
+                    <input type="date" name="startdate" id="startdate">
+
+                    <label for="enddate">End Date</label>
+                    <input type="date" name="enddate" id="enddate">
+
                     <input type="submit" value="Filter">
                 </form>
             </div>
         </div>
         <div class="accommodations">
-            <?php
+            <!-- Accommodation list will be updated here -->
+        </div>
+    </div>
+</body>
 
-            $filterArray = [];
-            $betweenArray = [];
-
-            if (isset($_POST['minimumprice']) && trim($_POST['minimumprice']) !== "") {
-                $betweenArray['priceAdults'] = $_GET['minimumprice'];
-            } else {
-                $betweenArray['priceAdults'] = 0;
-            }
-            if (isset($_POST['maximumprice']) && trim($_POST['maximumprice']) !== "") {
-                $betweenArray['priceAdultMaximum'] = $_GET['maximumprice'];
-            } else {
-                $betweenArray['priceAdultMaximum'] = 10000;
-            }
-            if (isset($_GET['category']) && trim($_POST['category']) !== "") {
-                $filterArray['category'] = $_GET['category'];
-            }
-            if (isset($_GET['gas'])) {
-                $filterArray['gas'] = 1;
-            } else {
-                $filterArray['gas'] = 0;
-            }
-            if (isset($_GET['water'])) {
-                $filterArray['water'] = 1;
-            } else {
-                $filterArray['water'] = 0;
-            }
-            if (isset($_GET['electricity'])) {
-                $filterArray['electricity'] = 1;
-            } else {
-                $filterArray['electricity'] = 0;
-            }
-            // if (isset($_GET['minPeople']) == !empty($_GET['minPeople'])) {
-            //     $betweenArray['minimumPeople'] = $_GET['minPeople'];
-            // }
-            // if (isset($_GET['maxPeople']) == !empty($_GET['maxPeople'])) {
-            //     $filterArray['maximumPeople'] = $_GET['maxPeople'];
-            // }
-
-            $accommodations = $AccommodationClass->readAccommodation($filterArray, $betweenArray);
-            $accommodationsLength = count($accommodations);
-            for ($i = 0; $i < $accommodationsLength; $i++) :
-
-
-                $image = $accommodations[$i]->images[0];
-            ?>
-                <div class="accommodation">
-                    <div class="image"><img src="<?= $image->photo ?>"></div>
-                    <div class="info">
-                        <input hidden name="accommodationid" value="<?= $accommodations[$i]->id ?>">
-                        <h2><?= $accommodations[$i]->name ?></h2>
-                        <p>Prijs: <?= $accommodations[$i]->priceAdults ?></p>
-                        <p><?= $accommodations[$i]->description ?></p>
-                        <button style="float:right" class="btn btn-primary" onclick="window.location.href='booking.php?id=<?= $accommodations[$i]->id?>'">Reserveren</button>
-                    </div>
-                    </div>
-                    <?php endfor ?>
-                </div>
-            </div>
-        </body>
-    </html>
+</html>
