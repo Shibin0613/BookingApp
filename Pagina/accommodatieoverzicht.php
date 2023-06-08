@@ -38,6 +38,7 @@ $AccommodationClass = new Accommodation();
                         }
                         ?>
                     </select>
+                    <br>
                     <label class="switch">Gas
                         <input type="checkbox" id="gas" name="gas">
                         <span class="slider round"></span>
@@ -46,10 +47,10 @@ $AccommodationClass = new Accommodation();
                         <input type="checkbox" id="water" name="water">
                         <span class="slider round"></span>
                     </label>
-                    <label class="switch">elektriciteit
+                    <label class="switch">Elektriciteit
                         <input type="checkbox" id="electricity" name="electricity">
                         <span class="slider round"></span>
-                    </label>
+                    </label><br>
                     <!-- <label for="price">personen</label>
                     <input type="number" name="minPeople" id="minPeople" placeholder="minimum personen">
                     <input type="number" name="maxPeople" id="maxPeople" placeholder="maximum personen"> -->

@@ -81,7 +81,7 @@ $accommodationId = $_GET['id'];
       <label for="0-4">0-4 jaar</label>
       <input type="number" class="form-control" id="inputNumber3" name="number3" value="0" min="0" max="5">
     </div>
-    <div id="result"></div><br>
+    <div id="result"></div></br>
     <div class="form-group">
       <label for="date">Checkin datum</label>
       <input type="date" class="form-control" id="checkindate" name="checkindate" value="<?php echo date("Y-m-d", strtotime('+5 days')); ?>">

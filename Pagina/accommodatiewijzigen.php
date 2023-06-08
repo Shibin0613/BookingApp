@@ -40,7 +40,7 @@ $AccommodationClass = new Accommodation();
                         <h2><?= $accommodations[$i]->name ?></h2>
                         <p>Prijs: <?= $accommodations[$i]->priceAdults ?></p>
                         <button type="button" style="float:right;" class="btn btn-primary" data-toggle="modal" data-target="#myModal<?=$accommodations[$i]->id?>">Wijzigen</button>
-                        <p><?= $accommodations[$i]->description ?></p>
+                        <p><?= $accommodations[$i]->description ?></p><br>
                         <form action="../Handlers/accommodationHandler.php" method="POST">
                           <input hidden name="id" value="<?php echo $accommodations[$i]->id ?>">
                           <button style="float:right;" class="btn btn-danger" name="verwijderen" onclick="return checkdelete()">Verwijderen</button>
