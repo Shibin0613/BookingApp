@@ -2,6 +2,7 @@
 include "header.php";
 
 $AccommodationClass = new Accommodation();
+
 ?>
 
 <!DOCTYPE html>

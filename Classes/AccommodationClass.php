@@ -23,8 +23,8 @@ class Accommodation
     public string $createDate;
 
     public function addAccommodation($files)
-    {       
-        
+    {
+
         $min = isset($_POST['min']) ? $_POST['min'] : null;
         $max = isset($_POST['max']) ? $_POST['max'] : null;
 
@@ -32,115 +32,115 @@ class Accommodation
         $max = intval($max);
 
         if ($min < 1 || $min > 6 || $max < 4 || $max > 14 || $min > $max) {
-                die("Zorg dat de min/max personen kloppen.");
-            } 
+            die("Zorg dat de min/max personen kloppen.");
+        }
 
-        if(isset($_POST['gas'])){
+        if (isset($_POST['gas'])) {
             $gas = 1;
-            }else{
+        } else {
             $gas = 0;
-            };
-            if(isset($_POST['elek'])){
+        };
+        if (isset($_POST['elek'])) {
             $elek = 1;
-            }else{
+        } else {
             $elek = 0;
-            };
-            if(isset($_POST['water'])){
+        };
+        if (isset($_POST['water'])) {
             $water = 1;
-            }else{
+        } else {
             $water = 0;
-            };
-    
-            $accommodation = [
-                'category' => $_POST['categorie'],
-                'name' => $_POST['naam'],
-                'minimumPeople' => $_POST['min'],
-                'maximumPeople' =>$_POST['max'],
-                'gas' =>$gas,
-                'electricity' => $elek,
-                'water' => $water,
-                'priceAdults' =>$_POST['18+'],
-                'priceKids' =>$_POST['4-18'],
-                'priceBaby' =>$_POST['0-4'],
-                'description' =>$_POST['beschrijving'],
-                'createDate' => date('Y-m-d'),
-                
-                
-            ];
+        };
 
-           
-    
-            DB::insert('accommodation', $accommodation);
-        
-            if (!is_dir('../Foto')) {
-                mkdir('../Foto', 0777, true);
-            }
-        
-            $filenamesToSave = [];
+        $accommodation = [
+            'category' => $_POST['categorie'],
+            'name' => $_POST['naam'],
+            'minimumPeople' => $_POST['min'],
+            'maximumPeople' => $_POST['max'],
+            'gas' => $gas,
+            'electricity' => $elek,
+            'water' => $water,
+            'priceAdults' => $_POST['18+'],
+            'priceKids' => $_POST['4-18'],
+            'priceBaby' => $_POST['0-4'],
+            'description' => $_POST['beschrijving'],
+            'createDate' => date('Y-m-d'),
+
+
+        ];
+
+
+
+        DB::insert('accommodation', $accommodation);
+
+        if (!is_dir('../Foto')) {
+            mkdir('../Foto', 0777, true);
+        }
+
+        $filenamesToSave = [];
         $_FILES = $files;
-            $allowedMimeTypes = explode(',', "image/png, image/jpg, image/jpeg");
-            if (!empty($_FILES)) {
-                if (isset($_FILES['file']['error'])) {
-                    foreach ($_FILES['file']['error'] as $uploadedFileKey => $uploadedFileError) {
-                        if ($uploadedFileError === UPLOAD_ERR_NO_FILE) {
-                            $errors[] = 'Er is geen foto meegegeven';
-                        } elseif ($uploadedFileError === UPLOAD_ERR_OK) {
-                            $uploadedFileName = basename($_FILES['file']['name'][$uploadedFileKey]);
-        
-                            if ($_FILES['file']['size'][$uploadedFileKey] <= 50000000000) {
-                                $uploadedFileType = $_FILES['file']['type'][$uploadedFileKey];
-                                $uploadedFileTempName = $_FILES['file']['tmp_name'][$uploadedFileKey];
-        
-                                $uploadedFilePath = rtrim('../Foto', '/') . '/' . $uploadedFileName;
-        
-                                if (in_array($uploadedFileType, $allowedMimeTypes)) {
-                                    if (!move_uploaded_file($uploadedFileTempName, $uploadedFilePath)) {
-                                        $errors[] = 'Het bestand "' . $uploadedFileName . '" kon niet worden geupload';
-                                    } else {
-                                        $filenamesToSave[] = $uploadedFilePath;
-                                    }
+        $allowedMimeTypes = explode(',', "image/png, image/jpg, image/jpeg");
+        if (!empty($_FILES)) {
+            if (isset($_FILES['file']['error'])) {
+                foreach ($_FILES['file']['error'] as $uploadedFileKey => $uploadedFileError) {
+                    if ($uploadedFileError === UPLOAD_ERR_NO_FILE) {
+                        $errors[] = 'Er is geen foto meegegeven';
+                    } elseif ($uploadedFileError === UPLOAD_ERR_OK) {
+                        $uploadedFileName = basename($_FILES['file']['name'][$uploadedFileKey]);
+
+                        if ($_FILES['file']['size'][$uploadedFileKey] <= 50000000000) {
+                            $uploadedFileType = $_FILES['file']['type'][$uploadedFileKey];
+                            $uploadedFileTempName = $_FILES['file']['tmp_name'][$uploadedFileKey];
+
+                            $uploadedFilePath = rtrim('../Foto', '/') . '/' . $uploadedFileName;
+
+                            if (in_array($uploadedFileType, $allowedMimeTypes)) {
+                                if (!move_uploaded_file($uploadedFileTempName, $uploadedFilePath)) {
+                                    $errors[] = 'Het bestand "' . $uploadedFileName . '" kon niet worden geupload';
                                 } else {
-                                    $errors[] = 'Ongeldig bestandstype "' . $uploadedFileName . '" . Wel geldig: JPG, JPEG, PNG, or GIF.';
+                                    $filenamesToSave[] = $uploadedFilePath;
                                 }
                             } else {
-                                $errors[] = 'Het bestand van "' . $uploadedFileName . '" moet maximaal zijn: ' . (5000000000 / 1024) . ' KB';
+                                $errors[] = 'Ongeldig bestandstype "' . $uploadedFileName . '" . Wel geldig: JPG, JPEG, PNG, or GIF.';
                             }
+                        } else {
+                            $errors[] = 'Het bestand van "' . $uploadedFileName . '" moet maximaal zijn: ' . (5000000000 / 1024) . ' KB';
                         }
                     }
                 }
             }
-        
-            $accommodation = [];
-            $selectAccommodation = DB::select('accommodation', $accommodation, 'Accommodation');
-            $lastAccommodationid = end($selectAccommodation)->id;
-            
-            foreach ($filenamesToSave as $filename) {
-                $phototable = "photo";
-                $photodata = [
-                    'photo' => $filename,
-                    'accommodationId' => $lastAccommodationid,
-                ];
-                $result = DB::insert($phototable,$photodata);
-            }
-            return 1;
+        }
+
+        $accommodation = [];
+        $selectAccommodation = DB::select('accommodation', $accommodation, 'Accommodation');
+        $lastAccommodationid = end($selectAccommodation)->id;
+
+        foreach ($filenamesToSave as $filename) {
+            $phototable = "photo";
+            $photodata = [
+                'photo' => $filename,
+                'accommodationId' => $lastAccommodationid,
+            ];
+            $result = DB::insert($phototable, $photodata);
+        }
+        return 1;
     }
 
-    public function deleteAccommodation() 
+    public function deleteAccommodation()
     {
-        $id=$_POST['id'];
+        $id = $_POST['id'];
         $phototable = "photo";
         $queryfoto = "DELETE FROM $phototable WHERE accommodationId= :id";
         $fotodata = [
             ":id" => $id,
         ];
-        $result = DB::delete($queryfoto,$fotodata);
+        $result = DB::delete($queryfoto, $fotodata);
 
         $accommodatietable = "accommodation";
         $queryaccommodatie = "DELETE FROM $accommodatietable WHERE id = :id";
         $accommodatiedata = [
             ":id" => $id,
         ];
-        DB::delete($queryaccommodatie,$accommodatiedata); 
+        DB::delete($queryaccommodatie, $accommodatiedata);
 
         return $result;
     }
@@ -167,7 +167,7 @@ class Accommodation
         $priceAdults = $_POST['18+'];
         $priceKids = $_POST['4-18'];
         $priceBaby = $_POST['0-4'];
-        
+
         $updateAccommodation = DB::update("UPDATE `accommodation` SET `name` = :name, `minimumPeople` = :minimumPeople, `maximumPeople` = :maximumPeople, `priceAdults` = :priceAdults, `priceKids` = :priceKids, `priceBaby` = :priceBaby, `description` = :description WHERE id = :id", [
             'name' => $name,
             'minimumPeople' => $minimunPeople,
@@ -204,7 +204,7 @@ class Accommodation
             id: " . $accommodations[$i]->id . ",
             title: '" . $accommodations[$i]->name . "',
         }, ";
-         }
+        }
 
         // $class = "Accommodation";
         // $table = "accommodation";
@@ -221,9 +221,45 @@ class Accommodation
         //     id: " . $accommodation[$i]->id . ",
         //     title: '" . $accommodation[0]->name . "',
         //     building: " . $category[0]->category . "'
-          
+
         // }, ";
         //}
     }
-    
+
+    public function dummyData()
+    {
+        for ($i = 100; $i < 300; $i++) {
+            
+
+            $accommodation = [
+                'category' => rand(1, 13),
+                'name' => 'huisnummer'.$i,
+                'minimumPeople' => rand(1, 5),
+                'maximumPeople' => rand(5, 14),
+                'gas' => rand(0,1),
+                'electricity' => rand(0,1),
+                'water' => rand(0,1),
+                'priceAdults' => rand(5,40),
+                'priceKids' => rand(5,40),
+                'priceBaby' => rand(5,40),
+                'description' => 'huisnummer '.$i,
+                'createDate' => date('Y-m-d'),
+
+
+            ];
+
+
+
+            DB::insert('accommodation', $accommodation);
+            $selectAccommodation = DB::select('accommodation', [], 'Accommodation');
+            $lastAccommodationid = end($selectAccommodation)->id;
+
+            $phototable = "photo";
+            $photodata = [
+                'photo' => '../Foto/huisje.png',
+                'accommodationId' => $lastAccommodationid,
+            ];
+            DB::insert($phototable, $photodata);
+        }
+    }
 }

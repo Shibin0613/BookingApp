@@ -63,6 +63,8 @@ if (!empty($startDate) && !empty($endDate)) {
 
     $extra = 'WHERE checkInDate BETWEEN "' . $startDate . '" AND "' . $endDate . '" OR checkOutDate BETWEEN "' . $startDate . '" AND "' . $endDate . '"';
 // echo $extra;
+} else {
+    $extra = '';
 }
 
 $bookedAccommodations = DB::select('booking', [], 'Booking', $extra);
