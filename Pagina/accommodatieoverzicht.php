@@ -91,10 +91,10 @@ $AccommodationClass = new Accommodation();
                         <input type="checkbox" id="electricity" name="electricity">
                         <span class="slider round"></span>
                     </label>
-                    <label for="startdate">Start Date</label>
+                    <label for="startdate">Incheckdatum</label>
                     <input type="date" name="startdate" id="startdate">
 
-                    <label for="enddate">End Date</label>
+                    <label for="enddate">Uitcheckdatum</label>
                     <input type="date" name="enddate" id="enddate">
 
                     <input type="submit" value="Filter">

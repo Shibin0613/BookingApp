@@ -83,11 +83,11 @@ $accommodationId = $_GET['id'];
     </div>
     <div id="result"></div></br>
     <div class="form-group">
-      <label for="date">Checkin datum</label>
+      <label for="date">Incheckdatum</label>
       <input type="date" class="form-control" id="checkindate" name="checkindate" value="<?php echo date("Y-m-d", strtotime('+5 days')); ?>">
     </div>
     <div class="form-group">
-      <label for="date">Checkout datum</label>
+      <label for="date">Uitcheckdatum</label>
       <input type="date" class="form-control" id="checkoutdate" name="checkoutdate" value="<?php echo date("Y-m-d", strtotime('+10 days')); ?>">
     </div>
     <input hidden id="resultInput">

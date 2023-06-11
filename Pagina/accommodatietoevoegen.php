@@ -35,15 +35,15 @@ $Accommodations = new Accommodation();
   </div>
   <div class="form-group">  
     <label for="18+">*18+ jaar</label>
-    €<input type="number" style="width:40%;" class="form-control" id="18+" name="18+" min="20" value="20" max="100">
+    €<input type="number" style="width:40%;" class="form-control" id="18+" name="18+" value="10" min="10" max="150">
   </div>
   <div class="form-group">
     <label for="4-18">*4-18 jaar</label>
-    €<input type="number" style="width:40%;" class="form-control" id="4-18" name="4-18" value="20" min="20" max="100">
+    €<input type="number" style="width:40%;" class="form-control" id="4-18" name="4-18" value="10" min="10" max="150">
   </div>
   <div class="form-group">
     <label for="0-4">*0-4 jaar</label>
-    €<input type="number" style="width:40%;" class="form-control" id="0-4" name="0-4" value="20" min="20" max="100">
+    €<input type="number" style="width:40%;" class="form-control" id="0-4" name="0-4" value="10" min="10" max="150">
   </div>
   <div class="form-group">
     <label for="categorie">Categorie</label>

@@ -78,10 +78,15 @@ $filteredSecondObject = removeMatchingObjects($bookedAccommodations, $accommodat
 ob_start(); // Start output buffering
 $filteredSecondObjectLength = count($filteredSecondObject);
 for ($i = 0; $i < $filteredSecondObjectLength; $i++) :
-    $image = $filteredSecondObject[$i]->images[0];
-?>
-    <div class="accommodation">
-        <div class="image"><img src="<?= $image->photo ?>"></div>
+    if(isset($filteredSecondObject[$i]->images[0]))
+    {
+        $image = $filteredSecondObject[$i]->images[0];
+        echo "
+    <div class='accommodation'>
+        <div class='image'><img src='$image->photo '></div>
+        ";
+    }
+        ?>
         <div class="info">
             <input hidden name="accommodationid" value="<?= $filteredSecondObject[$i]->id ?>">
             <h2><?= $filteredSecondObject[$i]->name ?></h2>

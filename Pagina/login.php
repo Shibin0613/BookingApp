@@ -52,16 +52,16 @@
                                         </div>
 
                                         <form>
-                                            <p>log hier in</p>
+                                            <p>Log hier in</p>
 
                                             <div class="form-outline mb-4">
-                                                <input type="email" name="email" class="form-control form-control-lg" placeholder="Enter a valid email address" />
-                                                <label class="form-label" for="form3Example3">Email</label>
+                                            <label class="form-label" for="form3Example3">Email</label>
+                                            <input type="email" name="email" class="form-control form-control-lg" placeholder="Uw emailadres" />    
                                             </div>
 
                                             <div class="form-outline mb-4">
-                                                <input type="password" name="wachtwoord" class="form-control form-control-lg" placeholder="Enter password" />
-                                                <label class="form-label" for="form3Example4">wachtwoord</label>
+                                            <label class="form-label" for="form3Example4">wachtwoord</label>
+                                            <input type="password" name="wachtwoord" class="form-control form-control-lg" placeholder="Uw wachtwoord" />    
                                             </div>
 
                                             <div class="text-center pt-1 mb-5 pb-1">

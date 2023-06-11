@@ -61,17 +61,14 @@ $AccommodationClass = new Accommodation();
                       <div class="modal-body">
                         <form action="../Handlers/accommodationHandler.php" method="POST">
                         <input hidden name="id" value="<?=$accommodations[$i]->id?>">
-                        <p>Naam</p><input type="text" id="name" name="naam" value="<?=$accommodations[$i]->name?>">
-                        <p>Beschrijving</p><input type="text" id="name" name="beschrijving" value="<?=$accommodations[$i]->description?>">
-                        <p>Prijs 18+</p><input type="text" id="name" name="18+" value="<?=$accommodations[$i]->priceAdults?>">
-                        <p>Prijs 4-18</p><input type="text" id="name" name="4-18" value="<?=$accommodations[$i]->priceKids?>">
-                        <p>Prijs 0-4</p><input type="text" id="name" name="0-4" value="<?=$accommodations[$i]->priceBaby?>">
-                        <p>Min</p><input type="text" id="name" name="min" value="<?=$accommodations[$i]->minimumPeople?>">
-                        <p>Max</p><input type="text" id="name" name="max" value="<?=$accommodations[$i]->maximumPeople?>">
-                        <button name="wijzigen">Wijziging opslaan</button>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <p>Naam</p><input type="text" id="naam" name="naam" value="<?=$accommodations[$i]->name?>">
+                        <p>Beschrijving</p><input type="text" id="beschrijving" name="beschrijving" value="<?=$accommodations[$i]->description?>">
+                        <p>Prijs 18+</p><input type="number" id="18+" name="18+" value="<?=$accommodations[$i]->priceAdults?>">
+                        <p>Prijs 4-18</p><input type="number" id="4-18" name="4-18" value="<?=$accommodations[$i]->priceKids?>">
+                        <p>Prijs 0-4</p><input type="number" id="0-4" name="0-4" value="<?=$accommodations[$i]->priceBaby?>">
+                        <p>Min</p><input type="number" id="min" name="min" value="<?=$accommodations[$i]->minimumPeople?>">
+                        <p>Max</p><input type="number" id="max" name="max" value="<?=$accommodations[$i]->maximumPeople?>"><br><br>
+                        <button name="wijzigen" class="btn btn-primary">Wijziging opslaan</button>
                       </div>
                     </div>
                     
