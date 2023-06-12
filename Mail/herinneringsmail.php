@@ -17,8 +17,8 @@ foreach($result as $info)
 {
     
     $checkindate = $info->checkInDate;
-    $todaydate = date("Y-m-d H:i:s");
-    $adaybefore = date('Y-m-d H:i:s', strtotime($checkindate . ' -24 hours'));
+    $todaydate = date("Y-m-d");
+    $adaybefore = date('Y-m-d', strtotime($checkindate . ' -1 day'));
     //voor de booking rol met de guestinfo wordt hierbij gehaald uit de database
     $guesttable = "guests";
     $guestdata = [
@@ -36,15 +36,15 @@ foreach($result as $info)
         $headers .= 'X-Mailer: PHP/' . phpversion();
 
         // Create email subject(onderwerp)
-        $subject = "De beheerder heeft jouw betaling goedgekeurd";
+        $subject = "Morgen is het zover";
 
         // Create email message
         $message = '';
         $message .= "<html><body>";
         $message .= "<br/>";
         $message .= "Beste heer of mevrouw $guestname, " . "<br/>";
-        $message .= "De beheerder heeft jouw betaling goedgekeurd." . "<br/><br/>";
-        $message .= "We wensen je alvast een goede reis en prettig vakantie!" . "<br/><br/>";
+        $message .= "Morgen is het zover." . "<br/><br/>";
+        $message .= "Geniet er van!" . "<br/><br/>";
         foreach ($weerApiValues as $result) {
             $message .= "dag: ".$result['dag'];
             $message .= "mintemp: ".$result['mintemp'];
